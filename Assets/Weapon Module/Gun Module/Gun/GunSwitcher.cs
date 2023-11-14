@@ -46,7 +46,7 @@ namespace Assets.WeaponModule.GunModule.Gun
 
         private void SetNextShootable()
         {
-            _shooter.SetShootable(_shootables[_currentShootableIndex]);
+            _shooter.InjectShootable(_shootables[_currentShootableIndex]);
         }
     }
 }

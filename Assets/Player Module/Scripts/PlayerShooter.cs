@@ -15,7 +15,7 @@ namespace Assets.WeaponModule.GunModule.Gun
             _attackEvents.AttackPressed += OnAttackPressed;
         }
 
-        public void SetShootable(IShootable shootable)
+        public void InjectShootable(IShootable shootable)
         {
             _shootable = shootable;
         }

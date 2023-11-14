@@ -27,7 +27,7 @@ public class DefaultBulletPool : AmmoPool
 
     protected override IAmmo Create()
     {
-        DefaultBullet bullet = _factory.Get(_currentType, _shotTranform.CurrentTransform, transform);
+        DefaultBullet bullet = _factory.Get(_currentType, _shotTranform.CurrentPosition, transform);
         bullet.Collided += OnAmmoCollided;
         return bullet;
     }
@@ -35,9 +35,9 @@ public class DefaultBulletPool : AmmoPool
     protected override void InitAmmo(IAmmo ammo)
     {
         DefaultBullet bullet = (DefaultBullet)ammo;
-        bullet.transform.SetPositionAndRotation(_shotTranform.CurrentTransform.position, _shotTranform.transform.rotation);
+        bullet.transform.SetPositionAndRotation(_shotTranform.CurrentPosition.position, _shotTranform.transform.rotation);
         bullet.gameObject.SetActive(true);
-        bullet.StartFlying();
+        bullet.StartFlying(_shotTranform.CurrentVector);
     }
 
     protected override void OnRelease(IAmmo ammo)

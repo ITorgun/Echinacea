@@ -10,6 +10,7 @@ namespace Assets.WeaponModule.GunModule.Gun
         private Coroutine _flying;
 
         [field : SerializeField] public DefaultBulletType Type { get; private set; }
+
         public float Speed { get; private set; }
         public float Damage { get; private set; }
         public float LifeTime { get; private set; }
@@ -29,9 +30,9 @@ namespace Assets.WeaponModule.GunModule.Gun
             CurrentDamage = Damage + damage;
         }
 
-        public void StartFlying()
+        public void StartFlying(Vector2 direction)
         {
-            _flying = StartCoroutine(Flying());
+            _flying = StartCoroutine(Flying(direction));
         }
 
         public void Collide()
@@ -55,12 +56,12 @@ namespace Assets.WeaponModule.GunModule.Gun
             Destroy(gameObject);
         }
 
-        private IEnumerator Flying()
+        private IEnumerator Flying(Vector2 direction)
         {
             float currentLifeTime = 0;
             yield return new WaitWhile(() =>
             {
-                Vector2 newPosition = transform.position + transform.right * (Time.deltaTime * Speed);
+                Vector2 newPosition = transform.position + (Vector3)direction * (Time.deltaTime * Speed);
                 transform.position = newPosition;
                 currentLifeTime += Time.deltaTime;
                 return currentLifeTime <= LifeTime;

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -47,6 +48,7 @@ namespace Assets.PlayerModule
             }
 
             _inputDirection = new Vector2(direction, 0);
+            DirectionUpdated?.Invoke(_inputDirection);
         }
 
         private void OnVerticalDirectionMoved(float direction)
@@ -58,6 +60,7 @@ namespace Assets.PlayerModule
             }
 
             _inputDirection = new Vector2(0, direction);
+            DirectionUpdated?.Invoke(_inputDirection);
         }
 
         private bool IsObstacleInDirection()
@@ -87,5 +90,7 @@ namespace Assets.PlayerModule
             }
             _playerTransform.position += _moveSpeed * Time.deltaTime * _currentDirection;
         }
+
+        public event Action<Vector2> DirectionUpdated;
     }
 }

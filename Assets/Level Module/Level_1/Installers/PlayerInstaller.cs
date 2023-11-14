@@ -19,6 +19,7 @@ namespace Assets.Level_1.Installers
             InstallPlayer();
             InstallMovement();
             InstallShotPosition();
+            InstallInputMediator();
         }
 
         private void InstallInput()
@@ -45,6 +46,11 @@ namespace Assets.Level_1.Installers
         {
             ShotPosition shotPosition = Container.InstantiatePrefabForComponent<ShotPosition>(_shotPosition, _player.transform);
             Container.BindInterfacesAndSelfTo<ShotPosition>().FromInstance(shotPosition).AsSingle().NonLazy();
+        }
+
+        private void InstallInputMediator()
+        {
+            Container.BindInterfacesAndSelfTo<PlayerInputMediator>().AsSingle().NonLazy();
         }
     }
 }
