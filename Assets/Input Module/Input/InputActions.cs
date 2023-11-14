@@ -28,15 +28,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             ""id"": ""ae107bf7-670e-4d28-8d3f-ea00f51a16e0"",
             ""actions"": [
                 {
-                    ""name"": ""Movement"",
-                    ""type"": ""Value"",
-                    ""id"": ""d0373153-e1bf-450a-bfdc-867bf473394a"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
                     ""name"": ""Evasion"",
                     ""type"": ""Button"",
                     ""id"": ""148de1a0-6f3c-4022-9cb8-7c7d2ead0d11"",
@@ -71,64 +62,27 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""XMovement"",
+                    ""type"": ""Button"",
+                    ""id"": ""bb64d6ae-5489-43cc-a3b8-3986d8f3ab6d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""YMovement"",
+                    ""type"": ""Button"",
+                    ""id"": ""3b821628-e8db-46a5-a9a6-b52fafe50bab"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""0d2bef65-5e36-42ee-bf0e-679062160b17"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""02ae58d5-88f8-4ea6-b75b-ce647ffa8895"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""New control scheme"",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""f77d50bc-967f-402a-8e74-14a712b4494f"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""New control scheme"",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""c62e809e-05cd-4e82-9bf0-70a2088d71eb"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""New control scheme"",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""36b7dc3b-9124-4449-ba17-eb7be4cef392"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""New control scheme"",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
                 {
                     ""name"": """",
                     ""id"": ""e1ad1c27-411f-4202-82c7-774e123a20b8"",
@@ -172,6 +126,72 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Switch Ammo Type"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Horiontal"",
+                    ""id"": ""bc7c3a8a-abe2-42df-9009-5287a0391204"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""XMovement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Negative"",
+                    ""id"": ""bcbb42c6-ae38-43c4-88ff-1af357c2ff9e"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""XMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Positive"",
+                    ""id"": ""56dd3b31-599c-4270-9109-e1f8781473e8"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""XMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Vecrtical"",
+                    ""id"": ""cbd987d2-500d-415c-a33e-a67db462337d"",
+                    ""path"": ""1DAxis(whichSideWins=1)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""YMovement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Negative"",
+                    ""id"": ""e4898963-31ce-470a-ae6b-b678f2e87d28"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""YMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Positive"",
+                    ""id"": ""6cc46e0f-9ecb-4cf8-a0f6-baec436b8303"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""YMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -186,11 +206,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
 }");
         // KeyboardMouse
         m_KeyboardMouse = asset.FindActionMap("KeyboardMouse", throwIfNotFound: true);
-        m_KeyboardMouse_Movement = m_KeyboardMouse.FindAction("Movement", throwIfNotFound: true);
         m_KeyboardMouse_Evasion = m_KeyboardMouse.FindAction("Evasion", throwIfNotFound: true);
         m_KeyboardMouse_Attack = m_KeyboardMouse.FindAction("Attack", throwIfNotFound: true);
         m_KeyboardMouse_SwitchGun = m_KeyboardMouse.FindAction("Switch Gun", throwIfNotFound: true);
         m_KeyboardMouse_SwitchAmmoType = m_KeyboardMouse.FindAction("Switch Ammo Type", throwIfNotFound: true);
+        m_KeyboardMouse_XMovement = m_KeyboardMouse.FindAction("XMovement", throwIfNotFound: true);
+        m_KeyboardMouse_YMovement = m_KeyboardMouse.FindAction("YMovement", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -252,20 +273,22 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     // KeyboardMouse
     private readonly InputActionMap m_KeyboardMouse;
     private List<IKeyboardMouseActions> m_KeyboardMouseActionsCallbackInterfaces = new List<IKeyboardMouseActions>();
-    private readonly InputAction m_KeyboardMouse_Movement;
     private readonly InputAction m_KeyboardMouse_Evasion;
     private readonly InputAction m_KeyboardMouse_Attack;
     private readonly InputAction m_KeyboardMouse_SwitchGun;
     private readonly InputAction m_KeyboardMouse_SwitchAmmoType;
+    private readonly InputAction m_KeyboardMouse_XMovement;
+    private readonly InputAction m_KeyboardMouse_YMovement;
     public struct KeyboardMouseActions
     {
         private @InputActions m_Wrapper;
         public KeyboardMouseActions(@InputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Movement => m_Wrapper.m_KeyboardMouse_Movement;
         public InputAction @Evasion => m_Wrapper.m_KeyboardMouse_Evasion;
         public InputAction @Attack => m_Wrapper.m_KeyboardMouse_Attack;
         public InputAction @SwitchGun => m_Wrapper.m_KeyboardMouse_SwitchGun;
         public InputAction @SwitchAmmoType => m_Wrapper.m_KeyboardMouse_SwitchAmmoType;
+        public InputAction @XMovement => m_Wrapper.m_KeyboardMouse_XMovement;
+        public InputAction @YMovement => m_Wrapper.m_KeyboardMouse_YMovement;
         public InputActionMap Get() { return m_Wrapper.m_KeyboardMouse; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -275,9 +298,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_KeyboardMouseActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_KeyboardMouseActionsCallbackInterfaces.Add(instance);
-            @Movement.started += instance.OnMovement;
-            @Movement.performed += instance.OnMovement;
-            @Movement.canceled += instance.OnMovement;
             @Evasion.started += instance.OnEvasion;
             @Evasion.performed += instance.OnEvasion;
             @Evasion.canceled += instance.OnEvasion;
@@ -290,13 +310,16 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @SwitchAmmoType.started += instance.OnSwitchAmmoType;
             @SwitchAmmoType.performed += instance.OnSwitchAmmoType;
             @SwitchAmmoType.canceled += instance.OnSwitchAmmoType;
+            @XMovement.started += instance.OnXMovement;
+            @XMovement.performed += instance.OnXMovement;
+            @XMovement.canceled += instance.OnXMovement;
+            @YMovement.started += instance.OnYMovement;
+            @YMovement.performed += instance.OnYMovement;
+            @YMovement.canceled += instance.OnYMovement;
         }
 
         private void UnregisterCallbacks(IKeyboardMouseActions instance)
         {
-            @Movement.started -= instance.OnMovement;
-            @Movement.performed -= instance.OnMovement;
-            @Movement.canceled -= instance.OnMovement;
             @Evasion.started -= instance.OnEvasion;
             @Evasion.performed -= instance.OnEvasion;
             @Evasion.canceled -= instance.OnEvasion;
@@ -309,6 +332,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @SwitchAmmoType.started -= instance.OnSwitchAmmoType;
             @SwitchAmmoType.performed -= instance.OnSwitchAmmoType;
             @SwitchAmmoType.canceled -= instance.OnSwitchAmmoType;
+            @XMovement.started -= instance.OnXMovement;
+            @XMovement.performed -= instance.OnXMovement;
+            @XMovement.canceled -= instance.OnXMovement;
+            @YMovement.started -= instance.OnYMovement;
+            @YMovement.performed -= instance.OnYMovement;
+            @YMovement.canceled -= instance.OnYMovement;
         }
 
         public void RemoveCallbacks(IKeyboardMouseActions instance)
@@ -337,10 +366,11 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     }
     public interface IKeyboardMouseActions
     {
-        void OnMovement(InputAction.CallbackContext context);
         void OnEvasion(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnSwitchGun(InputAction.CallbackContext context);
         void OnSwitchAmmoType(InputAction.CallbackContext context);
+        void OnXMovement(InputAction.CallbackContext context);
+        void OnYMovement(InputAction.CallbackContext context);
     }
 }

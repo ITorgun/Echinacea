@@ -4,20 +4,54 @@ using UnityEngine.InputSystem;
 
 public class Dekstop : PlayerInput
 {
-    public override event Action<Vector2> MovementDirectionUpdated;
+    //public override event Action<Vector2> MovementDirectionUpdated;
+    public override event Action<float> Horizontal;
+    public override event Action<float> Vertical;
     public override event Action AttackPressed;
     public override event Action GunSwitched;
     public override event Action AmmoSwitched;
 
-    protected override void RaiseMovementDirectionChanged(InputAction.CallbackContext movementContext)
+    protected override void RaiseXMovementDirectionChanged(InputAction.CallbackContext movementContext)
     {
         if (movementContext.performed)
         {
-            MovementDirectionUpdated?.Invoke(movementContext.action.ReadValue<Vector2>());
+            IsMovedOnX = true;
+            Horizontal?.Invoke(movementContext.ReadValue<float>());
         }
         else if (movementContext.canceled)
         {
-            MovementDirectionUpdated?.Invoke(Vector2.zero);
+            IsMovedOnX = false;
+
+            if (IsMovedOnY)
+            {
+                Vertical?.Invoke(Actions.KeyboardMouse.YMovement.ReadValue<float>());
+            }
+            else
+            {
+                Horizontal?.Invoke(0);
+            }
+        }
+    }
+
+    protected override void RaiseYMovementDirectionChanged(InputAction.CallbackContext movementContext)
+    {
+        if (movementContext.performed)
+        {
+            IsMovedOnY = true;
+            Vertical?.Invoke(movementContext.ReadValue<float>());
+        }
+        else if (movementContext.canceled)
+        {
+            IsMovedOnY = false;
+
+            if (IsMovedOnX)
+            {
+                Horizontal?.Invoke(Actions.KeyboardMouse.XMovement.ReadValue<float>());
+            }
+            else
+            {
+                Vertical?.Invoke(0);
+            }
         }
     }
 

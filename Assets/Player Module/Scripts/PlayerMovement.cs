@@ -8,7 +8,7 @@ namespace Assets.PlayerModule
         [SerializeField] private float _moveSpeed = 10f;
 
         private IMovementEvents _movementEvents;
-        private Vector2 _direction;
+        private Vector2 _inputDirection;
         private Vector3 _currentDirection;
         private Transform _playerTransform;
 
@@ -18,7 +18,8 @@ namespace Assets.PlayerModule
         private void Construct(IMovementEvents movementEvents)
         {
             _movementEvents = movementEvents;
-            _movementEvents.MovementDirectionUpdated += OnDirectionUpdated;
+            _movementEvents.Horizontal += OnHorisontalDirectionMoved;
+            _movementEvents.Vertical += OnVerticalDirectionMoved;
         }
 
         public void Init(Transform playerTransform)
@@ -28,7 +29,8 @@ namespace Assets.PlayerModule
 
         private void OnDisable()
         {
-            _movementEvents.MovementDirectionUpdated -= OnDirectionUpdated;
+            _movementEvents.Horizontal -= OnHorisontalDirectionMoved;
+            _movementEvents.Vertical -= OnVerticalDirectionMoved;
         }
 
         private void Update()
@@ -36,25 +38,31 @@ namespace Assets.PlayerModule
             Move();
         }
 
-        private void OnDirectionUpdated(Vector2 direction)
+        private void OnHorisontalDirectionMoved(float direction)
         {
-            if (IsDirectionZero(direction))
+            if (direction == 0)
             {
-                _direction = Vector2.zero;
+                _inputDirection = new Vector2(0, 0);
                 return;
             }
 
-            _direction = direction;
+            _inputDirection = new Vector2(direction, 0);
         }
 
-        private bool IsDirectionZero(Vector2 direction)
+        private void OnVerticalDirectionMoved(float direction)
         {
-            return direction == Vector2.zero;
+            if (direction == 0)
+            {
+                _inputDirection = new Vector2(0, 0);
+                return;
+            }
+
+            _inputDirection = new Vector2(0, direction);
         }
 
         private bool IsObstacleInDirection()
         {
-            RaycastHit2D[] hits = Physics2D.RaycastAll(_playerTransform.position, _direction, 0.2f);
+            RaycastHit2D[] hits = Physics2D.RaycastAll(_playerTransform.position, _inputDirection, 0.2f);
 
             foreach (var hitted in hits)
             {
@@ -75,7 +83,7 @@ namespace Assets.PlayerModule
             }
             else
             {
-                _currentDirection = new Vector2(_direction.x, _direction.y);
+                _currentDirection = _inputDirection;
             }
             _playerTransform.position += _moveSpeed * Time.deltaTime * _currentDirection;
         }
