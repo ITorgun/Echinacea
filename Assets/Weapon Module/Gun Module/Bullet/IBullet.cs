@@ -6,8 +6,5 @@ namespace Assets.WeaponModule.GunModule.Gun
     {
         void StartFlying();
         void Collide();
-        void Destroy();
-
-        event Action<IBullet> Collided;
     }
 }

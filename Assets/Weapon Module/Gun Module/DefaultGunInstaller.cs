@@ -6,7 +6,7 @@ using Zenject;
 
 public class DefaultGunInstaller : MonoInstaller
 {
-    [SerializeField] private DefaultBulletPool _defaultBulletPool;
+    [SerializeField] private AmmoPool _defaultBulletPool;
     [SerializeField] private DefaultGun _defaultGun;
 
     private Player _player;
@@ -39,10 +39,9 @@ public class DefaultGunInstaller : MonoInstaller
         Container.Bind<DefaultBulletType>().FromInstance(type).AsTransient()
             .WhenInjectedInto<DefaultBulletPool>().NonLazy();
 
-        DefaultBulletPool pool = Container.InstantiatePrefabForComponent<DefaultBulletPool>(_defaultBulletPool);
-        Container.BindInterfacesAndSelfTo<DefaultBulletPool>()
+        AmmoPool pool = Container.InstantiatePrefabForComponent<AmmoPool>(_defaultBulletPool);
+        Container.BindInterfacesAndSelfTo<AmmoPool>()
             .FromInstance(pool).AsSingle().NonLazy();
-        //pool.transform.SetParent(_player.transform);
     }
 
     private void InstallMagazine()

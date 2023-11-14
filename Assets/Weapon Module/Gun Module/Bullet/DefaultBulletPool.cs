@@ -1,73 +1,47 @@
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Pool;
+using Assets.WeaponModule.GunModule.Gun;
 using Zenject;
+using Zenject.SpaceFighter;
 
-namespace Assets.WeaponModule.GunModule.Gun
+public class DefaultBulletPool : AmmoPool
 {
-    public class DefaultBulletPool : MonoBehaviour
+    private DefaultBulletFactory _factory;
+    private ShotPosition _shotTranform;
+
+    private DefaultBulletType _currentType;
+
+    [Inject]
+    public void Construct (DefaultBulletFactory factory,
+        ShotPosition shotTranform, DefaultBulletType type)
     {
-        private DefaultBulletFactory _factory;
-        private ShotPosition _shotTranform;
-        private ObjectPool<DefaultBullet> _pool;
-        private DefaultBulletType _currentType;
+        Construct(10, 50);
+        _factory = factory;
+        _shotTranform = shotTranform;
+        _currentType = type;
+    }
 
-        [Inject]
-        public void Construct(DefaultBulletType type, DefaultBulletFactory factory,
-            ShotPosition shotPosition)
-        {
-            _currentType = type;
-            _factory = factory;
-            _shotTranform = shotPosition;
-            _pool = new ObjectPool<DefaultBullet>(OnCreateBullet, OnGetFromPool, OnReleaseFromPool, DestroyPreviousBulletType);
-        }
+    public void InjectAmmoType(DefaultBulletType type)
+    {
+        _currentType = type;
+        ClearPool();
+    }
 
-        public void InjectAmmoType(DefaultBulletType type)
-        {
-            _currentType = type;
-            _pool.Clear();
-        }
+    protected override IAmmo Create()
+    {
+        DefaultBullet bullet = _factory.Get(_currentType, _shotTranform.CurrentTransform, transform);
+        bullet.Collided += OnAmmoCollided;
+        return bullet;
+    }
 
-        public DefaultBullet Get()
-        {
-            return _pool.Get();
-        }
+    protected override void InitAmmo(IAmmo ammo)
+    {
+        DefaultBullet bullet = (DefaultBullet)ammo;
+        bullet.transform.SetPositionAndRotation(_shotTranform.CurrentTransform.position, _shotTranform.transform.rotation);
+        bullet.gameObject.SetActive(true);
+        bullet.StartFlying();
+    }
 
-        private DefaultBullet OnCreateBullet()
-        {
-            DefaultBullet bullet = _factory.Get(_currentType, _shotTranform.CurrentTransform, transform);
-            bullet.Collided += OnBulletCollided;
-            return bullet;
-        }
-
-        private void OnGetFromPool(DefaultBullet bullet)
-        {
-            bullet.transform.SetPositionAndRotation(_shotTranform.CurrentTransform.position, _shotTranform.transform.rotation);
-            bullet.gameObject.SetActive(true);
-            bullet.StartFlying();
-        }
-
-        private void DestroyPreviousBulletType(DefaultBullet bullet)
-        {
-            bullet.Collided -= OnBulletCollided;
-            Destroy(bullet.gameObject);
-        }
-
-        private void OnReleaseFromPool(DefaultBullet bullet)
-        {
-            if (bullet.Type != _currentType)
-            {
-                DestroyPreviousBulletType(bullet);
-                return;
-            }
-
-            bullet.gameObject.SetActive(false);
-        }
-
-        private void OnBulletCollided(IBullet bullet)
-        {
-            DefaultBullet defaultBullet = (DefaultBullet)bullet;
-            _pool.Release(defaultBullet);
-        }
+    protected override void OnRelease(IAmmo ammo)
+    {
+        ammo.Hide();
     }
 }

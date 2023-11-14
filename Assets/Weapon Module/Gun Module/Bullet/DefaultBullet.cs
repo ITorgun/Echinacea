@@ -9,10 +9,12 @@ namespace Assets.WeaponModule.GunModule.Gun
     {
         private Coroutine _flying;
 
-        public DefaultBulletType Type { get; private set; }
+        [field : SerializeField] public DefaultBulletType Type { get; private set; }
         public float Speed { get; private set; }
         public float Damage { get; private set; }
         public float LifeTime { get; private set; }
+
+        private float CurrentDamage;
 
         public void Init(DefaultBulletConfig config)
         {
@@ -24,7 +26,7 @@ namespace Assets.WeaponModule.GunModule.Gun
 
         public void IncreaseInitialStats(float damage)
         {
-            Damage += damage;
+            CurrentDamage = Damage + damage;
         }
 
         public void StartFlying()
@@ -40,6 +42,17 @@ namespace Assets.WeaponModule.GunModule.Gun
             }
 
             Collided?.Invoke(this);
+        }
+
+        public void Hide()
+        {
+            CurrentDamage = Damage;
+            gameObject.SetActive(false);
+        }
+
+        void IAmmo.Destroy()
+        {
+            Destroy(gameObject);
         }
 
         private IEnumerator Flying()
@@ -63,16 +76,11 @@ namespace Assets.WeaponModule.GunModule.Gun
             }
             else if (collision.TryGetComponent(out IDamageable damageable))
             {
-                damageable.SetDamage(Damage);
+                damageable.SetDamage(CurrentDamage);
                 Collide();
             }
         }
 
-        void IBullet.Destroy()
-        {
-            Destroy(gameObject);
-        }
-
-        public event Action<IBullet> Collided;
+        public event Action<IAmmo> Collided;
     }
 }

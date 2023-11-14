@@ -5,9 +5,9 @@ public class DefaultMagazine : IMagazine
     private DefaultBulletPool _pool;
     private DefaultBulletType _type;
 
-    public DefaultMagazine(DefaultBulletPool pool, DefaultBulletType bulletType)
+    public DefaultMagazine(AmmoPool pool, DefaultBulletType bulletType)
     {
-        _pool = pool;
+        _pool = (DefaultBulletPool)pool;
         _type = bulletType;
     }
 
