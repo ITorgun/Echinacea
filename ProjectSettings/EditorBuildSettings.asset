@@ -1,0 +1,14 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 0
+    path: Assets/DZ4_3/Balls/QuizChoosingScene.unity
+    guid: 5abe8d0c87aa95c4386f163a00197e1f
+  - enabled: 0
+    path: Assets/DZ4_3/Balls/QuizGameplayScene.unity
+    guid: 750a730629076894caeaea887ecb4004
+  m_configObjects: {}

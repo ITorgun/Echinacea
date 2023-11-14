@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 182af33f1ae571146aa1df0318dbe6db, type: 3}
+  m_Name: DefaultWeakBulletConfig
+  m_EditorClassIdentifier: 
+  _bulletType: 0
+  _speed: 15
+  _damage: 10
+  _lifeTime: 15
+  _prefab: {fileID: 4452562016936052364, guid: 4c82ede15c249044da68b411cbd7bc68, type: 3}
