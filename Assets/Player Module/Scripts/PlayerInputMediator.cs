@@ -10,22 +10,30 @@ public class PlayerInputMediator : IDisposable
 {
     private PlayerMovement _movement;
     private ShotPosition _shotPosition;
+    private PlayerModel _animatorConroller;
 
-    public PlayerInputMediator(PlayerMovement movement, ShotPosition shotPosition)
+    public PlayerInputMediator(PlayerMovement movement, ShotPosition shotPosition, PlayerModel animatorConroller)
     {
         _movement = movement;
         _shotPosition = shotPosition;
+        _animatorConroller = animatorConroller;
 
-        _movement.DirectionUpdated += OnMovementDirectionUpdated;
+        _movement.InputDirectionUpdated += OnInputDirectionUpdated;
+        _movement.MovementDirectionUpdated += OnMovementDirectionUpdated;
     }
 
-    public void OnMovementDirectionUpdated(Vector2 direction)
+    public void OnInputDirectionUpdated(Vector2 direction)
     {
         _shotPosition.UpdateState(direction);
     }
 
+    public void OnMovementDirectionUpdated(Vector2 direction)
+    {
+        _animatorConroller.ChageAnimation(direction);
+    }
+
     public void Dispose()
     {
-        _movement.DirectionUpdated -= OnMovementDirectionUpdated;
+        _movement.InputDirectionUpdated -= OnInputDirectionUpdated;
     }
 }

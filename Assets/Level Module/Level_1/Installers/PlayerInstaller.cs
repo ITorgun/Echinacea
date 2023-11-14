@@ -1,6 +1,7 @@
 using UnityEngine;
 using Zenject;
 using Assets.PlayerModule;
+using Cinemachine;
 
 namespace Assets.Level_1.Installers
 {
@@ -8,8 +9,10 @@ namespace Assets.Level_1.Installers
     {
         [SerializeField] private Dekstop _dekstop;
         [SerializeField] private Player _prefab;
+        [SerializeField] private CinemachineVirtualCamera _camera;
         [SerializeField] private PlayerMovement _movement;
         [SerializeField] private ShotPosition _shotPosition;
+        [SerializeField] private PlayerModel _model;
 
         private Player _player;
 
@@ -17,8 +20,10 @@ namespace Assets.Level_1.Installers
         {
             InstallInput();
             InstallPlayer();
+            InstallCameraFollow();
             InstallMovement();
             InstallShotPosition();
+            InstallModel();
             InstallInputMediator();
         }
 
@@ -35,6 +40,11 @@ namespace Assets.Level_1.Installers
             Container.BindInterfacesAndSelfTo<Player>().FromInstance(_player).AsSingle().NonLazy();
         }
 
+        private void InstallCameraFollow()
+        {
+            _camera.Follow = _player.transform;
+        }
+
         private void InstallMovement()
         {
             PlayerMovement playerMovement = Container.InstantiatePrefabForComponent<PlayerMovement>(_movement, _player.transform);
@@ -46,6 +56,12 @@ namespace Assets.Level_1.Installers
         {
             ShotPosition shotPosition = Container.InstantiatePrefabForComponent<ShotPosition>(_shotPosition, _player.transform);
             Container.BindInterfacesAndSelfTo<ShotPosition>().FromInstance(shotPosition).AsSingle().NonLazy();
+        }
+
+        private void InstallModel()
+        {
+            PlayerModel playerModel = Container.InstantiatePrefabForComponent<PlayerModel>(_model, _player.transform);
+            Container.BindInterfacesAndSelfTo<PlayerModel>().FromInstance(playerModel).AsSingle().NonLazy();
         }
 
         private void InstallInputMediator()

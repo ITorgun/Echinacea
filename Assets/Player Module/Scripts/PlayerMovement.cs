@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using Zenject;
 
@@ -7,6 +8,7 @@ namespace Assets.PlayerModule
     public class PlayerMovement : MonoBehaviour
     {
         [SerializeField] private float _moveSpeed = 10f;
+        [SerializeField] private Animator _animator;
 
         private IMovementEvents _movementEvents;
         private Vector2 _inputDirection;
@@ -39,28 +41,37 @@ namespace Assets.PlayerModule
             Move();
         }
 
+        private bool IsAxisZero(float axis)
+        {
+            return axis == 0;
+        }
+
         private void OnHorisontalDirectionMoved(float direction)
         {
-            if (direction == 0)
+            if (IsAxisZero(direction))
             {
                 _inputDirection = new Vector2(0, 0);
+                MovementDirectionUpdated?.Invoke(_inputDirection);
                 return;
             }
 
             _inputDirection = new Vector2(direction, 0);
-            DirectionUpdated?.Invoke(_inputDirection);
+            InputDirectionUpdated?.Invoke(_inputDirection);
+            MovementDirectionUpdated?.Invoke(_inputDirection);
         }
 
         private void OnVerticalDirectionMoved(float direction)
         {
-            if (direction == 0)
+            if (IsAxisZero(direction))
             {
                 _inputDirection = new Vector2(0, 0);
+                MovementDirectionUpdated(_inputDirection);
                 return;
             }
 
             _inputDirection = new Vector2(0, direction);
-            DirectionUpdated?.Invoke(_inputDirection);
+            InputDirectionUpdated?.Invoke(_inputDirection);
+            MovementDirectionUpdated?.Invoke(_inputDirection);
         }
 
         private bool IsObstacleInDirection()
@@ -91,6 +102,7 @@ namespace Assets.PlayerModule
             _playerTransform.position += _moveSpeed * Time.deltaTime * _currentDirection;
         }
 
-        public event Action<Vector2> DirectionUpdated;
+        public event Action<Vector2> InputDirectionUpdated;
+        public event Action<Vector2> MovementDirectionUpdated;
     }
 }
