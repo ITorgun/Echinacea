@@ -7,4 +7,7 @@ public interface IHealthTaker
     public float Health { get; }
     public float MaxHealth { get; }
     public float MinHealth { get; }
+
+    bool IsHealthLessMin();
+    void Die();
 }

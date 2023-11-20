@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IDamageable
+public interface IWallet
 {
-    void GetDamaged(float damage);
+    int Wallet { get; }
 }

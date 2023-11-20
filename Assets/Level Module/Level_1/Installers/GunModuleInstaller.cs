@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class DefaultGunInstaller : MonoInstaller
+public class GunModuleInstaller : MonoInstaller
 {
     [SerializeField] private AmmoPool _defaultBulletPool;
     [SerializeField] private DefaultGun _defaultGun;

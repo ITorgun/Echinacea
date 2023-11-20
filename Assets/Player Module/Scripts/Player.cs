@@ -3,7 +3,8 @@ using UnityEngine;
 
 namespace Assets.PlayerModule
 {
-    public class Player : MonoBehaviour, IHealable, IHealthTaker, IDamageable
+    public class Player : MonoBehaviour, IHealable, IHealthTaker, IDamageable, IWallet,
+        ICollectorValueable
     {
         [SerializeField] private float _health;
         [SerializeField] private int _level;
@@ -13,10 +14,11 @@ namespace Assets.PlayerModule
         public float MaxHealth { get; private set; }
         public float MinHealth { get; private set; }
         public int Coins { get; private set; }
+        public int Wallet { get; private set; }
 
-        public event Action<float> HealthChanged;
-        public event Action Died;
-        public event Action<int> LevelChanged;
+        //public event Action<float> HealthChanged;
+        //public event Action Died;
+        //public event Action<int> LevelChanged;
 
         private void Start()
         {
@@ -24,20 +26,32 @@ namespace Assets.PlayerModule
             MinHealth = 0;
             Health = 20;
 
-            HealthChanged?.Invoke(Health);
-            LevelChanged?.Invoke(_level);
+            //HealthChanged?.Invoke(Health);
+            //LevelChanged?.Invoke(_level);
         }
 
-        public void SetDamage(float damage)
+        public bool IsHealthLessMin()
+        {
+            return Health <= MinHealth;
+        }
+
+        public void Die()
+        {
+            Debug.Log("Игрок умер!");
+
+            Health = MaxHealth;
+
+            //Died.Invoke();
+        }
+
+        public void GetDamaged(float damage)
         {
             Health -= damage;
-            HealthChanged?.Invoke(Health);
+            //HealthChanged?.Invoke(Health);
 
-            if (Health <= MinHealth)
+            if (IsHealthLessMin())
             {
-                Debug.Log("Умер!");
-                Died.Invoke();
-                return;
+                Die();
             }
         }
 
@@ -51,22 +65,22 @@ namespace Assets.PlayerModule
 
             Health += healValue;
 
-            HealthChanged?.Invoke(Health);
+            //HealthChanged?.Invoke(Health);
         }
 
         public void IncreaseLevel()
         {
             _level++;
-            LevelChanged.Invoke(_level);
+            //LevelChanged.Invoke(_level);
         }
 
         public void ResetStats()
         {
             Health = 80;
-            HealthChanged.Invoke(Health);
+            //HealthChanged.Invoke(Health);
 
             _level = 1;
-            LevelChanged.Invoke(_level);
+            //LevelChanged.Invoke(_level);
         }
 
         public void AddCoins(int value)
@@ -79,9 +93,10 @@ namespace Assets.PlayerModule
             Coins += value;
         }
 
-        public void Shoot()
+        public void Add(int value)
         {
-            
+            Wallet += value;
+            Debug.Log("Value: " + Wallet);
         }
     }
 }

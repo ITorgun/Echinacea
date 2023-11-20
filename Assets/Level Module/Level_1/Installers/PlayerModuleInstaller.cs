@@ -5,7 +5,7 @@ using Cinemachine;
 
 namespace Assets.Level_1.Installers
 {
-    public class PlayerInstaller : MonoInstaller
+    public class PlayerModuleInstaller : MonoInstaller
     {
         [SerializeField] private Dekstop _dekstop;
         [SerializeField] private Player _prefab;

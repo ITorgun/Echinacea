@@ -77,7 +77,7 @@ namespace Assets.WeaponModule.GunModule.Gun
             }
             else if (collision.TryGetComponent(out IDamageable damageable))
             {
-                damageable.SetDamage(CurrentDamage);
+                damageable.GetDamaged(CurrentDamage);
                 Collide();
             }
         }
