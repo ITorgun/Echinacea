@@ -120,4 +120,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 0
   _level: 0
-  _shotPosition: {fileID: 0}
+  <Speed>k__BackingField: 10

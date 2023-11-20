@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 182af33f1ae571146aa1df0318dbe6db, type: 3}
-  m_Name: DefaultAverageBulletConfig
+  m_Script: {fileID: 11500000, guid: 26c817d28193b7d42a2ae3418a187b61, type: 3}
+  m_Name: ShortStrongBullet
   m_EditorClassIdentifier: 
-  _speed: 30
-  _damage: 50
-  _lifeTime: 15
-  _prefab: {fileID: 4452562016936052364, guid: 4c82ede15c249044da68b411cbd7bc68, type: 3}
+  _speed: 20
+  _damage: 10
+  _lifeTime: 2
+  _prefab: {fileID: -7755320919656414511, guid: 73c7a750fae1a3042a2003c90b8cd637, type: 3}
   _bulletType: 2

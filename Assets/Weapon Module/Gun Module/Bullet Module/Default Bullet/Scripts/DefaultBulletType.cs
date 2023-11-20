@@ -8,7 +8,7 @@ public enum DefaultBulletType
 
 public enum StrongBulletType
 {
-    Ooops,
-    Lol,
-    Kek
+    WeakConfig,
+    FastSpeedConfig,
+    ShortLife
 }

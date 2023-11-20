@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ShotPosition : MonoBehaviour
+public class ShotPosition : MonoBehaviour, IShootPosition
 {
     [SerializeField] private Transform _leftPositon;
     [SerializeField] private Transform _rightPositon;

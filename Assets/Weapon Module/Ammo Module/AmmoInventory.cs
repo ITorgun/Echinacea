@@ -9,10 +9,10 @@ public class AmmoInventory
         DefaultBulletType.TestConfig
     };
 
-    public List<StrongBulletType> strongBulletTypes = new List<StrongBulletType>()
+    public List<StrongBulletType> _strongBulletTypes = new List<StrongBulletType>()
     {
-        StrongBulletType.Lol,
-        StrongBulletType.Kek
+        StrongBulletType.ShortLife,
+        StrongBulletType.FastSpeedConfig,
     };
 
     public int GetAvaibleBullet(int index, IMagazine magazine)
@@ -21,6 +21,9 @@ public class AmmoInventory
         {
             case DefaultMagazine:
                 return (int)_defaultBulletTypes[index];
+
+            case StrongMagazine:
+                return (int)_strongBulletTypes[index];
 
             default:
                 throw new System.Exception();
@@ -33,6 +36,9 @@ public class AmmoInventory
         {
             case DefaultMagazine:
                 return _defaultBulletTypes.Count;
+
+            case StrongMagazine:
+                return _strongBulletTypes.Count;
 
             default:
                 throw new System.Exception();

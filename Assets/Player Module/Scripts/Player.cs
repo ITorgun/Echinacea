@@ -1,8 +1,6 @@
 using Assets.Playable_Entity_Module;
-using Assets.Player_Module.Scripts;
 using System;
 using UnityEngine;
-using Zenject;
 
 namespace Assets.PlayerModule
 {
@@ -12,13 +10,13 @@ namespace Assets.PlayerModule
         [SerializeField] private float _health;
         [SerializeField] private int _level;
 
+        [field: SerializeField] public float Speed { get; set; }
+
         public float Health { get => _health; private set => _health = value; }
         public float MaxHealth { get; private set; }
         public float MinHealth { get; private set; }
         public int Coins { get; private set; }
         public int Wallet { get; private set; }
-
-        public float Speed => 20;
 
         public Transform Transform => transform;
 
@@ -31,6 +29,8 @@ namespace Assets.PlayerModule
             MaxHealth = 100;
             MinHealth = 0;
             Health = 20;
+
+            Speed = 10;
 
             //HealthChanged?.Invoke(Health);
             //LevelChanged?.Invoke(_level);
