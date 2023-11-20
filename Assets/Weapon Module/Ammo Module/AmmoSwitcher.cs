@@ -19,6 +19,11 @@ public class AmmoSwitcher : IDisposable
         switchAmmoEvent.AmmoSwitched += OnAmmoSwitched;
     }
 
+    public void SetMagazine(IMagazine magazine)
+    {
+        _magazine = magazine;
+    }
+
     public void Dispose()
     {
         _switchAmmoEvent.AmmoSwitched -= OnAmmoSwitched;

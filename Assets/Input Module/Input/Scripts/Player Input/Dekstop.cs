@@ -7,7 +7,7 @@ public class Dekstop : PlayerInput
     //public override event Action<Vector2> MovementDirectionUpdated;
     public override event Action<float> Horizontal;
     public override event Action<float> Vertical;
-    public override event Action AttackPressed;
+    public override event Action RangeAttackPressed;
     public override event Action GunSwitched;
     public override event Action AmmoSwitched;
 
@@ -59,7 +59,7 @@ public class Dekstop : PlayerInput
     {
         if (attackContext.performed)
         {
-            AttackPressed?.Invoke();
+            RangeAttackPressed?.Invoke();
         }
     }
 

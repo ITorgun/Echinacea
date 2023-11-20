@@ -1,3 +1,4 @@
+using Assets.Player_Module.Scripts;
 using Assets.PlayerModule;
 using Assets.WeaponModule.GunModule.Gun;
 using System;
@@ -8,11 +9,11 @@ using UnityEngine;
 
 public class PlayerInputMediator : IDisposable
 {
-    private PlayerMovement _movement;
+    private IPlayerMover _movement;
     private ShotPosition _shotPosition;
     private PlayerModel _animatorConroller;
 
-    public PlayerInputMediator(PlayerMovement movement, ShotPosition shotPosition, PlayerModel animatorConroller)
+    public PlayerInputMediator(IPlayerMover movement, ShotPosition shotPosition, PlayerModel animatorConroller)
     {
         _movement = movement;
         _shotPosition = shotPosition;

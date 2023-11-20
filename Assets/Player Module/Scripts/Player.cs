@@ -1,20 +1,37 @@
+using Assets.Playable_Entity_Module;
+using Assets.Player_Module.Scripts;
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace Assets.PlayerModule
 {
     public class Player : MonoBehaviour, IHealable, IHealthTaker, IDamageable, IWallet,
-        ICollectorValueable
+        ICollectorValueable, IMovable
     {
         [SerializeField] private float _health;
         [SerializeField] private int _level;
-        [SerializeField] private ShotPosition _shotPosition;
+
+        public IRangeAttackDealer RangeAttackDealer { get; set; }
+
+        private IPlayerMover _mover;
 
         public float Health { get => _health; private set => _health = value; }
         public float MaxHealth { get; private set; }
         public float MinHealth { get; private set; }
         public int Coins { get; private set; }
         public int Wallet { get; private set; }
+
+        public float Speed => 15;
+
+        public Transform Transform => transform;
+
+        [Inject]
+        public IPlayerMover Mover 
+        { 
+            get => _mover; 
+            set => _mover = value; 
+        }
 
         //public event Action<float> HealthChanged;
         //public event Action Died;
@@ -28,6 +45,13 @@ namespace Assets.PlayerModule
 
             //HealthChanged?.Invoke(Health);
             //LevelChanged?.Invoke(_level);
+
+            Mover.StartMove();
+        }
+
+        private void Update()
+        {
+            Mover.Moving(transform);
         }
 
         public bool IsHealthLessMin()

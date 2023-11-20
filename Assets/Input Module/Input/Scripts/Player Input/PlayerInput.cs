@@ -4,14 +4,14 @@ using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using Zenject;
 
-public abstract class PlayerInput : MonoBehaviour, IMovementEvents, IAttackEvents, ISwitchGunEvent,
+public abstract class PlayerInput : MonoBehaviour, IMovementEvents, IRangeAttackEvents, ISwitchGunEvent,
     ISwitchAmmoEvent
 {
     protected InputActions Actions;
 
     //public abstract event Action<Vector2> MovementDirectionUpdated;
 
-    public abstract event Action AttackPressed;
+    public abstract event Action RangeAttackPressed;
     public abstract event Action GunSwitched;
     public abstract event Action AmmoSwitched;
     public abstract event Action<float> Horizontal;

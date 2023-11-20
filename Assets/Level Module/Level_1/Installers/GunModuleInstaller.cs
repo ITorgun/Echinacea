@@ -1,6 +1,4 @@
-using Assets.PlayerModule;
 using Assets.WeaponModule.GunModule.Gun;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -8,14 +6,6 @@ public class GunModuleInstaller : MonoInstaller
 {
     [SerializeField] private AmmoPool _defaultBulletPool;
     [SerializeField] private DefaultGun _defaultGun;
-
-    private Player _player;
-
-    [Inject]
-    public void Construct(Player player)
-    {
-        _player = player;
-    }
 
     public override void InstallBindings()
     {
@@ -55,14 +45,14 @@ public class GunModuleInstaller : MonoInstaller
 
     private void InstallDefaultGun()
     {
-        DefaultGun gun = Container.InstantiatePrefabForComponent<DefaultGun>(_defaultGun, _player.transform);
+        DefaultGun gun = Container.InstantiatePrefabForComponent<DefaultGun>(_defaultGun);
         Container.BindInterfacesAndSelfTo<DefaultGun>()
             .FromInstance(gun).AsSingle().NonLazy();
     }
 
     private void InstallPlayerShooter()
     {
-        Container.BindInterfacesAndSelfTo<PlayerShooter>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<DefaultRangeAttackDealer>().AsSingle().NonLazy();
     }
 
     private void InstallAmmoSwitcher()

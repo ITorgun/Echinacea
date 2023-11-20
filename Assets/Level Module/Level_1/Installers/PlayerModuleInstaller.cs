@@ -2,15 +2,14 @@ using UnityEngine;
 using Zenject;
 using Assets.PlayerModule;
 using Cinemachine;
+using Assets.Player_Module.Scripts;
 
 namespace Assets.Level_1.Installers
 {
     public class PlayerModuleInstaller : MonoInstaller
     {
-        [SerializeField] private Dekstop _dekstop;
         [SerializeField] private Player _prefab;
         [SerializeField] private CinemachineVirtualCamera _camera;
-        [SerializeField] private PlayerMovement _movement;
         [SerializeField] private ShotPosition _shotPosition;
         [SerializeField] private PlayerModel _model;
 
@@ -18,26 +17,19 @@ namespace Assets.Level_1.Installers
 
         public override void InstallBindings()
         {
-            InstallInput();
+            InstallMovement();
             InstallPlayer();
             InstallCameraFollow();
-            InstallMovement();
             InstallShotPosition();
             InstallModel();
             InstallInputMediator();
         }
 
-        private void InstallInput()
-        {
-            Container.BindInstance(new InputActions()).AsSingle().NonLazy();
-            Dekstop dekstop = Container.InstantiatePrefabForComponent<Dekstop>(_dekstop);
-            Container.BindInterfacesAndSelfTo<Dekstop>().FromInstance(dekstop).AsSingle().NonLazy();
-        }
-
         private void InstallPlayer()
         {
             _player = Container.InstantiatePrefabForComponent<Player>(_prefab);
-            Container.BindInterfacesAndSelfTo<Player>().FromInstance(_player).AsSingle().NonLazy();
+
+            Container.BindInterfacesAndSelfTo<Player>().FromInstance(_player).AsSingle();
         }
 
         private void InstallCameraFollow()
@@ -47,9 +39,7 @@ namespace Assets.Level_1.Installers
 
         private void InstallMovement()
         {
-            PlayerMovement playerMovement = Container.InstantiatePrefabForComponent<PlayerMovement>(_movement, _player.transform);
-            Container.BindInterfacesAndSelfTo<PlayerMovement>().FromInstance(playerMovement).AsSingle().NonLazy();
-            playerMovement.Init(_player.transform);
+            Container.BindInterfacesAndSelfTo<DefaultPlayerMover>().AsSingle().NonLazy();
         }
 
         private void InstallShotPosition()
