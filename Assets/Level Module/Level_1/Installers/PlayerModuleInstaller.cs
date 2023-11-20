@@ -10,14 +10,16 @@ namespace Assets.Level_1.Installers
     {
         [SerializeField] private Player _prefab;
         [SerializeField] private CinemachineVirtualCamera _camera;
+        [SerializeField] private PlayerMovement _playerMovement;
         [SerializeField] private PlayerModel _model;
 
         private Player _player;
 
         public override void InstallBindings()
         {
-            InstallMovement();
             InstallPlayer();
+            InstallMover();
+            InstallMovement();
             InstallCameraFollow();
             InstallModel();
             InstallInputMediator();
@@ -35,9 +37,15 @@ namespace Assets.Level_1.Installers
             _camera.Follow = _player.transform;
         }
 
-        private void InstallMovement()
+        private void InstallMover()
         {
             Container.BindInterfacesAndSelfTo<DefaultPlayerMover>().AsSingle().NonLazy();
+        }
+
+        private void InstallMovement()
+        {
+            PlayerMovement movement = Container.InstantiatePrefabForComponent<PlayerMovement>(_playerMovement, _player.transform);
+            Container.BindInterfacesAndSelfTo<PlayerMovement>().FromInstance(movement).AsSingle().NonLazy();
         }
 
         private void InstallModel()

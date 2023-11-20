@@ -8,7 +8,7 @@ namespace Assets.Player_Module.Scripts
     {
         void StartMove();
         void StopMove();
-        void Moving(Transform transform);
+        void Moving();
 
         public event Action<Vector2> InputDirectionUpdated;
         public event Action<Vector2> MovementDirectionUpdated;

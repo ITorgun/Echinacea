@@ -1,29 +1,31 @@
-﻿using System;
+﻿using Assets.Playable_Entity_Module;
+using System;
 using UnityEngine;
 
 namespace Assets.Player_Module.Scripts
 {
     public class DefaultPlayerMover : IPlayerMover, IDisposable
     {
-        [SerializeField] private float _moveSpeed = 10f;
         [SerializeField] private Animator _animator;
 
-        //private IMovable _movable;
         private IMovementEvents _movementEvents;
         private Vector2 _inputDirection;
         private Vector3 _currentDirection;
         private bool _isMoving;
 
         public IMovementEvents MovementEvents => _movementEvents;
+        public IMovable Movable { get; private set; }
 
         public event Action<Vector2> InputDirectionUpdated;
         public event Action<Vector2> MovementDirectionUpdated;
 
-        public DefaultPlayerMover(IMovementEvents movementEvents)
+        public DefaultPlayerMover(IMovementEvents movementEvents, IMovable movable)
         {
             _movementEvents = movementEvents;
             _movementEvents.Horizontal += OnHorisontalDirectionMoved;
             _movementEvents.Vertical += OnVerticalDirectionMoved;
+
+            Movable = movable;
         }
 
         public void Dispose()
@@ -36,7 +38,7 @@ namespace Assets.Player_Module.Scripts
 
         public void StopMove() => _isMoving = false;
 
-        public void Moving(Transform transform)
+        public void Moving()
         {
             if (_isMoving == false)
             {
@@ -44,7 +46,7 @@ namespace Assets.Player_Module.Scripts
                 return;
             }
 
-            Move(transform);
+            Move(Movable.Transform, Movable.Speed);
         }
 
         private bool IsAxisZero(float axis)
@@ -94,7 +96,7 @@ namespace Assets.Player_Module.Scripts
             return false;
         }
 
-        private void Move(Transform transform)
+        private void Move(Transform transform, float moveSpeed)
         {
             if (IsObstacleInDirection(transform))
             {
@@ -105,7 +107,7 @@ namespace Assets.Player_Module.Scripts
             {
                 _currentDirection = _inputDirection;
             }
-            transform.position += _moveSpeed * Time.deltaTime * _currentDirection;
+            transform.position += moveSpeed * Time.deltaTime * _currentDirection;
         }
     }
 }

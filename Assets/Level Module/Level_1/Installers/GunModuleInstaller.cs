@@ -1,3 +1,4 @@
+using Assets.PlayerModule;
 using Assets.WeaponModule.GunModule.Gun;
 using UnityEngine;
 using Zenject;
@@ -12,6 +13,9 @@ public class GunModuleInstaller : MonoInstaller
     private ShotPosition _shotPositionInstance;
     private AmmoPool _ammoPoolInstance;
     private DefaultGun _gunInstance;
+
+    [Inject]
+    public Player Player { get; set; }
 
     public override void InstallBindings()
     {
@@ -77,7 +81,8 @@ public class GunModuleInstaller : MonoInstaller
 
     private void InstallPlayerAttack()
     {
-        PlayerAttack playerAttack = Container.InstantiatePrefabForComponent<PlayerAttack>(_playerAttack);
+        PlayerAttack playerAttack = Container.InstantiatePrefabForComponent<PlayerAttack>(_playerAttack, Player.transform);
+        playerAttack.transform.position = Player.transform.position;
 
         _shotPositionInstance.transform.position = playerAttack.transform.position;
         _shotPositionInstance.transform.SetParent(playerAttack.transform);

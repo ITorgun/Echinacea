@@ -862,8 +862,8 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 380274333}
-  - {fileID: 660384089}
   - {fileID: 1725079945}
+  - {fileID: 660384089}
   - {fileID: 678126095}
   _installerPrefabs: []
   _autoRun: 1
@@ -932,6 +932,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefab: {fileID: 384649539549481342, guid: 14a75989e47a14f42baf3fa7494b041c, type: 3}
   _camera: {fileID: 1396703402}
+  _playerMovement: {fileID: 2141392945972381449, guid: 21118a3a32ddc4e49afc338a7496e079, type: 3}
   _model: {fileID: 8631732607137641901, guid: 45686e62f0974424ebd2f6f166eebec9, type: 3}
 --- !u!4 &1725079946
 Transform:

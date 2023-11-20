@@ -12,32 +12,19 @@ namespace Assets.PlayerModule
         [SerializeField] private float _health;
         [SerializeField] private int _level;
 
-        private PlayerAttack _playerAttack;
-        private IPlayerMover _mover;
-
         public float Health { get => _health; private set => _health = value; }
         public float MaxHealth { get; private set; }
         public float MinHealth { get; private set; }
         public int Coins { get; private set; }
         public int Wallet { get; private set; }
 
-        public float Speed => 15;
+        public float Speed => 20;
 
         public Transform Transform => transform;
 
         //public event Action<float> HealthChanged;
         //public event Action Died;
         //public event Action<int> LevelChanged;
-
-        [Inject]
-        public void Construct(IPlayerMover playerMover, PlayerAttack playerAttack)
-        {
-            _mover = playerMover;
-
-            _playerAttack = playerAttack;
-            _playerAttack.transform.position = transform.position;
-            _playerAttack.transform.SetParent(transform);
-        }
 
         private void Start()
         {
@@ -47,13 +34,6 @@ namespace Assets.PlayerModule
 
             //HealthChanged?.Invoke(Health);
             //LevelChanged?.Invoke(_level);
-
-            _mover.StartMove();
-        }
-
-        private void Update()
-        {
-            _mover.Moving(transform);
         }
 
         public bool IsHealthLessMin()
