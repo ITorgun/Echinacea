@@ -21,8 +21,9 @@ namespace Assets.Playable_Entity_Module.IMover
 
         public void Moving(float deltaTime)
         {
-            if (_isMoving == false && Vector3.Distance(_movable.Transform.position, _positionable.Position) < 0.2f)
+            if (_isMoving == false || Vector3.Distance(_movable.Transform.position, _positionable.Position) < 0.2f)
             {
+                _positionable.IsPositionSet = false;
                 return;
             }
 

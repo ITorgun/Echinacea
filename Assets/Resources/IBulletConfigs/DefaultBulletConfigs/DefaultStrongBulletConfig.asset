@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 182af33f1ae571146aa1df0318dbe6db, type: 3}
   m_Name: DefaultStrongBulletConfig
   m_EditorClassIdentifier: 
-  _bulletType: 1
-  _speed: 30
+  _speed: 4.12
   _damage: 20
   _lifeTime: 15
   _prefab: {fileID: 4452562016936052364, guid: 4c82ede15c249044da68b411cbd7bc68, type: 3}
+  _bulletType: 1

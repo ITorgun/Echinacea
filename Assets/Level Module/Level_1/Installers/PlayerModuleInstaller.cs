@@ -10,7 +10,6 @@ namespace Assets.Level_1.Installers
     {
         [SerializeField] private Player _prefab;
         [SerializeField] private CinemachineVirtualCamera _camera;
-        [SerializeField] private ShotPosition _shotPosition;
         [SerializeField] private PlayerModel _model;
 
         private Player _player;
@@ -20,7 +19,6 @@ namespace Assets.Level_1.Installers
             InstallMovement();
             InstallPlayer();
             InstallCameraFollow();
-            InstallShotPosition();
             InstallModel();
             InstallInputMediator();
         }
@@ -40,12 +38,6 @@ namespace Assets.Level_1.Installers
         private void InstallMovement()
         {
             Container.BindInterfacesAndSelfTo<DefaultPlayerMover>().AsSingle().NonLazy();
-        }
-
-        private void InstallShotPosition()
-        {
-            ShotPosition shotPosition = Container.InstantiatePrefabForComponent<ShotPosition>(_shotPosition, _player.transform);
-            Container.BindInterfacesAndSelfTo<ShotPosition>().FromInstance(shotPosition).AsSingle().NonLazy();
         }
 
         private void InstallModel()

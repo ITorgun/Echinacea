@@ -11,8 +11,8 @@ namespace Assets.Enemy_Module.PlayerFinder
         private float _timer;
 
         public bool IsFinding => _playerFinder.IsFinding;
-        public Transform FinderTransform { get; private set; }
-        public float Range { get; private set; }
+        public Transform FinderTransform => _playerFinder.FinderTransform;
+        public float Range => _playerFinder.Range;
 
         public FreqiencyAroundFinder(IFinder playerFinder, float findCooldown)
         {
@@ -42,7 +42,7 @@ namespace Assets.Enemy_Module.PlayerFinder
 
         public bool TryFindPosition(out Vector2 position)
         {
-            position = Vector2.zero;
+            position = FinderTransform.transform.position;
 
             if (IsFinding == false)
             {

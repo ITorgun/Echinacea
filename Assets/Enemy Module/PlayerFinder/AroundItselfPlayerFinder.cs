@@ -21,7 +21,7 @@ namespace Assets.Enemy_Module
 
         public bool TryFindPosition(out Vector2 position)
         {
-            position = Vector2.zero;
+            position = FinderTransform.transform.position;
 
             if (IsFinding == false)
             {

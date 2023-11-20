@@ -6,13 +6,14 @@ public class DefaultRangeAttackDealer : IRangeAttackDealer, IDisposable
 {
     private IRangeAttackEvents _rangeAttackEvents;
 
-    [Inject]
     public IShootable Shootable { get; set; }
 
     [Inject]
-    public DefaultRangeAttackDealer(IRangeAttackEvents rangeAttackEvents)
+    public DefaultRangeAttackDealer(IRangeAttackEvents rangeAttackEvents, IShootable shootable)
     {
         _rangeAttackEvents = rangeAttackEvents;
+        Shootable = shootable;
+
         _rangeAttackEvents.RangeAttackPressed += Shoot;
     }
 

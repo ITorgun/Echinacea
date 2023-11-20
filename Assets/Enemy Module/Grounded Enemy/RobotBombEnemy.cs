@@ -20,6 +20,8 @@ namespace Assets.Enemy_Module.Grounded_Enemy
         private void Start()
         {
             Speed = 5;
+
+            _positionable.Position = transform.position;
         }
 
         public void InjectTarget(IPositionable positionable)
