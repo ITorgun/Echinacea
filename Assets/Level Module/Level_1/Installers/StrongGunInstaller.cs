@@ -65,7 +65,7 @@ public class StrongGunInstaller : MonoInstaller
         Container.Bind<StrongBulletType>().FromInstance(type).AsTransient()
             .WhenInjectedInto<StrongMagazine>().NonLazy();
 
-        Container.BindInterfacesAndSelfTo<StrongMagazine>().AsTransient().NonLazy();
+        Container.BindInterfacesAndSelfTo<StrongMagazine>().WhenInjectedInto<StrongGun>().NonLazy();
     }
 
     private void InstallGun()

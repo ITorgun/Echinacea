@@ -48,7 +48,7 @@ public class GunModuleInstaller : MonoInstaller
 
     private void InstallDefaultBulletPool()
     {
-        DefaultBulletType type = DefaultBulletType.AverageConfig;
+        DefaultBulletType type = DefaultBulletType.TestConfig;
         Container.Bind<DefaultBulletType>().FromInstance(type).AsTransient()
             .WhenInjectedInto<DefaultBulletPool>().NonLazy();
 
@@ -59,11 +59,11 @@ public class GunModuleInstaller : MonoInstaller
 
     private void InstallMagazine()
     {
-        DefaultBulletType type = DefaultBulletType.AverageConfig;
+        DefaultBulletType type = DefaultBulletType.TestConfig;
         Container.Bind<DefaultBulletType>().FromInstance(type).AsTransient()
             .WhenInjectedInto<DefaultBulletMagazine>().NonLazy();
 
-        Container.BindInterfacesAndSelfTo<DefaultBulletMagazine>().AsTransient().NonLazy();
+        Container.BindInterfacesAndSelfTo<DefaultBulletMagazine>().WhenInjectedInto<DefaultGun>().NonLazy();
     }
 
     private void InstallDefaultGun()

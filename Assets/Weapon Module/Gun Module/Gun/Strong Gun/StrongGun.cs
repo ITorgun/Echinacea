@@ -29,7 +29,17 @@ public class StrongGun : MonoBehaviour, IShootable
 
     public void Shoot()
     {
-        _pulling = StartCoroutine(PullingAmmo());
+        Debug.Log("Strong Gun");
+
+        IAmmo ammo1 = Magazine.PullAmmo();
+        ammo1.IncreaseInitialStats(_damage);
+
+        IAmmo ammo2 = Magazine.PullAmmo();
+        ammo2.IncreaseInitialStats(_damage);
+
+        IAmmo ammo3 = Magazine.PullAmmo();
+        ammo3.IncreaseInitialStats(_damage);
+        //_pulling = StartCoroutine(PullingAmmo());
     }
 
     private IEnumerator PullingAmmo()

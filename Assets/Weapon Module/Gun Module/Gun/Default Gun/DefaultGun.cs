@@ -28,6 +28,8 @@ namespace Assets.WeaponModule.GunModule.Gun
 
         public void Shoot()
         {
+            Debug.Log("Default Gun");
+
             IAmmo ammo = Magazine.PullAmmo();
             ammo.IncreaseInitialStats(_damage);
         }

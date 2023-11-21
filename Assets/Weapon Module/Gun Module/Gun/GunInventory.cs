@@ -11,7 +11,7 @@ namespace Assets.Weapon_Module.Gun_Module.Gun
         private ISwitchGunEvent _switchGunEvent;
         private List<IShootable> _shootables;
         private ISwitcherShootable _switcherShootable;
-        private int _currentShootableIndex = 0;
+        private int _index = 0;
 
         [Inject]
         public void Constructor(ISwitchGunEvent switchGunEvent,
@@ -26,6 +26,12 @@ namespace Assets.Weapon_Module.Gun_Module.Gun
         {
             IShootable[] shootables = GetComponentsInChildren<IShootable>();
             _shootables = new List<IShootable>(shootables);
+
+            for (int i = 1; i < shootables.Length; i++)
+            {
+                _shootables[i].Hide();
+            }
+
             _switcherShootable.InjectShootable(_shootables[0]);
         }
 
@@ -42,21 +48,14 @@ namespace Assets.Weapon_Module.Gun_Module.Gun
 
         private void CountIndex()
         {
-            if (_currentShootableIndex == _shootables.Count - 1)
-            {
-                _currentShootableIndex = 0;
-            }
-            else
-            {
-                _shootables[_currentShootableIndex].Hide();
-                _currentShootableIndex++;
-                _shootables[_currentShootableIndex].Show();
-            }
+            _shootables[_index].Hide();
+            _index = (_index + 1) % _shootables.Count;
+            _shootables[_index].Show();
         }
 
         private void SetNextShootable()
         {
-            _switcherShootable.InjectShootable(_shootables[_currentShootableIndex]);
+            _switcherShootable.InjectShootable(_shootables[_index]);
         }
     }
 }
