@@ -41,4 +41,14 @@ public class StrongGun : MonoBehaviour, IShootable
             yield return new WaitForSeconds(_pullingDelay);
         }
     }
+
+    public void Hide()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void Show()
+    {
+        gameObject.SetActive(true);
+    }
 }

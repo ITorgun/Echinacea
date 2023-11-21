@@ -1,4 +1,5 @@
 using Assets.PlayerModule;
+using Assets.Weapon_Module.Gun_Module.Gun;
 using Assets.WeaponModule.GunModule.Gun;
 using UnityEngine;
 using Zenject;
@@ -14,12 +15,15 @@ public class StrongGunInstaller : MonoInstaller
     private AmmoPool _ammoPoolInstance;
     private StrongGun _gunInstance;
 
+    [SerializeField] private PlayerInventory _playerInventory;
+    [SerializeField] private GunInventory _gunInventory;
+
     [Inject]
     public Player Player { get; set; }
 
     public override void InstallBindings()
     {
-        Container.Bind<AmmoInventory>().AsSingle().NonLazy();
+        Container.Bind<BulletInventory>().AsSingle().NonLazy();
         InstallDefaultBulletFactory();
         InstallShotPosition();
         InstallBulletPool();
@@ -29,6 +33,8 @@ public class StrongGunInstaller : MonoInstaller
         InstallAmmoSwitcher();
 
         InstallPlayerAttack();
+        GunInventoryInstaller();
+        //PlayerInventoryInstaller();
     }
 
     private void InstallDefaultBulletFactory()
@@ -50,7 +56,7 @@ public class StrongGunInstaller : MonoInstaller
 
         _ammoPoolInstance = Container.InstantiatePrefabForComponent<AmmoPool>(_defaultBulletPool);
         Container.BindInterfacesAndSelfTo<AmmoPool>()
-            .FromInstance(_ammoPoolInstance).AsSingle().NonLazy();
+            .FromInstance(_ammoPoolInstance).AsTransient().WhenInjectedInto<StrongMagazine>().NonLazy();
     }
 
     private void InstallMagazine()
@@ -59,7 +65,7 @@ public class StrongGunInstaller : MonoInstaller
         Container.Bind<StrongBulletType>().FromInstance(type).AsTransient()
             .WhenInjectedInto<StrongMagazine>().NonLazy();
 
-        Container.BindInterfacesAndSelfTo<StrongMagazine>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<StrongMagazine>().AsTransient().NonLazy();
     }
 
     private void InstallGun()
@@ -87,10 +93,26 @@ public class StrongGunInstaller : MonoInstaller
         _shotPositionInstance.transform.position = playerAttack.transform.position;
         _shotPositionInstance.transform.SetParent(playerAttack.transform);
 
-        _gunInstance.transform.position = playerAttack.transform.position;
-        _gunInstance.transform.SetParent(playerAttack.transform);
-
         Container.BindInterfacesAndSelfTo<PlayerAttack>()
             .FromInstance(playerAttack).AsSingle().NonLazy();
     }
+
+    private void GunInventoryInstaller()
+    {
+        GunInventory gunInventory = Container.InstantiatePrefabForComponent<GunInventory>(_gunInventory, Player.transform);
+        gunInventory.transform.position = Player.transform.position;
+
+        _gunInstance.transform.position = gunInventory.transform.position;
+        _gunInstance.transform.SetParent(gunInventory.transform);
+
+        Container.BindInterfacesAndSelfTo<GunInventory>().FromInstance(gunInventory).AsSingle().NonLazy();
+    }
+
+    //private void PlayerInventoryInstaller()
+    //{
+    //    PlayerInventory playerInventory = Container.InstantiatePrefabForComponent<PlayerInventory>(_playerInventory, Player.transform);
+    //    playerInventory.transform.position = Player.transform.position;
+
+    //    Container.BindInterfacesAndSelfTo<PlayerInventory>().FromInstance(playerInventory).AsSingle().NonLazy();
+    //}
 }

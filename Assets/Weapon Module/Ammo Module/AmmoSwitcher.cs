@@ -2,17 +2,15 @@ using System;
 
 public class AmmoSwitcher : IDisposable
 {
-    private AmmoInventory _ammoInventory;
+    private BulletInventory _ammoInventory;
     private IAmmoLoader _ammoLoader;
     private IMagazine _magazine;
     private ISwitchAmmoEvent _switchAmmoEvent;
     private int _index = 0;
 
-    public AmmoSwitcher(ISwitchAmmoEvent switchAmmoEvent, IMagazine magazine, 
-        IAmmoLoader ammoLoader, AmmoInventory ammoInventory)
+    public AmmoSwitcher(ISwitchAmmoEvent switchAmmoEvent, IAmmoLoader ammoLoader, BulletInventory ammoInventory)
     {
         _ammoLoader = ammoLoader;
-        _magazine = magazine;
         _switchAmmoEvent = switchAmmoEvent;
         _ammoInventory = ammoInventory;
 
@@ -31,8 +29,8 @@ public class AmmoSwitcher : IDisposable
 
     private void OnAmmoSwitched()
     {
-        _index = (_index + 1) % _ammoInventory.GetAvaibleTypeCount(_magazine);
-        int index = _ammoInventory.GetAvaibleBullet(_index, _magazine);
+        _index = (_index + 1) % _ammoInventory.GetAvaibleBulletTypeCount(_magazine);
+        int index = _ammoInventory.GetBulletTypeByIndex(_index, _magazine);
         SetNextAmmoType(index);
     }
 

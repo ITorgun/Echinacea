@@ -1,6 +1,7 @@
+using System;
 using System.Collections.Generic;
 
-public class AmmoInventory
+public class BulletInventory
 {
     private List<DefaultBulletType> _defaultBulletTypes = new List<DefaultBulletType>()
     {
@@ -15,33 +16,33 @@ public class AmmoInventory
         StrongBulletType.FastSpeedConfig,
     };
 
-    public int GetAvaibleBullet(int index, IMagazine magazine)
+    public int GetBulletTypeByIndex(int index, IMagazine magazine)
     {
         switch (magazine)
         {
-            case DefaultMagazine:
+            case DefaultBulletMagazine:
                 return (int)_defaultBulletTypes[index];
 
             case StrongMagazine:
                 return (int)_strongBulletTypes[index];
 
             default:
-                throw new System.Exception();
+                throw new Exception();
         }
     }
 
-    public int GetAvaibleTypeCount(IMagazine magazine)
+    public int GetAvaibleBulletTypeCount(IMagazine magazine)
     {
         switch (magazine)
         {
-            case DefaultMagazine:
+            case DefaultBulletMagazine:
                 return _defaultBulletTypes.Count;
 
             case StrongMagazine:
                 return _strongBulletTypes.Count;
 
             default:
-                throw new System.Exception();
+                throw new Exception();
         }
     }
 }

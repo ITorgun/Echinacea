@@ -31,5 +31,15 @@ namespace Assets.WeaponModule.GunModule.Gun
             IAmmo ammo = Magazine.PullAmmo();
             ammo.IncreaseInitialStats(_damage);
         }
+
+        public void Hide()
+        {
+            gameObject.SetActive(false);
+        }
+
+        public void Show()
+        {
+            gameObject.SetActive(true);
+        }
     }
 }

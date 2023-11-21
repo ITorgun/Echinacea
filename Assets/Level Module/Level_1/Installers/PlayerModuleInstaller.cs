@@ -3,6 +3,8 @@ using Zenject;
 using Assets.PlayerModule;
 using Cinemachine;
 using Assets.Player_Module.Scripts;
+using Assets.Weapon_Module.Gun_Module.Gun;
+using System;
 
 namespace Assets.Level_1.Installers
 {
@@ -23,6 +25,7 @@ namespace Assets.Level_1.Installers
             InstallCameraFollow();
             InstallModel();
             InstallInputMediator();
+
         }
 
         private void InstallPlayer()

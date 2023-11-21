@@ -1,24 +1,32 @@
-using System;
+﻿using Assets.WeaponModule.GunModule.Gun;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using Zenject;
 
-namespace Assets.WeaponModule.GunModule.Gun
+namespace Assets.Weapon_Module.Gun_Module.Gun
 {
-    public class GunSwitcher : IDisposable
+    public class GunInventory : MonoBehaviour
     {
         private ISwitchGunEvent _switchGunEvent;
         private List<IShootable> _shootables;
-        private ISwitcherShootable _shooter;
+        private ISwitcherShootable _switcherShootable;
         private int _currentShootableIndex = 0;
 
-        public GunSwitcher(ISwitchGunEvent switchGunEvent, IEnumerable shootables,
+        [Inject]
+        public void Constructor(ISwitchGunEvent switchGunEvent,
             ISwitcherShootable shooter)
         {
             _switchGunEvent = switchGunEvent;
-            _shootables = (List<IShootable>)shootables;
-            _shooter = shooter;
-
+            _switcherShootable = shooter;
             _switchGunEvent.GunSwitched += OnGunSwitched;
+        }
+
+        private void Start()
+        {
+            IShootable[] shootables = GetComponentsInChildren<IShootable>();
+            _shootables = new List<IShootable>(shootables);
+            _switcherShootable.InjectShootable(_shootables[0]);
         }
 
         public void Dispose()
@@ -40,13 +48,15 @@ namespace Assets.WeaponModule.GunModule.Gun
             }
             else
             {
+                _shootables[_currentShootableIndex].Hide();
                 _currentShootableIndex++;
+                _shootables[_currentShootableIndex].Show();
             }
         }
 
         private void SetNextShootable()
         {
-            _shooter.InjectShootable(_shootables[_currentShootableIndex]);
+            _switcherShootable.InjectShootable(_shootables[_currentShootableIndex]);
         }
     }
 }

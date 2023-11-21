@@ -1,11 +1,11 @@
 using Assets.WeaponModule.GunModule.Gun;
 
-public class DefaultMagazine : IMagazine
+public class DefaultBulletMagazine : IMagazine
 {
     private DefaultBulletPool _pool;
     private DefaultBulletType _type;
 
-    public DefaultMagazine(AmmoPool pool, DefaultBulletType bulletType)
+    public DefaultBulletMagazine(AmmoPool pool, DefaultBulletType bulletType)
     {
         _pool = (DefaultBulletPool)pool;
         _type = bulletType;
