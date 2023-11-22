@@ -11,12 +11,8 @@ public class GunModuleInstaller : MonoInstaller
     //[SerializeField] private ShotPosition _shotPosition;
     //[SerializeField] private PlayerAttack _playerAttack;
 
-    private ShotPosition _shotPositionInstance;
     private AmmoPool _ammoPoolInstance;
     private DefaultGun _gunInstance;
-
-    [Inject]
-    public Player Player { get; set; }
 
     [Inject]
     private GunInventory GunInventory { get ; set; }

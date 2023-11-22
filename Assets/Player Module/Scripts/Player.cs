@@ -2,6 +2,7 @@ using Assets.Playable_Entity_Module;
 using Assets.Player_Module.Scripts.Movement;
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace Assets.PlayerModule
 {
@@ -15,16 +16,12 @@ namespace Assets.PlayerModule
         public int Coins { get; private set; }
         public int Wallet { get; private set; }
 
-        //public event Action<float> HealthChanged;
-        //public event Action Died;
-        //public event Action<int> LevelChanged;
-
-        private void Start()
+        [Inject]
+        public void Constructor(IPlayerMovement playerMovement)
         {
-
-            //HealthChanged?.Invoke(Health);
-            //LevelChanged?.Invoke(_level);
+            _movement = playerMovement;
         }
+
 
         public void IncreaseLevel()
         {

@@ -7,19 +7,14 @@ using Zenject;
 public class StrongGunInstaller : MonoInstaller
 {
     [SerializeField] private AmmoPool _defaultBulletPool;
-    [SerializeField] private StrongGun _defaultGun;
+    [SerializeField] private StrongGun _gun;
+
     [SerializeField] private ShotPosition _shotPosition;
-    [SerializeField] private PlayerAttack _playerAttack;
 
     private ShotPosition _shotPositionInstance;
     private AmmoPool _ammoPoolInstance;
     private StrongGun _gunInstance;
 
-    [SerializeField] private PlayerInventory _playerInventory;
-    [SerializeField] private GunInventory _gunInventory;
-
-    [Inject]
-    public Player Player { get; set; }
 
     public override void InstallBindings()
     {
@@ -32,9 +27,6 @@ public class StrongGunInstaller : MonoInstaller
         InstallPlayerShooter();
         InstallAmmoSwitcher();
 
-        InstallPlayerAttack();
-        GunInventoryInstaller();
-        //PlayerInventoryInstaller();
     }
 
     private void InstallDefaultBulletFactory()
@@ -70,7 +62,7 @@ public class StrongGunInstaller : MonoInstaller
 
     private void InstallGun()
     {
-        _gunInstance = Container.InstantiatePrefabForComponent<StrongGun>(_defaultGun);
+        _gunInstance = Container.InstantiatePrefabForComponent<StrongGun>(_gun);
         Container.BindInterfacesAndSelfTo<StrongGun>()
             .FromInstance(_gunInstance).AsSingle().NonLazy();
     }
@@ -84,35 +76,4 @@ public class StrongGunInstaller : MonoInstaller
     {
         Container.BindInterfacesAndSelfTo<AmmoSwitcher>().AsSingle().NonLazy();
     }
-
-    private void InstallPlayerAttack()
-    {
-        PlayerAttack playerAttack = Container.InstantiatePrefabForComponent<PlayerAttack>(_playerAttack, Player.transform);
-        playerAttack.transform.position = Player.transform.position;
-
-        _shotPositionInstance.transform.position = playerAttack.transform.position;
-        _shotPositionInstance.transform.SetParent(playerAttack.transform);
-
-        Container.BindInterfacesAndSelfTo<PlayerAttack>()
-            .FromInstance(playerAttack).AsSingle().NonLazy();
-    }
-
-    private void GunInventoryInstaller()
-    {
-        GunInventory gunInventory = Container.InstantiatePrefabForComponent<GunInventory>(_gunInventory, Player.transform);
-        gunInventory.transform.position = Player.transform.position;
-
-        _gunInstance.transform.position = gunInventory.transform.position;
-        _gunInstance.transform.SetParent(gunInventory.transform);
-
-        Container.BindInterfacesAndSelfTo<GunInventory>().FromInstance(gunInventory).AsSingle().NonLazy();
-    }
-
-    //private void PlayerInventoryInstaller()
-    //{
-    //    PlayerInventory playerInventory = Container.InstantiatePrefabForComponent<PlayerInventory>(_playerInventory, Player.transform);
-    //    playerInventory.transform.position = Player.transform.position;
-
-    //    Container.BindInterfacesAndSelfTo<PlayerInventory>().FromInstance(playerInventory).AsSingle().NonLazy();
-    //}
 }

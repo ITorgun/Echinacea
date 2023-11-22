@@ -962,11 +962,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _defaultBulletPool: {fileID: -2434966106315419934, guid: 9af25e85d2f69344b93f342da5f76ca9, type: 3}
-  _defaultGun: {fileID: -4578598262802960342, guid: de21dad1e7fadf043919b572d9f257a5, type: 3}
+  _gun: {fileID: -4578598262802960342, guid: de21dad1e7fadf043919b572d9f257a5, type: 3}
   _shotPosition: {fileID: 3317225299143523737, guid: 0553c344a482ea943b051fdf6dff849d, type: 3}
-  _playerAttack: {fileID: -7832844472935522509, guid: db17b62353c3f264a9d15bc223fc480d, type: 3}
-  _playerInventory: {fileID: 4402009263947365128, guid: de4a1c5b01dc6764095abc18b8a83173, type: 3}
-  _gunInventory: {fileID: 5924722688811717981, guid: aedda99548ec62f4f86d33fd21139779, type: 3}
 --- !u!4 &1460865863
 Transform:
   m_ObjectHideFlags: 0
@@ -1014,8 +1011,8 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 380274333}
-  - {fileID: 1725079945}
   - {fileID: 1460865862}
+  - {fileID: 1725079945}
   - {fileID: 1406356344}
   - {fileID: 678126095}
   _installerPrefabs: []
@@ -1084,10 +1081,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad5f6c644bcbdd14b9f7da817f11b391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 384649539549481342, guid: 14a75989e47a14f42baf3fa7494b041c, type: 3}
+  _playerInstance: {fileID: 2918201461807589476, guid: 14a75989e47a14f42baf3fa7494b041c, type: 3}
   _camera: {fileID: 1396703402}
   _playerMovement: {fileID: 2141392945972381449, guid: 21118a3a32ddc4e49afc338a7496e079, type: 3}
   _model: {fileID: 8631732607137641901, guid: 45686e62f0974424ebd2f6f166eebec9, type: 3}
+  _gunInventory: {fileID: 5924722688811717981, guid: aedda99548ec62f4f86d33fd21139779, type: 3}
+  _playerAttack: {fileID: -7832844472935522509, guid: db17b62353c3f264a9d15bc223fc480d, type: 3}
+  _shotPosition: {fileID: 3317225299143523737, guid: 0553c344a482ea943b051fdf6dff849d, type: 3}
+  _player: {fileID: 5821751916005640465, guid: efc49fb1ebb5f2f46ac7e4a703877718, type: 3}
 --- !u!4 &1725079946
 Transform:
   m_ObjectHideFlags: 0
