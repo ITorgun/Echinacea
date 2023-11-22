@@ -8,7 +8,7 @@ public class PlayerHealthDebuffZone : MonoBehaviour
     {
         if (collision.TryGetComponent(out IDamageable damageable))
         {
-            damageable.GetDamaged(15);
+            damageable.GetDamaged(5);
         }
     }
 }

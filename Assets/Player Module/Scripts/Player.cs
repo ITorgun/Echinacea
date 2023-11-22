@@ -1,4 +1,5 @@
 using Assets.Playable_Entity_Module;
+using Assets.Player_Module.Scripts.Health;
 using Assets.Player_Module.Scripts.Movement;
 using System;
 using UnityEngine;
@@ -12,13 +13,13 @@ namespace Assets.PlayerModule
         [SerializeField] private int _level;
 
         public IPlayerMovement Movement { get; private set; }
-        public IHealthTaker Health { get; private set; }
+        public IPlayerHealthTaker Health { get; private set; }
 
         public int Coins { get; private set; }
         public int Wallet { get; private set; }
 
         [Inject]
-        public void Constructor(IPlayerMovement playerMovement, IHealthTaker playerHealth)
+        public void Constructor(IPlayerMovement playerMovement, IPlayerHealthTaker playerHealth)
         {
             Movement = playerMovement;
             Health = playerHealth;

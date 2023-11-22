@@ -49,8 +49,6 @@ namespace Assets.Level_1.Installers
             InstallPlayerInventory();
 
             InstallPlayer();
-
-            InstallInputMediator();
         }
 
         private void InstantiatePlayerGameobject()
@@ -132,11 +130,6 @@ namespace Assets.Level_1.Installers
         {
             Player player = Container.InstantiateComponent<Player>(_playerGameObject);
             Container.BindInterfacesAndSelfTo<Player>().FromInstance(player).AsSingle();
-        }
-
-        private void InstallInputMediator()
-        {
-            Container.BindInterfacesAndSelfTo<PlayerInputMediator>().AsSingle().NonLazy();
         }
     }
 }

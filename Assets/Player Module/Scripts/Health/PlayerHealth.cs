@@ -1,8 +1,10 @@
+using Assets.Player_Module.Scripts.Health;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour, IHealthTaker, IHealable, IDamageable
+public class PlayerHealth : MonoBehaviour, IPlayerHealthTaker, IHealable, IDamageable
 {
     [SerializeField] private float _health;
 
@@ -10,11 +12,13 @@ public class PlayerHealth : MonoBehaviour, IHealthTaker, IHealable, IDamageable
     public float MaxHealth { get; private set; }
     public float MinHealth { get; private set; }
 
+    public event Action<float> HealthChanged;
+
     private void Start()
     {
         MaxHealth = 100;
         MinHealth = 0;
-        Health = 20;
+        Health = 90;
     }
 
     public bool IsHealthLessMin()
@@ -34,7 +38,7 @@ public class PlayerHealth : MonoBehaviour, IHealthTaker, IHealable, IDamageable
     public void GetDamaged(float damage)
     {
         Health -= damage;
-        //HealthChanged?.Invoke(Health);
+        HealthChanged?.Invoke(Health);
 
         Debug.Log("Получил урон. Осталось хп: " + Health);
 
@@ -54,6 +58,6 @@ public class PlayerHealth : MonoBehaviour, IHealthTaker, IHealable, IDamageable
 
         Health += healValue;
 
-        //HealthChanged?.Invoke(Health);
+        HealthChanged?.Invoke(Health);
     }
 }
