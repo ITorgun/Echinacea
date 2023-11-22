@@ -12,14 +12,17 @@ namespace Assets.Weapon_Module.Gun_Module.Gun
         private List<IShootable> _shootables;
         private ISwitcherShootable _switcherShootable;
         private int _index = 0;
+        private AmmoSwitcher _ammoSwitcher;
 
         [Inject]
         public void Constructor(ISwitchGunEvent switchGunEvent,
-            ISwitcherShootable shooter)
+            ISwitcherShootable shooter, AmmoSwitcher ammoSwitcher)
         {
             _switchGunEvent = switchGunEvent;
             _switcherShootable = shooter;
             _switchGunEvent.GunSwitched += OnGunSwitched;
+
+            _ammoSwitcher = ammoSwitcher;
         }
 
         private void Start()
@@ -32,7 +35,8 @@ namespace Assets.Weapon_Module.Gun_Module.Gun
                 _shootables[i].Hide();
             }
 
-            _switcherShootable.InjectShootable(_shootables[0]);
+            _switcherShootable.InjectShootable(_shootables[_index]);
+            _ammoSwitcher.SetMagazine(_shootables[_index].Magazine);
         }
 
         public void Dispose()
@@ -56,6 +60,7 @@ namespace Assets.Weapon_Module.Gun_Module.Gun
         private void SetNextShootable()
         {
             _switcherShootable.InjectShootable(_shootables[_index]);
+            _ammoSwitcher.SetMagazine(_shootables[_index].Magazine);
         }
     }
 }

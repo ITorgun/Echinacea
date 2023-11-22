@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 10
   _damage: 1
-  _lifeTime: 2
+  _lifeTime: 1
   _prefab: {fileID: 4452562016936052364, guid: 4c82ede15c249044da68b411cbd7bc68, type: 3}
   _bulletType: 3
