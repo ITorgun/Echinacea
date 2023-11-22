@@ -4,66 +4,63 @@ using Assets.PlayerModule;
 using Cinemachine;
 using Assets.Player_Module.Scripts;
 using Assets.Weapon_Module.Gun_Module.Gun;
-using System;
-using System.ComponentModel;
 
 namespace Assets.Level_1.Installers
 {
     public class PlayerModuleInstaller : MonoInstaller
     {
-        [SerializeField] private GameObject _playerInstance;
-        [SerializeField] private CinemachineVirtualCamera _camera;
-        [SerializeField] private PlayerMovement _playerMovement;
-        [SerializeField] private PlayerModel _model;
+        [SerializeField] private GameObject _playerGameObjectPrefab;
+        [SerializeField] private CinemachineVirtualCamera _cameraPrefab;
+        [SerializeField] private PlayerModel _modelPrefab;
+        [SerializeField] private PlayerInventory _playerInventoryPrefab;
+        [SerializeField] private GunInventory _gunInventoryPrefab;
+        [SerializeField] private PlayerAttack _playerAttackPrefab;
+        [SerializeField] private ShotPosition _shotPositionPrefab;
 
-        
-        //[SerializeField] private PlayerInventory _playerInventory;
+        private ShotPosition _shotPosition;
+        private StrongGun _strongGun;
 
-        [SerializeField] private GunInventory _gunInventory;
-        [SerializeField] private PlayerAttack _playerAttack;
-
-        [SerializeField] private ShotPosition _shotPosition;
-
-        [SerializeField] private Player _player;
-
-        private GameObject _playerGameobject;
+        private GameObject _playerGameObject;
+        private GunInventory _gunInventory;
 
         [Inject]
-        private ShotPosition ShotPositionInstance { get; set; }
-
-        [Inject]
-        public StrongGun StrongGun { get; set; }
+        public void Constructor(ShotPosition shotPosition, StrongGun strongGun)
+        {
+            _shotPosition = shotPosition;
+            _strongGun = strongGun;
+        }
 
         public override void InstallBindings()
         {
-            InstallMover();
             InstantiatePlayerGameobject();
-            //InstallMovement();
-            InstallCameraFollow();
+            SetCameraFollow();
+
             InstallModel();
 
             InstallPlayerAttack();
-            GunInventoryInstaller();
-            //PlayerInventoryInstaller();
 
-            PlayerMovement playerMovement = Container.InstantiateComponent<PlayerMovement>(_playerGameobject);
-            Container.BindInterfacesAndSelfTo<PlayerMovement>().FromInstance(playerMovement).AsSingle();
+            InstallHealth();
 
-            Player player = Container.InstantiateComponent<Player>(_playerGameobject);
-            Container.BindInterfacesAndSelfTo<Player>().FromInstance(player).AsSingle();
+            InstallMover();
+            InstallMovement();
+
+            InstallBulletInventory();
+            InstallGunInventory();
+            InstallPlayerInventory();
+
+            InstallPlayer();
 
             InstallInputMediator();
-
         }
 
         private void InstantiatePlayerGameobject()
         {
-            _playerGameobject = Instantiate(_playerInstance);
+            _playerGameObject = Instantiate(_playerGameObjectPrefab);
         }
 
-        private void InstallCameraFollow()
+        private void SetCameraFollow()
         {
-            _camera.Follow = _playerGameobject.transform;
+            _cameraPrefab.Follow = _playerGameObject.transform;
         }
 
         private void InstallMover()
@@ -73,48 +70,69 @@ namespace Assets.Level_1.Installers
             Container.BindInterfacesAndSelfTo<DefaultPlayerMover>().FromInstance(mover).AsSingle().NonLazy();
         }
 
-        //private void InstallMovement()
-        //{
-        //    PlayerMovement movement = Container.InstantiatePrefabForComponent<PlayerMovement>(_playerMovement, _player.transform);
-        //    Container.BindInterfacesAndSelfTo<PlayerMovement>().FromInstance(movement).AsSingle().NonLazy();
-        //}
-
         private void InstallModel()
         {
-            PlayerModel playerModel = Container.InstantiatePrefabForComponent<PlayerModel>(_model, _playerGameobject.transform);
+            PlayerModel playerModel = Container.InstantiatePrefabForComponent<PlayerModel>(_modelPrefab, _playerGameObject.transform);
             Container.BindInterfacesAndSelfTo<PlayerModel>().FromInstance(playerModel).AsSingle().NonLazy();
         }
 
         private void InstallPlayerAttack()
         {
-            PlayerAttack playerAttack = Container.InstantiatePrefabForComponent<PlayerAttack>(_playerAttack, _playerGameobject.transform);
-            playerAttack.transform.position = _playerGameobject.transform.position;
+            PlayerAttack playerAttack = Container.InstantiatePrefabForComponent<PlayerAttack>(_playerAttackPrefab, _playerGameObject.transform);
+            playerAttack.transform.position = _playerGameObject.transform.position;
 
-            ShotPositionInstance.transform.position = playerAttack.transform.position;
-            ShotPositionInstance.transform.SetParent(playerAttack.transform);
+            _shotPosition.transform.position = playerAttack.transform.position;
+            _shotPosition.transform.SetParent(playerAttack.transform);
 
             Container.BindInterfacesAndSelfTo<PlayerAttack>()
                 .FromInstance(playerAttack).AsSingle().NonLazy();
         }
 
-        private void GunInventoryInstaller()
+        private void InstallHealth()
         {
-            GunInventory gunInventory = Container.InstantiatePrefabForComponent<GunInventory>(_gunInventory, _playerGameobject.transform);
-            gunInventory.transform.position = _playerGameobject.transform.position;
-
-            StrongGun.transform.position = gunInventory.transform.position;
-            StrongGun.transform.SetParent(gunInventory.transform);
-
-            Container.BindInterfacesAndSelfTo<GunInventory>().FromInstance(gunInventory).AsSingle().NonLazy();
+            PlayerHealth health = Container.InstantiateComponent<PlayerHealth>(_playerGameObject);
+            Container.BindInterfacesAndSelfTo<PlayerHealth>().FromInstance(health).AsTransient();
         }
 
-        //private void PlayerInventoryInstaller()
-        //{
-        //    PlayerInventory playerInventory = Container.InstantiatePrefabForComponent<PlayerInventory>(_playerInventory, Player.transform);
-        //    playerInventory.transform.position = Player.transform.position;
+        private void InstallMovement()
+        {
+            PlayerMovement playerMovement = Container.InstantiateComponent<PlayerMovement>(_playerGameObject);
+            Container.BindInterfacesAndSelfTo<PlayerMovement>().FromInstance(playerMovement).AsSingle();
+        }
 
-        //    Container.BindInterfacesAndSelfTo<PlayerInventory>().FromInstance(playerInventory).AsSingle().NonLazy();
-        //}
+        private void InstallBulletInventory()
+        {
+            Container.Bind<BulletInventory>().AsSingle().NonLazy();
+        }
+
+        private void InstallGunInventory()
+        {
+            _gunInventory = Container.InstantiatePrefabForComponent<GunInventory>(_gunInventoryPrefab, _playerGameObject.transform);
+            _gunInventory.transform.position = _playerGameObject.transform.position;
+
+            _strongGun.transform.position = _gunInventory.transform.position;
+            _strongGun.transform.SetParent(_gunInventory.transform);
+
+            Container.BindInterfacesAndSelfTo<GunInventory>().FromInstance(_gunInventory)
+                .AsSingle().NonLazy();
+        }
+
+        private void InstallPlayerInventory()
+        {
+            PlayerInventory playerInventory = Container.InstantiatePrefabForComponent<PlayerInventory>(_playerInventoryPrefab, _playerGameObject.transform);
+            playerInventory.transform.position = _playerGameObject.transform.position;
+
+            _gunInventory.transform.position = playerInventory.transform.position;
+            _gunInventory.transform.SetParent(playerInventory.transform);
+
+            Container.BindInterfacesAndSelfTo<PlayerInventory>().FromInstance(playerInventory).AsSingle().NonLazy();
+        }
+
+        private void InstallPlayer()
+        {
+            Player player = Container.InstantiateComponent<Player>(_playerGameObject);
+            Container.BindInterfacesAndSelfTo<Player>().FromInstance(player).AsSingle();
+        }
 
         private void InstallInputMediator()
         {

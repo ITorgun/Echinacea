@@ -1,24 +1,18 @@
 using Assets.Weapon_Module.Gun_Module.Gun;
-using Assets.WeaponModule.GunModule.Gun;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
 public class PlayerInventory : MonoBehaviour
 {
-    private BulletInventory _bulletInventory;
-    private AmmoSwitcher _ammoSwitcher;
-    private GunInventory _gunInventory;
+    public BulletInventory BulletInventory { get; private set; }
+    public AmmoSwitcher AmmoSwitcher { get; private set; }
+    public GunInventory GunInventory { get; private set; }
 
     [Inject]
     public void Constructor(BulletInventory bulletInventory, AmmoSwitcher ammoSwitcher, GunInventory gunInventory)
     {
-        _bulletInventory = bulletInventory;
-        _ammoSwitcher = ammoSwitcher;
-        _gunInventory = gunInventory;
+        BulletInventory = bulletInventory;
+        AmmoSwitcher = ammoSwitcher;
+        GunInventory = gunInventory;
     }
-
-
-
 }

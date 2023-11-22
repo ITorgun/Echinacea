@@ -36,6 +36,8 @@ public class PlayerHealth : MonoBehaviour, IHealthTaker, IHealable, IDamageable
         Health -= damage;
         //HealthChanged?.Invoke(Health);
 
+        Debug.Log("Получил урон. Осталось хп: " + Health);
+
         if (IsHealthLessMin())
         {
             Die();

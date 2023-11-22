@@ -1,26 +1,18 @@
-using Assets.PlayerModule;
-using Assets.Weapon_Module.Gun_Module.Gun;
 using Assets.WeaponModule.GunModule.Gun;
 using UnityEngine;
 using Zenject;
 
 public class StrongGunInstaller : MonoInstaller
 {
-    [SerializeField] private AmmoPool _defaultBulletPool;
-    [SerializeField] private StrongGun _gun;
+    [SerializeField] private AmmoPool _defaultBulletPoolPrefab;
+    [SerializeField] private StrongGun _gunPrefab;
 
-    [SerializeField] private ShotPosition _shotPosition;
-
-    private ShotPosition _shotPositionInstance;
-    private AmmoPool _ammoPoolInstance;
-    private StrongGun _gunInstance;
-
+    private AmmoPool _ammoPool;
+    private StrongGun _gun;
 
     public override void InstallBindings()
     {
-        Container.Bind<BulletInventory>().AsSingle().NonLazy();
-        InstallDefaultBulletFactory();
-        InstallShotPosition();
+        InstallBulletFactory();
         InstallBulletPool();
         InstallMagazine();
         InstallGun();
@@ -29,15 +21,9 @@ public class StrongGunInstaller : MonoInstaller
 
     }
 
-    private void InstallDefaultBulletFactory()
+    private void InstallBulletFactory()
     {
         Container.Bind<StrongBulletFactory>().AsSingle();
-    }
-
-    private void InstallShotPosition()
-    {
-        _shotPositionInstance = Container.InstantiatePrefabForComponent<ShotPosition>(_shotPosition);
-        Container.BindInterfacesAndSelfTo<ShotPosition>().FromInstance(_shotPositionInstance).AsSingle().NonLazy();
     }
 
     private void InstallBulletPool()
@@ -46,9 +32,9 @@ public class StrongGunInstaller : MonoInstaller
         Container.Bind<StrongBulletType>().FromInstance(type).AsTransient()
             .WhenInjectedInto<StrongBulletPool>().NonLazy();
 
-        _ammoPoolInstance = Container.InstantiatePrefabForComponent<AmmoPool>(_defaultBulletPool);
+        _ammoPool = Container.InstantiatePrefabForComponent<AmmoPool>(_defaultBulletPoolPrefab);
         Container.BindInterfacesAndSelfTo<AmmoPool>()
-            .FromInstance(_ammoPoolInstance).AsTransient().WhenInjectedInto<StrongMagazine>().NonLazy();
+            .FromInstance(_ammoPool).AsTransient().WhenInjectedInto<StrongMagazine>().NonLazy();
     }
 
     private void InstallMagazine()
@@ -62,9 +48,9 @@ public class StrongGunInstaller : MonoInstaller
 
     private void InstallGun()
     {
-        _gunInstance = Container.InstantiatePrefabForComponent<StrongGun>(_gun);
+        _gun = Container.InstantiatePrefabForComponent<StrongGun>(_gunPrefab);
         Container.BindInterfacesAndSelfTo<StrongGun>()
-            .FromInstance(_gunInstance).AsSingle().NonLazy();
+            .FromInstance(_gun).AsSingle().NonLazy();
     }
 
     private void InstallPlayerShooter()

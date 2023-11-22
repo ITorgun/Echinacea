@@ -11,15 +11,17 @@ namespace Assets.PlayerModule
     {
         [SerializeField] private int _level;
 
-        [field: SerializeField] public IPlayerMovement _movement { get; private set; }
+        public IPlayerMovement Movement { get; private set; }
+        public IHealthTaker Health { get; private set; }
 
         public int Coins { get; private set; }
         public int Wallet { get; private set; }
 
         [Inject]
-        public void Constructor(IPlayerMovement playerMovement)
+        public void Constructor(IPlayerMovement playerMovement, IHealthTaker playerHealth)
         {
-            _movement = playerMovement;
+            Movement = playerMovement;
+            Health = playerHealth;
         }
 
 

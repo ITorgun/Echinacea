@@ -23,13 +23,6 @@ public class EnemyModuleInstaller : MonoInstaller
         InstallRobotBomb();
     }
 
-    private void InstallFinder()
-    {
-        FreqiencyAroundFinder moveToPosition = new FreqiencyAroundFinder(
-            new AroundItselfPlayerFinder(_enemy.transform, 5), 0);
-        _enemy.InjectFinder(moveToPosition);
-    }
-
     private void InstantiateEnemy()
     {
         _enemy = Container.InstantiatePrefabForComponent<RobotBombEnemy>(_enemyPrefab);
@@ -39,6 +32,13 @@ public class EnemyModuleInstaller : MonoInstaller
         Container.Inject(_enemy);
 
         Container.Bind<RobotBombEnemy>().FromInstance(_enemy).AsTransient();
+    }
+
+    private void InstallFinder()
+    {
+        FreqiencyAroundFinder moveToPosition = new FreqiencyAroundFinder(
+            new AroundItselfPlayerFinder(_enemy.transform, 5), 0);
+        _enemy.InjectFinder(moveToPosition);
     }
 
     private void InstallMover()
