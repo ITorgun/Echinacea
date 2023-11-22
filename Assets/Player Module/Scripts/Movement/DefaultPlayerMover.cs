@@ -1,9 +1,11 @@
 ﻿using Assets.Playable_Entity_Module;
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Assets.Player_Module.Scripts
 {
+    [Serializable]
     public class DefaultPlayerMover : IPlayerMover, IDisposable
     {
         [SerializeField] private Animator _animator;
@@ -13,19 +15,23 @@ namespace Assets.Player_Module.Scripts
         private Vector3 _currentDirection;
         private bool _isMoving;
 
+        [field: SerializeField] public float Speed { get; private set; }
+
         public IMovementEvents MovementEvents => _movementEvents;
-        public IMovable Movable { get; private set; }
 
         public event Action<Vector2> InputDirectionUpdated;
         public event Action<Vector2> MovementDirectionUpdated;
 
-        public DefaultPlayerMover(IMovementEvents movementEvents, IMovable movable)
+        public DefaultPlayerMover(IMovementEvents movementEvents)
         {
             _movementEvents = movementEvents;
             _movementEvents.Horizontal += OnHorisontalDirectionMoved;
             _movementEvents.Vertical += OnVerticalDirectionMoved;
+        }
 
-            Movable = movable;
+        public void Init(float speed)
+        {
+            Speed = speed;
         }
 
         public void Dispose()
@@ -38,7 +44,7 @@ namespace Assets.Player_Module.Scripts
 
         public void StopMove() => _isMoving = false;
 
-        public void Moving()
+        public void Moving(Transform transform)
         {
             if (_isMoving == false)
             {
@@ -46,7 +52,17 @@ namespace Assets.Player_Module.Scripts
                 return;
             }
 
-            Move(Movable.Transform, Movable.Speed);
+            Move(transform, Speed);
+        }
+
+        public void DebaffSpeed(float speed)
+        {
+            Speed -= speed;
+        }
+
+        public void ResetSpeed()
+        {
+            Speed += 9;
         }
 
         private bool IsAxisZero(float axis)

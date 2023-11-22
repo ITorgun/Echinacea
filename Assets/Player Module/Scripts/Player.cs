@@ -1,24 +1,19 @@
 using Assets.Playable_Entity_Module;
+using Assets.Player_Module.Scripts.Movement;
 using System;
 using UnityEngine;
 
 namespace Assets.PlayerModule
 {
-    public class Player : MonoBehaviour, IHealable, IHealthTaker, IDamageable, IWallet,
-        ICollectorValueable, IMovable
+    public class Player : MonoBehaviour, IWallet,
+        ICollectorValueable
     {
-        [SerializeField] private float _health;
         [SerializeField] private int _level;
 
-        [field: SerializeField] public float Speed { get; set; }
+        [field: SerializeField] public IPlayerMovement _movement { get; private set; }
 
-        public float Health { get => _health; private set => _health = value; }
-        public float MaxHealth { get; private set; }
-        public float MinHealth { get; private set; }
         public int Coins { get; private set; }
         public int Wallet { get; private set; }
-
-        public Transform Transform => transform;
 
         //public event Action<float> HealthChanged;
         //public event Action Died;
@@ -26,52 +21,9 @@ namespace Assets.PlayerModule
 
         private void Start()
         {
-            MaxHealth = 100;
-            MinHealth = 0;
-            Health = 20;
-
-            Speed = 10;
 
             //HealthChanged?.Invoke(Health);
             //LevelChanged?.Invoke(_level);
-        }
-
-        public bool IsHealthLessMin()
-        {
-            return Health <= MinHealth;
-        }
-
-        public void Die()
-        {
-            Debug.Log("Игрок умер!");
-
-            Health = MaxHealth;
-
-            //Died.Invoke();
-        }
-
-        public void GetDamaged(float damage)
-        {
-            Health -= damage;
-            //HealthChanged?.Invoke(Health);
-
-            if (IsHealthLessMin())
-            {
-                Die();
-            }
-        }
-
-        public void Heal(float healValue)
-        {
-            if (Health >= MaxHealth)
-            {
-                Debug.Log("Максимум хп");
-                return;
-            }
-
-            Health += healValue;
-
-            //HealthChanged?.Invoke(Health);
         }
 
         public void IncreaseLevel()
@@ -82,7 +34,6 @@ namespace Assets.PlayerModule
 
         public void ResetStats()
         {
-            Health = 80;
             //HealthChanged.Invoke(Health);
 
             _level = 1;

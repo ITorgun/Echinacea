@@ -15,9 +15,9 @@ namespace Assets.Enemy_Module.Grounded_Enemy
 
         protected override void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.TryGetComponent(out Player player))
+            if (collision.TryGetComponent(out IDamageable damageable))
             {
-                DealDamage(player);
+                DealDamage(damageable);
             }
         }
 

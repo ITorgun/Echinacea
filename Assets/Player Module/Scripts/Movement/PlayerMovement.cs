@@ -1,25 +1,27 @@
 using Assets.Playable_Entity_Module;
+using Assets.Playable_Entity_Module.IMover;
 using Assets.Player_Module.Scripts;
+using Assets.Player_Module.Scripts.Movement;
 using UnityEngine;
 using Zenject;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IPlayerMovement
 {
-    public IPlayerMover Mover { get; private set; }
+    public IPlayerMover PlayerMover { get; private set; }
 
     [Inject]
     public void Constructor(IPlayerMover mover)
     {
-        Mover = mover;
+        PlayerMover = mover;
     }
 
     private void Start()
     {
-        Mover.StartMove();
+        PlayerMover.StartMove();
     }
 
     private void Update()
     {
-        Mover.Moving();
+        PlayerMover.Moving(transform);
     }
 }

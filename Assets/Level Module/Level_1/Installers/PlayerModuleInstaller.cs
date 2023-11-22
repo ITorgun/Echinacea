@@ -19,9 +19,9 @@ namespace Assets.Level_1.Installers
 
         public override void InstallBindings()
         {
-            InstallPlayer();
             InstallMover();
-            InstallMovement();
+            InstallPlayer();
+            //InstallMovement();
             InstallCameraFollow();
             InstallModel();
             InstallInputMediator();
@@ -42,14 +42,16 @@ namespace Assets.Level_1.Installers
 
         private void InstallMover()
         {
-            Container.BindInterfacesAndSelfTo<DefaultPlayerMover>().AsSingle().NonLazy();
+            DefaultPlayerMover mover = Container.Instantiate<DefaultPlayerMover>();
+            mover.Init(10);
+            Container.BindInterfacesAndSelfTo<DefaultPlayerMover>().FromInstance(mover).AsSingle().NonLazy();
         }
 
-        private void InstallMovement()
-        {
-            PlayerMovement movement = Container.InstantiatePrefabForComponent<PlayerMovement>(_playerMovement, _player.transform);
-            Container.BindInterfacesAndSelfTo<PlayerMovement>().FromInstance(movement).AsSingle().NonLazy();
-        }
+        //private void InstallMovement()
+        //{
+        //    PlayerMovement movement = Container.InstantiatePrefabForComponent<PlayerMovement>(_playerMovement, _player.transform);
+        //    Container.BindInterfacesAndSelfTo<PlayerMovement>().FromInstance(movement).AsSingle().NonLazy();
+        //}
 
         private void InstallModel()
         {
