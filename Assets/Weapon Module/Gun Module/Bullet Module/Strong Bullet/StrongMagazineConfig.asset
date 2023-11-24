@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e826ce8f72881324eb166df3c878d5a5, type: 3}
   m_Name: StrongMagazineConfig
   m_EditorClassIdentifier: 
-  _image: {fileID: 1028896295035756252, guid: 2465dbc963235de4f9c5f272355e4e20, type: 3}
+  _image: {fileID: 4725566371513058064, guid: 7a97c18f9a1df954e952af5efb0257a5, type: 3}

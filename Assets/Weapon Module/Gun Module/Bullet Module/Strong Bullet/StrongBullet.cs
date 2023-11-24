@@ -21,6 +21,8 @@ public class StrongBullet : MonoBehaviour, IBullet
         Speed = config.Speed;
         Damage = config.Damage;
         LifeTime = config.LifeTime;
+
+        CurrentDamage = Damage;
     }
 
     public void IncreaseInitialStats(float damage)

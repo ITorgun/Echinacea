@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da25400ef58bbab4ba9d705761ab0bc6, type: 3}
   m_Name: DefaultMagazineConfig
   m_EditorClassIdentifier: 
-  _image: {fileID: 1028896295035756252, guid: b89c6542c5509494fa5fdf46dfa3d5da, type: 3}
+  _image: {fileID: 4725566371513058064, guid: 7f70fc41abc661848b323e7f4ebfba85, type: 3}

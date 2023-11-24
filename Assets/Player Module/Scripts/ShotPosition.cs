@@ -13,6 +13,7 @@ public class ShotPosition : MonoBehaviour, IShootPosition
     private void Awake()
     {
         CurrentPosition = _leftPositon;
+        CurrentVector = Vector2.left;
     }
 
     public void UpdateState(Vector2 movementDirection)
