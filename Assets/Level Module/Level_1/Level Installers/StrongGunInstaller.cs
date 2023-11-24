@@ -1,11 +1,13 @@
 using Assets.WeaponModule.GunModule.Gun;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 public class StrongGunInstaller : MonoInstaller
 {
-    [SerializeField] private AmmoPool _defaultBulletPoolPrefab;
+    [SerializeField] private AmmoPool _bulletPoolPrefab;
     [SerializeField] private StrongGun _gunPrefab;
+    [SerializeField] private StrongMagazineConfig _config;
 
     private AmmoPool _ammoPool;
     private StrongGun _gun;
@@ -32,7 +34,7 @@ public class StrongGunInstaller : MonoInstaller
         Container.Bind<StrongBulletType>().FromInstance(type).AsTransient()
             .WhenInjectedInto<StrongBulletPool>().NonLazy();
 
-        _ammoPool = Container.InstantiatePrefabForComponent<AmmoPool>(_defaultBulletPoolPrefab);
+        _ammoPool = Container.InstantiatePrefabForComponent<AmmoPool>(_bulletPoolPrefab);
         Container.BindInterfacesAndSelfTo<AmmoPool>()
             .FromInstance(_ammoPool).AsTransient().WhenInjectedInto<StrongMagazine>().NonLazy();
     }
@@ -42,6 +44,8 @@ public class StrongGunInstaller : MonoInstaller
         StrongBulletType type = StrongBulletType.ShortLife;
         Container.Bind<StrongBulletType>().FromInstance(type).AsTransient()
             .WhenInjectedInto<StrongMagazine>().NonLazy();
+
+        Container.BindInstance(_config).AsSingle();
 
         Container.BindInterfacesAndSelfTo<StrongMagazine>().WhenInjectedInto<StrongGun>().NonLazy();
     }

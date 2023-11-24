@@ -44,5 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c5c290352480fc42bbb1a8c84245f22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _image: {fileID: 4065502444027421608, guid: e5444b0c7ff784947b7250d44a202786, type: 3}
   _damage: 15
   _ammoPullModifier: 3
+  _pullingDelay: 0.1

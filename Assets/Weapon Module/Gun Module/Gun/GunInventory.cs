@@ -1,4 +1,5 @@
 ﻿using Assets.WeaponModule.GunModule.Gun;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,8 @@ namespace Assets.Weapon_Module.Gun_Module.Gun
         private ISwitcherShootable _switcherShootable;
         private int _index = 0;
         private AmmoSwitcher _ammoSwitcher;
+
+        public event Action<IShootable> ShootableSwitcted;
 
         [Inject]
         public void Constructor(ISwitchGunEvent switchGunEvent,
@@ -35,6 +38,7 @@ namespace Assets.Weapon_Module.Gun_Module.Gun
                 _shootables[i].Hide();
             }
 
+            ShootableSwitcted?.Invoke(_shootables[_index]);
             _switcherShootable.InjectShootable(_shootables[_index]);
             _ammoSwitcher.SetMagazine(_shootables[_index].Magazine);
         }
@@ -46,18 +50,19 @@ namespace Assets.Weapon_Module.Gun_Module.Gun
 
         private void OnGunSwitched()
         {
-            CountIndex();
-            SetNextShootable();
+            SwitchShootable();
+            ShootableSwitcted?.Invoke(_shootables[_index]);
+            InjectShootable();
         }
 
-        private void CountIndex()
+        private void SwitchShootable()
         {
             _shootables[_index].Hide();
             _index = (_index + 1) % _shootables.Count;
             _shootables[_index].Show();
         }
 
-        private void SetNextShootable()
+        private void InjectShootable()
         {
             _switcherShootable.InjectShootable(_shootables[_index]);
             _ammoSwitcher.SetMagazine(_shootables[_index].Magazine);

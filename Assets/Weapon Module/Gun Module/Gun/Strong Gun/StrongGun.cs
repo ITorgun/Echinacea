@@ -1,17 +1,22 @@
 using Assets.WeaponModule.GunModule.Gun;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 public class StrongGun : MonoBehaviour, IShootable
 {
+    [SerializeField] private Image _image;
     [SerializeField] private float _damage;
     [SerializeField] private int _ammoPullModifier;
     [SerializeField] private float _pullingDelay;
 
-    private Coroutine _delaying;
     private Coroutine _pulling;
     public IMagazine Magazine { get; private set; }
+
+    public Image Image => _image;
+
+    private bool _isShooting;
 
     [Inject]
     private void Construct(IMagazine magazine)
@@ -21,35 +26,34 @@ public class StrongGun : MonoBehaviour, IShootable
 
     private void OnDisable()
     {
-        if (_delaying != null)
+        if (_pulling != null)
         {
-            StopCoroutine(_delaying);
+            StopCoroutine(_pulling);
         }
+
+        _isShooting = false;
     }
 
     public void Shoot()
     {
-        Debug.Log("Strong Gun");
+        if (_isShooting)
+            return;
 
-        IAmmo ammo1 = Magazine.PullAmmo();
-        ammo1.IncreaseInitialStats(_damage);
-
-        IAmmo ammo2 = Magazine.PullAmmo();
-        ammo2.IncreaseInitialStats(_damage);
-
-        IAmmo ammo3 = Magazine.PullAmmo();
-        ammo3.IncreaseInitialStats(_damage);
-        //_pulling = StartCoroutine(PullingAmmo());
+        _pulling = StartCoroutine(PullingAmmo());
     }
 
     private IEnumerator PullingAmmo()
     {
+        _isShooting = true;
+
         for (int i = 0; i < _ammoPullModifier; i++)
         {
             IAmmo ammo = Magazine.PullAmmo();
             ammo.IncreaseInitialStats(_damage);
             yield return new WaitForSeconds(_pullingDelay);
         }
+
+        _isShooting = false;
     }
 
     public void Hide()

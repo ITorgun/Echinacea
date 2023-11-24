@@ -1,12 +1,15 @@
 using Assets.Weapon_Module.Gun_Module.Gun;
 using Assets.WeaponModule.GunModule.Gun;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 public class DefaultGunInstaller : MonoInstaller
 {
     [SerializeField] private AmmoPool _defaultBulletPoolPrefab;
     [SerializeField] private DefaultGun _defaultGunPrefab;
+    [SerializeField] private DefaultMagazineConfig _config;
 
     private GunInventory _gunInventory;
 
@@ -48,6 +51,8 @@ public class DefaultGunInstaller : MonoInstaller
         DefaultBulletType type = DefaultBulletType.TestConfig;
         Container.Bind<DefaultBulletType>().FromInstance(type).AsTransient()
             .WhenInjectedInto<DefaultBulletMagazine>().NonLazy();
+
+        Container.BindInstance(_config).AsSingle();
 
         Container.BindInterfacesAndSelfTo<DefaultBulletMagazine>().WhenInjectedInto<DefaultGun>().NonLazy();
     }

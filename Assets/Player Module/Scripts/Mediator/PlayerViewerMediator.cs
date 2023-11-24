@@ -1,35 +1,45 @@
+using System;
 using Assets.Player_Module.Scripts.Health;
 using Assets.Player_Module.UI;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Assets.WeaponModule.GunModule.Gun;
 
 public class PlayerViewerMediator : IDisposable
 {
-    private IPlayerHealthTaker _playerHealth;
+    private IPlayerHealthTaker _health;
     private IHealthViewer _healthViewer;
 
-    public PlayerViewerMediator(IPlayerHealthTaker playerHealth, IHealthViewer floatViewer)
-    {
-        _playerHealth = playerHealth;
-        _healthViewer = floatViewer;
+    private PlayerInventory _inventory;
+    private WeaponImageViewer _weaponImageViewer;
 
-        _playerHealth.HealthChanged += OnPlayerHealthChanged;
+    public PlayerViewerMediator(IPlayerHealthTaker playerHealth, IHealthViewer floatViewer, 
+        PlayerInventory inventory, WeaponImageViewer weaponImageViewer)
+    {
+        _health = playerHealth;
+        _healthViewer = floatViewer;
+        _health.HealthChanged += OnPlayerHealthChanged;
+
+        _inventory = inventory;
+        _weaponImageViewer = weaponImageViewer;
+        _inventory.GunInventory.ShootableSwitcted += OnShootableSwiched;
     }
 
     public void Dispose()
     {
-        _playerHealth.HealthChanged += OnPlayerHealthChanged;
+        _health.HealthChanged += OnPlayerHealthChanged;
     }
 
     public void InitViewers()
     {
-        _healthViewer.SetInitialHealthValue(_playerHealth.Health);
+        _healthViewer.SetInitialHealthValue(_health.Health);
     }
 
     private void OnPlayerHealthChanged(float healthValue)
     {
         _healthViewer.OnHealthChanged(healthValue);
+    }
+
+    private void OnShootableSwiched(IShootable shootable)
+    {
+        _weaponImageViewer.OnShootableSwitched(shootable);
     }
 }

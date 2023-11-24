@@ -1,16 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace Assets.WeaponModule.GunModule.Gun
 {
     public class DefaultGun : MonoBehaviour, IShootable
     {
+        [SerializeField] private Image _view;
+
         private Coroutine _delaying;
+        private float _damage;
+
+        public Image Image => _view;
         public IMagazine Magazine { get; private set; }
 
-        private float _damage;
 
         [Inject]
         private void Construct(IMagazine magazine)

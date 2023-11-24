@@ -1,6 +1,6 @@
 namespace Assets.WeaponModule.GunModule.Gun
 {
-    public interface IShootable
+    public interface IShootable : IImageViewable
     {
         void Hide();
         void Show();
