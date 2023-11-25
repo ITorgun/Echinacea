@@ -59,7 +59,7 @@ public class PlayerMediatorsInstaller : MonoInstaller
             .InstantiatePrefabForComponent<MagazineImageViewer>(_magazineImageViewer, weaponViewerTransform);
         Container.BindInterfacesAndSelfTo<MagazineImageViewer>().FromInstance(magazineViewer).AsSingle();
 
-        Container.Bind<IImageViewer>().WithId("ShootableViewer").FromInstance(magazineViewer);
+        Container.Bind<IImageViewer>().WithId("ShootableViewer").FromInstance(shootableViewer);
         Container.Bind<IImageViewer>().WithId("MagazineViewer").FromInstance(magazineViewer);
 
         WeaponImageViewer weaponViewer = Container.InstantiateComponent<WeaponImageViewer>(weaponViewerTransform.gameObject);

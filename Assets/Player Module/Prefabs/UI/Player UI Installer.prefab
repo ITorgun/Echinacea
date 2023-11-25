@@ -48,6 +48,6 @@ MonoBehaviour:
   _playerPanelTransform: {fileID: 4714324751159488826, guid: dee01ae1445f81c45b81269423a944a1, type: 3}
   _playerMediator: {fileID: 1166305559668540961, guid: e60214878ebe11544a438c07f81677f2, type: 3}
   _playerHealthViewer: {fileID: 3737013538142239479, guid: 73f80d4127e5ef44fbbe0e79456ebe2c, type: 3}
-  _weaponRectTransform: {fileID: 1479509038403593070, guid: 932a18b19c0ab2f44bcb883b88c6af69, type: 3}
+  _weaponRectTransform: {fileID: 7785375470195159759, guid: 932a18b19c0ab2f44bcb883b88c6af69, type: 3}
   _shootableImageViewer: {fileID: 6929377013631589198, guid: a9db0d08cc1be654c8bd96fd4d67e46e, type: 3}
-  _magazineImageViewer: {fileID: -767927649762292595, guid: 9a6599dea671794479c2b8bd8bd6d521, type: 3}
+  _magazineImageViewer: {fileID: -1515985333330156211, guid: 7a97c18f9a1df954e952af5efb0257a5, type: 3}

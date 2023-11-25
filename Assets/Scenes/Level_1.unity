@@ -851,14 +851,6 @@ PrefabInstance:
       propertyPath: _canvas
       value: 
       objectReference: {fileID: 931286855}
-    - target: {fileID: 1503305040024386402, guid: 4348cff2e2bdefe46989aca2ba3a566f, type: 3}
-      propertyPath: _magazineImageViewer
-      value: 
-      objectReference: {fileID: -1515985333330156211, guid: 7a97c18f9a1df954e952af5efb0257a5, type: 3}
-    - target: {fileID: 1503305040024386402, guid: 4348cff2e2bdefe46989aca2ba3a566f, type: 3}
-      propertyPath: _weaponRectTransform
-      value: 
-      objectReference: {fileID: 7785375470195159759, guid: 932a18b19c0ab2f44bcb883b88c6af69, type: 3}
     - target: {fileID: 4322750200345922355, guid: 4348cff2e2bdefe46989aca2ba3a566f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
