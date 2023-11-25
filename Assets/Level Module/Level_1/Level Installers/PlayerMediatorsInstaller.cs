@@ -53,46 +53,15 @@ public class PlayerMediatorsInstaller : MonoInstaller
 
         ShootableImageViewer shootableViewer = Container
             .InstantiatePrefabForComponent<ShootableImageViewer>(_shootableImageViewer, weaponViewerTransform);
-        Container.BindInterfacesAndSelfTo<ShootableImageViewer>().FromInstance(shootableViewer).AsSingle();
+        Container.Bind<IImageViewer>().WithId("ShootableViewer").FromInstance(shootableViewer);
 
         MagazineImageViewer magazineViewer = Container
             .InstantiatePrefabForComponent<MagazineImageViewer>(_magazineImageViewer, weaponViewerTransform);
-        Container.BindInterfacesAndSelfTo<MagazineImageViewer>().FromInstance(magazineViewer).AsSingle();
-
-        Container.Bind<IImageViewer>().WithId("ShootableViewer").FromInstance(shootableViewer);
         Container.Bind<IImageViewer>().WithId("MagazineViewer").FromInstance(magazineViewer);
 
         WeaponImageViewer weaponViewer = Container.InstantiateComponent<WeaponImageViewer>(weaponViewerTransform.gameObject);
         Container.BindInterfacesAndSelfTo<WeaponImageViewer>().FromInstance(weaponViewer).AsSingle();
-
-        //PlayerAttackImageViewer attackImageViewer = Container.InstantiateComponent<PlayerAttackImageViewer>(_playerPanel.gameObject);
-        //Container.BindInterfacesAndSelfTo<PlayerAttackImageViewer>().FromInstance(attackImageViewer).AsSingle();
     }
-
-    //private void InstallWeaponViewer()
-    //{
-    //    RectTransform playerAttack = Container
-    //        .InstantiatePrefabForComponent<RectTransform>(_weaponRectTransform, _playerPanel);
-
-    //    RectTransform weaponRect = Container.InstantiatePrefabForComponent<RectTransform>(_weaponRectTransform, playerAttack.transform);
-
-    //    ShootableImageViewer shootableViewer = Container
-    //        .InstantiatePrefabForComponent<ShootableImageViewer>(_shootableImageViewer, weaponRect);
-    //    Container.BindInterfacesAndSelfTo<ShootableImageViewer>().FromInstance(shootableViewer).AsSingle();
-
-    //    MagazineImageViewer magazineViewer = Container
-    //        .InstantiatePrefabForComponent<MagazineImageViewer>(_magazineImageViewer, weaponRect);
-    //    Container.BindInterfacesAndSelfTo<MagazineImageViewer>().FromInstance(magazineViewer).AsSingle();
-
-    //    Container.Bind<IImageViewer>().WithId("ShootableViewer").FromInstance(shootableViewer);
-    //    Container.Bind<IImageViewer>().WithId("MagazineViewer").FromInstance(magazineViewer);
-
-    //    WeaponImageViewer weaponViewer = Container.InstantiateComponent<WeaponImageViewer>(weaponRect.gameObject);
-    //    Container.BindInterfacesAndSelfTo<WeaponImageViewer>().FromInstance(weaponViewer).AsSingle();
-
-    //    PlayerAttackImageViewer attackImageViewer = Container.InstantiateComponent<PlayerAttackImageViewer>(playerAttack.gameObject);
-    //    Container.BindInterfacesAndSelfTo<PlayerAttackImageViewer>().FromInstance(attackImageViewer).AsSingle();
-    //}
 
     private void InstallViewerMediator()
     {
