@@ -5,11 +5,11 @@ using Zenject;
 
 public class StrongGunInstaller : MonoInstaller
 {
-    [SerializeField] private AmmoPool _bulletPoolPrefab;
+    [SerializeField] private AmmoSubtypePool _bulletPoolPrefab;
     [SerializeField] private StrongGun _gunPrefab;
     [SerializeField] private StrongMagazineConfig _config;
 
-    private AmmoPool _ammoPool;
+    private AmmoSubtypePool _ammoPool;
     private StrongGun _gun;
 
     public override void InstallBindings()
@@ -25,18 +25,21 @@ public class StrongGunInstaller : MonoInstaller
 
     private void InstallBulletFactory()
     {
-        Container.Bind<StrongBulletFactory>().AsSingle();
+        Container.BindInterfacesAndSelfTo<BulletFactory>().AsSingle().NonLazy();
     }
 
     private void InstallBulletPool()
     {
         StrongBulletType type = StrongBulletType.ShortLife;
         Container.Bind<StrongBulletType>().FromInstance(type).AsTransient()
-            .WhenInjectedInto<StrongBulletPool>().NonLazy();
+            .WhenInjectedInto<StrongBulletSubtypePool>().NonLazy();
 
-        _ammoPool = Container.InstantiatePrefabForComponent<AmmoPool>(_bulletPoolPrefab);
-        Container.BindInterfacesAndSelfTo<AmmoPool>()
-            .FromInstance(_ammoPool).AsTransient().WhenInjectedInto<StrongMagazine>().NonLazy();
+        StrongBulletSubtypePool pool = Container.InstantiatePrefabForComponent<StrongBulletSubtypePool>(_bulletPoolPrefab);
+        pool.Init(10, 60);
+        Container.BindInterfacesAndSelfTo<StrongBulletSubtypePool>().FromInstance(pool).AsTransient();
+
+        //Container.BindInterfacesAndSelfTo<AmmoSubtypePool>()
+        //    .FromInstance(_ammoPool).AsTransient().WhenInjectedInto<StrongMagazine>().NonLazy();
     }
 
     private void InstallMagazine()

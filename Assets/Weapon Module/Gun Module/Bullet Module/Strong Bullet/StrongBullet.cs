@@ -17,7 +17,7 @@ public class StrongBullet : MonoBehaviour, IBullet
 
     public void Init(StrongBulletConfig config)
     {
-        //Type = config.BulletType;
+        Type = config.BulletType;
         Speed = config.Speed;
         Damage = config.Damage;
         LifeTime = config.LifeTime;

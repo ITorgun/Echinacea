@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26c817d28193b7d42a2ae3418a187b61, type: 3}
   m_Name: FastStrongBullet
   m_EditorClassIdentifier: 
-  _speed: 1
-  _damage: 0
-  _lifeTime: 2
+  _speed: 35
+  _damage: 5
+  _lifeTime: 4
   _prefab: {fileID: -7755320919656414511, guid: 73c7a750fae1a3042a2003c90b8cd637, type: 3}
   _bulletType: 1

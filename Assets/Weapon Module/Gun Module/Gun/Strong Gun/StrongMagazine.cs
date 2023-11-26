@@ -1,32 +1,32 @@
+using Assets.Weapon_Module.Ammo_Module.Interfaces;
+using Assets.Weapon_Module.Interfaces;
 using Assets.WeaponModule.GunModule.Gun;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.UI;
 
-public class StrongMagazine : IMagazine
+public class StrongMagazine : IStrongMagazine
 {
-    private StrongBulletPool _pool;
-    private StrongBulletType _type;
+    private IStrongBulletPool _pool;
     private Image _image;
 
     public Image Image => _image;
 
-    public StrongMagazine(AmmoPool pool, StrongBulletType bulletType, StrongMagazineConfig config)
+    public StrongBulletType BulletType { get; private set; }
+
+    public StrongMagazine(IStrongBulletPool pool, StrongBulletType bulletType, StrongMagazineConfig config)
     {
-        _pool = (StrongBulletPool)pool;
-        _type = bulletType;
+        _pool = pool;
+        BulletType = bulletType;
         _image = config.Image;
     }
 
-    public void LoadAmmo(int ammoEnumValue)
+    public void InjectBulletType(StrongBulletType bulletType)
     {
-        _type = (StrongBulletType)ammoEnumValue;
-        _pool.InjectAmmoType(_type);
+        BulletType = bulletType;
+        _pool.InjectBulletType(BulletType);
     }
 
     public IAmmo PullAmmo()
     {
-        return _pool.Get();
+        return _pool.GetBullet();
     }
 }

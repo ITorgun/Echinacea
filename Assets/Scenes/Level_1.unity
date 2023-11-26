@@ -1133,7 +1133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc3fd1337256b4d4185aa093320f0c37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletPoolPrefab: {fileID: -2434966106315419934, guid: 9af25e85d2f69344b93f342da5f76ca9, type: 3}
+  _bulletPoolPrefab: {fileID: 7238204844711554483, guid: 9af25e85d2f69344b93f342da5f76ca9, type: 3}
   _gunPrefab: {fileID: -4578598262802960342, guid: de21dad1e7fadf043919b572d9f257a5, type: 3}
   _config: {fileID: 11400000, guid: edd6fa792a0f43640a8d999a611424ae, type: 2}
 --- !u!4 &1460865863

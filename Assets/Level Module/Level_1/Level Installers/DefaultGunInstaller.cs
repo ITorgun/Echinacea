@@ -1,19 +1,17 @@
 using Assets.Weapon_Module.Gun_Module.Gun;
 using Assets.WeaponModule.GunModule.Gun;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 public class DefaultGunInstaller : MonoInstaller
 {
-    [SerializeField] private AmmoPool _defaultBulletPoolPrefab;
+    [SerializeField] private AmmoSubtypePool _defaultBulletPoolPrefab;
     [SerializeField] private DefaultGun _defaultGunPrefab;
     [SerializeField] private DefaultMagazineConfig _config;
 
     private GunInventory _gunInventory;
 
-    private AmmoPool _ammoPool;
+    private AmmoSubtypePool _ammoPool;
     private DefaultGun _gun;
 
     [Inject]
@@ -24,26 +22,24 @@ public class DefaultGunInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        InstallBulletFactory();
         InstallBulletPool();
         InstallMagazine();
         InstallGun();
-    }
-
-    private void InstallBulletFactory()
-    {
-        Container.Bind<DefaultBulletFactory>().AsSingle();
     }
 
     private void InstallBulletPool()
     {
         DefaultBulletType type = DefaultBulletType.TestConfig;
         Container.Bind<DefaultBulletType>().FromInstance(type).AsTransient()
-            .WhenInjectedInto<DefaultBulletPool>().NonLazy();
+            .WhenInjectedInto<DefaultBulletSubtypePool>().NonLazy();
 
-        _ammoPool = Container.InstantiatePrefabForComponent<AmmoPool>(_defaultBulletPoolPrefab);
-        Container.BindInterfacesAndSelfTo<AmmoPool>()
-            .FromInstance(_ammoPool).AsTransient().WhenInjectedInto<DefaultBulletMagazine>().NonLazy();
+        DefaultBulletSubtypePool pool = Container.InstantiatePrefabForComponent<DefaultBulletSubtypePool>(_defaultBulletPoolPrefab);
+        pool.Init(10, 40);
+        Container.BindInterfacesAndSelfTo<DefaultBulletSubtypePool>().FromInstance(pool).AsTransient();
+
+        //_ammoPool = Container.InstantiatePrefabForComponent<AmmoSubtypePool>(_defaultBulletPoolPrefab);
+        //Container.BindInterfacesAndSelfTo<AmmoSubtypePool>()
+        //    .FromInstance(_ammoPool).AsTransient().WhenInjectedInto<DefaultBulletMagazine>().NonLazy();
     }
 
     private void InstallMagazine()

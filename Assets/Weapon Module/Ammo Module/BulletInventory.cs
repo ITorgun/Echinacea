@@ -1,5 +1,7 @@
+using Assets.Weapon_Module.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 public class BulletInventory
 {
@@ -16,15 +18,17 @@ public class BulletInventory
         StrongBulletType.FastSpeedConfig,
     };
 
-    public int GetBulletTypeByIndex(int index, IMagazine magazine)
+    public void InjectBulletType(int avaibleInventoryIndex, IMagazine magazine)
     {
         switch (magazine)
         {
-            case DefaultBulletMagazine:
-                return (int)_defaultBulletTypes[index];
+            case DefaultBulletMagazine defaulltMagazine:
+                defaulltMagazine.InjectBulletType(_defaultBulletTypes[avaibleInventoryIndex]);
+                return;
 
-            case StrongMagazine:
-                return (int)_strongBulletTypes[index];
+            case StrongMagazine strongMagazine:
+                strongMagazine.InjectBulletType(_strongBulletTypes[avaibleInventoryIndex]);
+                return;
 
             default:
                 throw new Exception();
@@ -35,10 +39,10 @@ public class BulletInventory
     {
         switch (magazine)
         {
-            case DefaultBulletMagazine:
+            case IDefaultMagazine:
                 return _defaultBulletTypes.Count;
 
-            case StrongMagazine:
+            case IStrongMagazine:
                 return _strongBulletTypes.Count;
 
             default:

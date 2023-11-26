@@ -30,9 +30,4 @@ public class DefaultRangeAttackDealer : IRangeAttackDealer, IDisposable
     {
         Shootable.Shoot();
     }
-
-    public void LoadAmmo(int ammoEnumValue)
-    {
-        Shootable.Magazine.LoadAmmo(ammoEnumValue);
-    }
 }
