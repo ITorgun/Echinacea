@@ -9,7 +9,7 @@ namespace Assets.Enemy_Module.PlayerFinder
 
         private IFinder _playerFinder;
         private float _timer;
-        private bool isPlayerFinded = false;
+        private bool _isPlayerFinded = false;
 
         public bool IsFinding => _playerFinder.IsFinding;
         public Transform FinderTransform => _playerFinder.FinderTransform;
@@ -24,13 +24,12 @@ namespace Assets.Enemy_Module.PlayerFinder
 
         private bool IsCooldowning()
         {
-            return _timer >= _findCooldown;
+            return _timer <= _findCooldown;
         }
 
         private void CalculateCooldown()
         {
             _timer += Time.deltaTime;
-            Debug.Log(_timer);
         }
 
         public void StartFind()
@@ -52,15 +51,20 @@ namespace Assets.Enemy_Module.PlayerFinder
                 return false;
             }
 
-            if (IsCooldowning() == false)
+            if(_isPlayerFinded == false)
             {
-                CalculateCooldown();
-                return false;
+                if (IsCooldowning())
+                {
+                    CalculateCooldown();
+                    return false;
+                }
             }
 
             _timer = 0;
 
-            return _playerFinder.TryFindPosition(out position);
+            bool result = _playerFinder.TryFindPosition(out position);
+            _isPlayerFinded = result;
+            return result;
         }
     }
 }
