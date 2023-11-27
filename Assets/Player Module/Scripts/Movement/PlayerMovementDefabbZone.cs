@@ -1,4 +1,4 @@
-using Assets.Playable_Entity_Module.IMover;
+using Assets.Playable_Entity_Module.Mover;
 using Assets.Player_Module.Scripts;
 using System.Collections;
 using System.Collections.Generic;

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assets.Playable_Entity_Module.IMover
+namespace Assets.Playable_Entity_Module.Mover
 {
     public interface IPlayerMovable
     {

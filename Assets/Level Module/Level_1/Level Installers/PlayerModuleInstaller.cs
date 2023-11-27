@@ -37,6 +37,7 @@ namespace Assets.Level_1.Installers
 
             InstallModel();
 
+            InstallPlayerShooter();
             InstallPlayerAttack();
 
             InstallHealth();
@@ -45,6 +46,7 @@ namespace Assets.Level_1.Installers
             InstallMovement();
 
             InstallBulletInventory();
+            InstallAmmoSwitcher();
             InstallGunInventory();
             InstallPlayerInventory();
 
@@ -74,6 +76,11 @@ namespace Assets.Level_1.Installers
             Container.BindInterfacesAndSelfTo<PlayerModel>().FromInstance(playerModel).AsSingle().NonLazy();
         }
 
+        private void InstallPlayerShooter()
+        {
+            Container.BindInterfacesAndSelfTo<DefaultRangeAttackDealer>().AsSingle().NonLazy();
+        }
+
         private void InstallPlayerAttack()
         {
             PlayerAttack playerAttack = Container.InstantiatePrefabForComponent<PlayerAttack>(_playerAttackPrefab, _playerGameObject.transform);
@@ -101,6 +108,11 @@ namespace Assets.Level_1.Installers
         private void InstallBulletInventory()
         {
             Container.Bind<BulletInventory>().AsSingle().NonLazy();
+        }
+
+        private void InstallAmmoSwitcher()
+        {
+            Container.BindInterfacesAndSelfTo<AmmoSwitcher>().AsSingle().NonLazy();
         }
 
         private void InstallGunInventory()

@@ -1,56 +1,22 @@
-﻿using Assets.Enemy_Module.Interfaces;
-using Assets.Playable_Entity_Module;
-using Assets.Playable_Entity_Module.IMover;
+﻿using Assets.Playable_Entity_Module.Mover;
 using UnityEngine;
+using Zenject;
 
 namespace Assets.Enemy_Module.Grounded_Enemy
 {
-    public class RobotBombEnemy : MonoBehaviour, IHealthTaker, IDamageable, IMovable
+    public class RobotBombEnemy : MonoBehaviour, IHealthTaker, IDamageable
     {
-        private IFinder _finder;
-        private IPositionable _positionable;
-        private IMover _mover;
+        public IMovement RobotMovement { get; private set; }
 
         public float Health { get; private set; }
         public float MaxHealth { get; private set; }
         public float MinHealth { get; private set; }
-        [field: SerializeField] public float Speed { get; private set; }
-        public Transform Transform => transform;
 
-        private void Start()
+
+        [Inject]
+        public void Constrcutor(IMovement robotMovement)
         {
-            Speed = 5;
-
-            _positionable.Position = transform.position;
-        }
-
-        public void InjectTarget(IPositionable positionable)
-        {
-            _positionable = positionable;
-        }
-
-        public void InjectFinder(IFinder finder)
-        {
-            _finder?.StopFind();
-            _finder = finder;
-            _finder.StartFind();
-        }
-
-        public void InjectMover(IMover mover)
-        {
-            _mover?.StopMove();
-            _mover = mover;
-            _mover.StartMove();
-        }
-
-        private void Update()
-        {
-            if (_finder.TryFindPosition(out Vector2 playerPosition))
-            {
-                _positionable.Position = playerPosition;
-            }
-
-            _mover.Moving(Time.deltaTime);
+            RobotMovement = robotMovement;
         }
 
         public bool IsHealthLessMin()

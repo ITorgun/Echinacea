@@ -18,9 +18,6 @@ public class StrongGunInstaller : MonoInstaller
         InstallBulletPool();
         InstallMagazine();
         InstallGun();
-        InstallPlayerShooter();
-        InstallAmmoSwitcher();
-
     }
 
     private void InstallBulletFactory()
@@ -58,15 +55,5 @@ public class StrongGunInstaller : MonoInstaller
         _gun = Container.InstantiatePrefabForComponent<StrongGun>(_gunPrefab);
         Container.BindInterfacesAndSelfTo<StrongGun>()
             .FromInstance(_gun).AsTransient().NonLazy();
-    }
-
-    private void InstallPlayerShooter()
-    {
-        Container.BindInterfacesAndSelfTo<DefaultRangeAttackDealer>().AsSingle().NonLazy();
-    }
-
-    private void InstallAmmoSwitcher()
-    {
-        Container.BindInterfacesAndSelfTo<AmmoSwitcher>().AsSingle().NonLazy();
     }
 }

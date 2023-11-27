@@ -456,7 +456,7 @@ GameObject:
   - component: {fileID: 380274334}
   - component: {fileID: 380274333}
   m_Layer: 0
-  m_Name: InputInstaller
+  m_Name: Input Installer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -533,7 +533,7 @@ GameObject:
   - component: {fileID: 678126094}
   - component: {fileID: 678126095}
   m_Layer: 0
-  m_Name: Enemy Installe
+  m_Name: Enemy Installer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -566,7 +566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 315595834c84fe84d9f1aeed5bfa5c0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 3577708115076241190, guid: a43dcbfd49254524fbf5448606cc9a86, type: 3}
+  _enemyObjectPrefab: {fileID: 7106416248076901635, guid: a43dcbfd49254524fbf5448606cc9a86, type: 3}
   _robotBomb: {fileID: -4928595845792828000, guid: f749bcd1adb6cc4499bbd7f6637abf2b, type: 3}
   _spawnPoint: {fileID: 847945493}
 --- !u!1001 &780695071

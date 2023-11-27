@@ -12,9 +12,8 @@ GameObject:
   - component: {fileID: 4981071639243655137}
   - component: {fileID: 1211706584975192030}
   - component: {fileID: 6811506392657398727}
-  - component: {fileID: 3577708115076241190}
   m_Layer: 0
-  m_Name: Triangle
+  m_Name: Robot Bomb Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -162,16 +161,3 @@ PolygonCollider2D:
       - {x: -0.5, y: -0.28866667}
       - {x: 0.5, y: -0.28866667}
   m_UseDelaunayMesh: 0
---- !u!114 &3577708115076241190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7106416248076901635}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e9ce7dd41f73eb40b600e3d80570dac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Speed>k__BackingField: 0

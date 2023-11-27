@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace Assets.Playable_Entity_Module.IMover
+namespace Assets.Playable_Entity_Module.Mover
 {
     class MoverToTarget : IMover
     {
@@ -9,6 +9,9 @@ namespace Assets.Playable_Entity_Module.IMover
         private IMovable _movable;
 
         private bool _isMoving;
+
+        public float Speed { get; private set; }
+        public float CurrentSpeed { get; private set; }
 
         public MoverToTarget(IMovable movable, ITargetable targetable)
         {
@@ -20,7 +23,7 @@ namespace Assets.Playable_Entity_Module.IMover
 
         public void StopMove() => _isMoving = false;
 
-        public void Moving(float deltaTime)
+        public void Moving(Transform transform)
         {
             if (_isMoving == false)
             {
@@ -34,7 +37,17 @@ namespace Assets.Playable_Entity_Module.IMover
             }
 
             Vector3 direction = _targetable.TargetTransform.position - _movable.Transform.position;
-            _movable.Transform.Translate(_movable.Speed * deltaTime * direction.normalized);
+            _movable.Transform.Translate(_movable.Speed * Time.deltaTime * direction.normalized);
+        }
+
+        public void DebaffSpeed(float speed)
+        {
+            CurrentSpeed -= speed;
+        }
+
+        public void ResetSpeed()
+        {
+            CurrentSpeed = Speed;
         }
     }
 }

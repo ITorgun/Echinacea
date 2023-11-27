@@ -1,5 +1,5 @@
 using Assets.Playable_Entity_Module;
-using Assets.Playable_Entity_Module.IMover;
+using Assets.Playable_Entity_Module.Mover;
 using Assets.Player_Module.Scripts;
 using Assets.Player_Module.Scripts.Movement;
 using UnityEngine;
