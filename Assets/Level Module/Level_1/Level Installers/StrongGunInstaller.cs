@@ -57,7 +57,7 @@ public class StrongGunInstaller : MonoInstaller
     {
         _gun = Container.InstantiatePrefabForComponent<StrongGun>(_gunPrefab);
         Container.BindInterfacesAndSelfTo<StrongGun>()
-            .FromInstance(_gun).AsSingle().NonLazy();
+            .FromInstance(_gun).AsTransient().NonLazy();
     }
 
     private void InstallPlayerShooter()

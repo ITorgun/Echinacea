@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Assets.WeaponModule.GunModule.Gun
 {
-    public class DefaultBullet : MonoBehaviour, IBullet
+    public class DefaultBullet : MonoBehaviour, IAmmo
     {
         private Coroutine _flying;
 

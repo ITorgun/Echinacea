@@ -1,6 +1,5 @@
 ﻿using Assets.WeaponModule.GunModule.Gun;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -51,8 +50,8 @@ namespace Assets.Weapon_Module.Gun_Module.Gun
         private void OnGunSwitched()
         {
             SwitchShootable();
-            ShootableSwitcted?.Invoke(_shootables[_index]);
             InjectShootable();
+            ShootableSwitcted?.Invoke(_shootables[_index]);
         }
 
         private void SwitchShootable()

@@ -5,9 +5,10 @@ public class ShootableImageViewer : MonoBehaviour, IImageViewer
 {
     [SerializeField] private Image _image;
 
-    public void SetImage(Image image)
+    public void SetImage(IImageViewable image)
     {
-        _image.sprite = image.sprite;
+        _image.sprite = image.Image.sprite;
+        _image.color = image.Image.color;
     }
 
     public void ResetImage()

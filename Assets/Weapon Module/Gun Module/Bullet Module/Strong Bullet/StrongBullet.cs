@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class StrongBullet : MonoBehaviour, IBullet
+public class StrongBullet : MonoBehaviour, IAmmo
 {
     private Coroutine _flying;
 

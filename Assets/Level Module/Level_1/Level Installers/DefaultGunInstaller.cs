@@ -61,6 +61,6 @@ public class DefaultGunInstaller : MonoInstaller
         _gun.transform.SetParent(_gunInventory.transform);
 
         Container.BindInterfacesAndSelfTo<DefaultGun>()
-            .FromInstance(_gun).AsSingle().NonLazy();
+            .FromInstance(_gun).AsTransient().NonLazy();
     }
 }

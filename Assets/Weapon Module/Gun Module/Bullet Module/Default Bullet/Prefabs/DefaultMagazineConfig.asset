@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da25400ef58bbab4ba9d705761ab0bc6, type: 3}
   m_Name: DefaultMagazineConfig
   m_EditorClassIdentifier: 
-  _image: {fileID: 2408884282332122508, guid: e203e2cfec4ce8441a1d798cdb5d7bfa, type: 3}
+  _weakImage: {fileID: 1665092464405382799, guid: 97aa8584d7119bf4f814118e5c18ecc3, type: 3}
+  _averageImage: {fileID: 3300509434933929126, guid: 5ba0164fd2a0d1e49ba9876d6325779f, type: 3}
+  _strongImage: {fileID: 2408884282332122508, guid: e203e2cfec4ce8441a1d798cdb5d7bfa, type: 3}
+  _testImage: {fileID: 1211833013483411237, guid: d9c7a2c487362a241bcf6597ecc0d7a5, type: 3}

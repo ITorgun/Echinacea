@@ -14,6 +14,6 @@ public class PlayerAttackImageViewer : MonoBehaviour
 
     public void OnShootableSwitched(IShootable shootable)
     {
-        _shootableViewer.OnShootableSwitched(shootable);
+        _shootableViewer.OnShootableSwitched(shootable, shootable.Magazine);
     }
 }

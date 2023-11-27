@@ -5,5 +5,6 @@
         public StrongBulletType BulletType { get; }
 
         public void InjectBulletType(StrongBulletType bulletType);
+        public void SwitchImage(StrongBulletType bulletType);
     }
 }

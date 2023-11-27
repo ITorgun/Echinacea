@@ -11,6 +11,8 @@ public interface IAmmo
     float LifeTime { get; }
 
     void IncreaseInitialStats(float damage);
+    void StartFlying(Vector2 direction);
+    void Collide();
     void Hide();
     void Destroy();
 

@@ -21,6 +21,8 @@ public class PlayerViewerMediator : IDisposable
         _inventory = inventory;
         _weaponImageViewer = weaponImageViewer;
         _inventory.GunInventory.ShootableSwitcted += OnShootableSwiched;
+
+        _inventory.AmmoSwitcher.AmmoSwithted += OnAmmoTypeSwitched;
     }
 
     public void Dispose()
@@ -40,6 +42,11 @@ public class PlayerViewerMediator : IDisposable
 
     private void OnShootableSwiched(IShootable shootable)
     {
-        _weaponImageViewer.OnShootableSwitched(shootable);
+        _weaponImageViewer.OnShootableSwitched(shootable, shootable.Magazine);
+    }
+
+    private void OnAmmoTypeSwitched(IImageViewable imageViewable)
+    {
+        _weaponImageViewer.MagazineViewer.SetImage(imageViewable);
     }
 }
