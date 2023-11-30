@@ -4,6 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Robot Bomb Enemy Config", menuName = "SO/RobotBombEnemyConfig")]
 public class RobotBombEnemyConfig : ScriptableObject
 {
+    [SerializeField] private RobotBombEnemy _testPrefab;
     [SerializeField] private GameObject _prefab;
     [SerializeField] private float _radiusFinder;
     [SerializeField] private float _cooldown;
@@ -18,4 +19,5 @@ public class RobotBombEnemyConfig : ScriptableObject
     public RobotBomb RobotBomb => _robotBomb;
     public float BombDamage => _bombDamage;
 
+    public RobotBombEnemy TestPrefab => _testPrefab;
 }

@@ -1,9 +1,4 @@
-using Assets.Enemy_Module;
 using Assets.Enemy_Module.Grounded_Enemy;
-using Assets.Enemy_Module.Interfaces;
-using Assets.Enemy_Module.PlayerFinder;
-using Assets.Playable_Entity_Module.Mover;
-using System.ComponentModel;
 using UnityEngine;
 using Zenject;
 
@@ -13,9 +8,13 @@ public class RobotBombEnemyFactory
 
     private DiContainer _container;
 
+    private RobotBombEnemyConfig _config;
+
     public RobotBombEnemyFactory(DiContainer container)
     {
         _container = container;
+
+        _config = GetConfig();
     }
 
     public RobotBombEnemy GetRobotBombEnemy(Transform enemyTranform)
@@ -23,11 +22,16 @@ public class RobotBombEnemyFactory
         RobotBombEnemyConfig config = GetConfig();
 
         GameObject enemyObject = _container.InstantiatePrefab(config.Prefab, enemyTranform);
-        //enemyObject.name = "Enemy123";
         InstallMovement(enemyObject);
         RobotBombEnemy enemy = InstallEnemy(enemyObject);
         InstallRobotBomb(enemy, config);
         return enemy;
+    }
+
+    public RobotBombEnemy GetRobotBombEnemy2(Transform enemyTranform)
+    {
+        RobotBombEnemy enemyObject = _container.InstantiatePrefabForComponent<RobotBombEnemy>(_config.TestPrefab, enemyTranform);
+        return enemyObject;
     }
 
     private RobotBombEnemyConfig GetConfig()

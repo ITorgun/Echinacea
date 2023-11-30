@@ -13,10 +13,9 @@ namespace Assets.Enemy_Module.Grounded_Enemy
         public float MinHealth { get; private set; }
 
 
-        [Inject]
-        public void Constrcutor(IMovement robotMovement)
+        private void Awake()
         {
-            RobotMovement = robotMovement;
+            RobotMovement = GetComponent<IMovement>();
         }
 
         public bool IsHealthLessMin()

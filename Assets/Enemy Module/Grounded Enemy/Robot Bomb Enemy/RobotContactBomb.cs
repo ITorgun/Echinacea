@@ -20,6 +20,11 @@ namespace Assets.Enemy_Module.Grounded_Enemy
 
         protected override void OnTriggerEnter2D(Collider2D collision)
         {
+            if (collision.TryGetComponent(out RobotBombEnemy enemy))
+            {
+                return;
+            }
+
             if (collision.TryGetComponent(out IDamageable damageable))
             {
                 DealDamage(damageable);
