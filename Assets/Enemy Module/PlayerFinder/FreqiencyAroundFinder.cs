@@ -12,7 +12,7 @@ namespace Assets.Enemy_Module.PlayerFinder
         private bool _isPlayerFinded = false;
 
         public bool IsFinding => _playerFinder.IsFinding;
-        public Transform FinderTransform => _playerFinder.FinderTransform;
+        //public Transform FinderTransform => _playerFinder.FinderTransform;
         public float Range => _playerFinder.Range;
 
         public FreqiencyAroundFinder(IFinder playerFinder, float findCooldown)
@@ -42,9 +42,11 @@ namespace Assets.Enemy_Module.PlayerFinder
             _playerFinder.StopFind();
         }
 
-        public bool TryFindPosition(out Vector2 position)
+        public bool TryFindPosition(Vector2 currentPosition, out Vector2 position)
         {
-            position = FinderTransform.transform.position;
+            //position = FinderTransform.transform.position;
+
+            position = currentPosition;
 
             if (IsFinding == false)
             {
@@ -62,7 +64,7 @@ namespace Assets.Enemy_Module.PlayerFinder
 
             _timer = 0;
 
-            bool result = _playerFinder.TryFindPosition(out position);
+            bool result = _playerFinder.TryFindPosition(currentPosition, out position);
             _isPlayerFinded = result;
             return result;
         }

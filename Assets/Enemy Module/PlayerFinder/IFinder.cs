@@ -6,11 +6,11 @@ namespace Assets.Enemy_Module.Interfaces
     public interface IFinder
     {
         bool IsFinding { get; }
-        Transform FinderTransform { get; }
+        //Transform FinderTransform { get; }
         float Range { get; }
 
         void StartFind();
         void StopFind();
-        bool TryFindPosition(out Vector2 vector2);
+        bool TryFindPosition(Vector2 currentPosition, out Vector2 finderPosition);
     }
 }

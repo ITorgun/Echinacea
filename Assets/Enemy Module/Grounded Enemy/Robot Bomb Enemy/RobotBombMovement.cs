@@ -26,7 +26,7 @@ public class RobotBombMovement : MonoBehaviour, IMovement
 
     private void Update()
     {
-        if (Finder.TryFindPosition(out Vector2 playerPosition))
+        if (Finder.TryFindPosition(transform.position, out Vector2 playerPosition))
         {
             Positionable.Position = playerPosition;
             Positionable.IsPositionSet = true;

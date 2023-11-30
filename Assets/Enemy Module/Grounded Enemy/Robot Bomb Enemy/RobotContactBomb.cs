@@ -7,6 +7,11 @@ namespace Assets.Enemy_Module.Grounded_Enemy
 {
     public class RobotContactBomb : RobotBomb
     {
+        public void Init(float damage)
+        {
+            Damage = damage;
+        }
+
         public override void DealDamage(IDamageable damageable)
         {
             damageable.GetDamaged(Damage);

@@ -2,7 +2,9 @@ using Assets.Enemy_Module;
 using Assets.Enemy_Module.Grounded_Enemy;
 using Assets.Enemy_Module.Interfaces;
 using Assets.Enemy_Module.PlayerFinder;
+using Assets.Playable_Entity_Module;
 using Assets.Playable_Entity_Module.Mover;
+using System.ComponentModel;
 using UnityEngine;
 using Zenject;
 
@@ -30,22 +32,6 @@ public class EnemyModuleInstaller : MonoInstaller
     private void InstantiateEnemyObject()
     {
         _enemyObject = Instantiate(_enemyObjectPrefab, _spawnPoint.position, _spawnPoint.rotation);
-
-        //_enemy = Container.InstantiatePrefabForComponent<RobotBombEnemy>(_enemyPrefab);
-        //_enemy.transform.SetPositionAndRotation(_spawnPoint.position, _spawnPoint.rotation);
-
-        //Container.Bind<IMovable>().FromInstance(_enemy).WhenInjectedInto<MoverToPosition>();
-        //Container.Inject(_enemy);
-
-        //Container.Bind<RobotBombEnemy>().FromInstance(_enemy).AsTransient();
-    }
-
-    private void InstallFinder()
-    {
-        FreqiencyAroundFinder moveToPosition = new FreqiencyAroundFinder(
-            new AroundItselfPlayerFinder(_enemyObject.transform, 5), 1f);
-        Container.BindInterfacesAndSelfTo<IFinder>().FromInstance(moveToPosition)
-            .AsTransient().WhenInjectedInto<RobotBombMovement>();
     }
 
     private void InstallPositionable()
@@ -55,6 +41,16 @@ public class EnemyModuleInstaller : MonoInstaller
             .AsTransient();
     }
 
+    private void InstallFinder()
+    {
+        FreqiencyAroundFinder finder = new FreqiencyAroundFinder(
+            new AroundItselfPlayerFinder(5), 1f);
+
+        Container.BindInterfacesAndSelfTo<IFinder>().FromInstance(finder)
+            .AsTransient().WhenInjectedInto<RobotBombMovement>();
+    }
+
+
     private void InstallMover()
     {
         MoverToPosition moveToPosition = Container.Instantiate<MoverToPosition>();
@@ -62,7 +58,6 @@ public class EnemyModuleInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<IMover>().FromInstance(moveToPosition)
             .AsTransient().WhenInjectedInto<RobotBombMovement>();
     }
-
     private void InstallMovement()
     {
         RobotBombMovement robotMovement = Container.InstantiateComponent<RobotBombMovement>(_enemyObject);

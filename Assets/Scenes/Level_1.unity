@@ -445,6 +445,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &377200445
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 377200446}
+  - component: {fileID: 377200447}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &377200446
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 377200445}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1491506640}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &377200447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 377200445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 435c77872e35a5145b469bb0b3d4ba58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyObjectPrefab: {fileID: 7106416248076901635, guid: a43dcbfd49254524fbf5448606cc9a86, type: 3}
+  _robotBomb: {fileID: -4928595845792828000, guid: f749bcd1adb6cc4499bbd7f6637abf2b, type: 3}
+  _spawnPoint: {fileID: 847945493}
 --- !u!1 &380274332
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,53 +569,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &678126093
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 678126094}
-  - component: {fileID: 678126095}
-  m_Layer: 0
-  m_Name: Enemy Installer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &678126094
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 678126093}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1491506640}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &678126095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 678126093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 315595834c84fe84d9f1aeed5bfa5c0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemyObjectPrefab: {fileID: 7106416248076901635, guid: a43dcbfd49254524fbf5448606cc9a86, type: 3}
-  _robotBomb: {fileID: -4928595845792828000, guid: f749bcd1adb6cc4499bbd7f6637abf2b, type: 3}
-  _spawnPoint: {fileID: 847945493}
 --- !u!1001 &780695071
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -660,6 +660,51 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &872299843
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 872299845}
+  - component: {fileID: 872299844}
+  m_Layer: 0
+  m_Name: Robot Bomb Enemy Spawner Installer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &872299844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872299843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b213e9e0cfd428841b989a9610fdc671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawner: {fileID: 7138792266604262709, guid: a26db04dbdbebcc44bea2ded1ad46563, type: 3}
+--- !u!4 &872299845
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872299843}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1491506640}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &931286852
 GameObject:
@@ -1161,6 +1206,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1491506640}
   - component: {fileID: 1491506639}
+  - component: {fileID: 1491506641}
+  - component: {fileID: 1491506642}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -1185,9 +1232,10 @@ MonoBehaviour:
   - {fileID: 380274333}
   - {fileID: 1460865862}
   - {fileID: 1725079945}
-  - {fileID: 678126095}
   - {fileID: 1406356344}
   - {fileID: 1201210080}
+  - {fileID: 1491506641}
+  - {fileID: 872299844}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -1222,10 +1270,41 @@ Transform:
   - {fileID: 1460865863}
   - {fileID: 1725079946}
   - {fileID: 1406356345}
-  - {fileID: 678126094}
   - {fileID: 1201210081}
+  - {fileID: 377200446}
+  - {fileID: 872299845}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1491506641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1491506638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 315595834c84fe84d9f1aeed5bfa5c0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyObjectPrefab: {fileID: 7106416248076901635, guid: a43dcbfd49254524fbf5448606cc9a86, type: 3}
+  _robotBomb: {fileID: -4928595845792828000, guid: f749bcd1adb6cc4499bbd7f6637abf2b, type: 3}
+  _spawnPoint: {fileID: 847945493}
+--- !u!114 &1491506642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1491506638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 435c77872e35a5145b469bb0b3d4ba58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyObjectPrefab: {fileID: 7106416248076901635, guid: a43dcbfd49254524fbf5448606cc9a86, type: 3}
+  _robotBomb: {fileID: -4928595845792828000, guid: f749bcd1adb6cc4499bbd7f6637abf2b, type: 3}
+  _spawnPoint: {fileID: 847945493}
 --- !u!1 &1725079944
 GameObject:
   m_ObjectHideFlags: 0
