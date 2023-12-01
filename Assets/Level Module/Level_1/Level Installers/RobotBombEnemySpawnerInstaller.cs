@@ -1,6 +1,4 @@
-using Assets.Enemy_Module.Grounded_Enemy;
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Enemy_Module.Grounded.Robot_Bomb;
 using UnityEngine;
 using Zenject;
 

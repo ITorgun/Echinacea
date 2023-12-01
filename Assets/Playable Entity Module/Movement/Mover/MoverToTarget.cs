@@ -11,7 +11,7 @@ namespace Assets.Playable_Entity_Module.Mover
         private bool _isMoving;
 
         public float Speed { get; private set; }
-        public float CurrentSpeed { get; private set; }
+        public float CurrentSpeed { get; set; }
 
         public MoverToTarget(IMovable movable, ITargetable targetable)
         {

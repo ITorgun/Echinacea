@@ -1,20 +1,13 @@
 ﻿using UnityEngine;
 using Assets.PlayerModule;
-using Assets.Enemy_Module.Interfaces;
+using Assets.Playable_Entity_Module.Finder;
 
-namespace Assets.Enemy_Module
+namespace Assets.Enemy_Module.PlayerFinder
 {
     public class AroundItselfPlayerFinder : IFinder
     {
-        //public Transform FinderTransform { get; private set; }
         public float Range { get; private set; }
         public bool IsFinding { get; private set; }
-
-        //public AroundItselfPlayerFinder(Transform finderTranform, float radius)
-        //{
-        //    FinderTransform = finderTranform;
-        //    Range = radius;
-        //}
 
         public AroundItselfPlayerFinder(float radius)
         {
@@ -33,7 +26,6 @@ namespace Assets.Enemy_Module
                 return false;
             }
 
-            //Collider2D[] colliders = Physics2D.OverlapCircleAll(FinderTransform.position, Range);
             Collider2D[] colliders = Physics2D.OverlapCircleAll(currentPosition, Range);
 
             foreach (Collider2D collider in colliders)

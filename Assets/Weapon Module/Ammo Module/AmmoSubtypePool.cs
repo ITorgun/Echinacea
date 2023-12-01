@@ -57,21 +57,17 @@ namespace Assets.WeaponModule.GunModule.Gun
 
         public virtual void Release(IAmmo element)
         {
-            if (GettedAmmoList.Count > 0)
+            if (GettedAmmoList.Contains(element))
             {
-                for (int i = 0; i < GettedAmmoList.Count; i++)
-                {
-                    if (element == GettedAmmoList[i])
-                    {
-                        throw new InvalidOperationException("Trying to release an object that has already been released to the pool.");
-                    }
-                }
+                return;
             }
 
             OnRelease(element);
+
             if (CountInactive < MaxSize)
             {
                 GettedAmmoList.Add(element);
+                ReleasedAmmoList.Remove(element);
             }
             else
             {

@@ -15,7 +15,7 @@ namespace Assets.Player_Module.Scripts
         private bool _isMoving;
 
         public float Speed { get; private set; }
-        public float CurrentSpeed { get; private set; }
+        public float CurrentSpeed { get; set; }
 
         public IMovementEvents MovementEvents => _movementEvents;
 
