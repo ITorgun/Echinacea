@@ -1,3 +1,4 @@
+using Assets.EnvironmentModule.Obstacle;
 using Assets.WeaponModule.GunModule.Gun;
 using System;
 using System.Collections;

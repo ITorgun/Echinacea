@@ -3,64 +3,62 @@ using Assets.WeaponModule.GunModule.Gun;
 using UnityEngine;
 using Zenject;
 
-public class DefaultGunInstaller : MonoInstaller
+namespace Assets.LevelModule.Level_1
 {
-    [SerializeField] private AmmoSubtypePool _defaultBulletPoolPrefab;
-    [SerializeField] private DefaultGun _defaultGunPrefab;
-    [SerializeField] private DefaultMagazineConfig _config;
-
-    private GunInventory _gunInventory;
-
-    private AmmoSubtypePool _ammoPool;
-    private DefaultGun _gun;
-
-    [Inject]
-    public void Constructor(GunInventory gunInventory)
+    public class DefaultGunInstaller : MonoInstaller
     {
-        _gunInventory = gunInventory;
-    }
+        [SerializeField] private AmmoSubtypePool _defaultBulletPoolPrefab;
+        [SerializeField] private DefaultGun _defaultGunPrefab;
+        [SerializeField] private DefaultMagazineConfig _config;
 
-    public override void InstallBindings()
-    {
-        InstallBulletPool();
-        InstallMagazine();
-        InstallGun();
-    }
+        private GunInventory _gunInventory;
 
-    private void InstallBulletPool()
-    {
-        DefaultBulletType type = DefaultBulletType.TestConfig;
-        Container.Bind<DefaultBulletType>().FromInstance(type).AsTransient()
-            .WhenInjectedInto<DefaultBulletSubtypePool>().NonLazy();
+        private DefaultGun _gun;
 
-        DefaultBulletSubtypePool pool = Container.InstantiatePrefabForComponent<DefaultBulletSubtypePool>(_defaultBulletPoolPrefab);
-        pool.Init(10, 40);
-        Container.BindInterfacesAndSelfTo<DefaultBulletSubtypePool>().FromInstance(pool).AsTransient();
+        [Inject]
+        public void Constructor(GunInventory gunInventory)
+        {
+            _gunInventory = gunInventory;
+        }
 
-        //_ammoPool = Container.InstantiatePrefabForComponent<AmmoSubtypePool>(_defaultBulletPoolPrefab);
-        //Container.BindInterfacesAndSelfTo<AmmoSubtypePool>()
-        //    .FromInstance(_ammoPool).AsTransient().WhenInjectedInto<DefaultBulletMagazine>().NonLazy();
-    }
+        public override void InstallBindings()
+        {
+            InstallBulletPool();
+            InstallMagazine();
+            InstallGun();
+        }
 
-    private void InstallMagazine()
-    {
-        DefaultBulletType type = DefaultBulletType.TestConfig;
-        Container.Bind<DefaultBulletType>().FromInstance(type).AsTransient()
-            .WhenInjectedInto<DefaultBulletMagazine>().NonLazy();
+        private void InstallBulletPool()
+        {
+            DefaultBulletType type = DefaultBulletType.TestConfig;
+            Container.Bind<DefaultBulletType>().FromInstance(type).AsTransient()
+                .WhenInjectedInto<DefaultBulletSubtypePool>().NonLazy();
 
-        Container.BindInstance(_config).AsSingle();
+            DefaultBulletSubtypePool pool = Container.InstantiatePrefabForComponent<DefaultBulletSubtypePool>(_defaultBulletPoolPrefab);
+            pool.Init(10, 40);
+            Container.BindInterfacesAndSelfTo<DefaultBulletSubtypePool>().FromInstance(pool).AsTransient();
+        }
 
-        Container.BindInterfacesAndSelfTo<DefaultBulletMagazine>().WhenInjectedInto<DefaultGun>().NonLazy();
-    }
+        private void InstallMagazine()
+        {
+            DefaultBulletType type = DefaultBulletType.TestConfig;
+            Container.Bind<DefaultBulletType>().FromInstance(type).AsTransient()
+                .WhenInjectedInto<DefaultBulletMagazine>().NonLazy();
 
-    private void InstallGun()
-    {
-        _gun = Container.InstantiatePrefabForComponent<DefaultGun>(_defaultGunPrefab);
+            Container.BindInstance(_config).AsSingle();
 
-        _gun.transform.position = _gunInventory.transform.position;
-        _gun.transform.SetParent(_gunInventory.transform);
+            Container.BindInterfacesAndSelfTo<DefaultBulletMagazine>().WhenInjectedInto<DefaultGun>().NonLazy();
+        }
 
-        Container.BindInterfacesAndSelfTo<DefaultGun>()
-            .FromInstance(_gun).AsTransient().NonLazy();
+        private void InstallGun()
+        {
+            _gun = Container.InstantiatePrefabForComponent<DefaultGun>(_defaultGunPrefab);
+
+            _gun.transform.position = _gunInventory.transform.position;
+            _gun.transform.SetParent(_gunInventory.transform);
+
+            Container.BindInterfacesAndSelfTo<DefaultGun>()
+                .FromInstance(_gun).AsTransient().NonLazy();
+        }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System;
 using UnityEngine;
-using Assets.Playable_Entity_Module;
+using Assets.PlayableEntityModule;
 
-namespace Assets.Enemy_Module.Grounded.Robot_Bomb
+namespace Assets.EnemyModule.Grounded.RobotBomb
 {
     public abstract class RobotBomb : MonoBehaviour, IDamageDealer
     {

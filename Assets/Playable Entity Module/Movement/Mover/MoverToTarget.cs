@@ -1,7 +1,6 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Assets.Playable_Entity_Module.Mover
+namespace Assets.PlayableEntityModule.Mover
 {
     class MoverToTarget : IMover
     {
@@ -27,17 +26,16 @@ namespace Assets.Playable_Entity_Module.Mover
         {
             if (_isMoving == false)
             {
-                // idle animation
                 return;
             }
 
-            if (Vector3.Distance(_movable.Transform.position, _targetable.TargetTransform.position) < 0.2f)
+            if (Vector3.Distance(transform.position, _targetable.TargetTransform.position) < 0.2f)
             {
                 return;
             }
 
-            Vector3 direction = _targetable.TargetTransform.position - _movable.Transform.position;
-            _movable.Transform.Translate(_movable.Speed * Time.deltaTime * direction.normalized);
+            Vector3 direction = _targetable.TargetTransform.position - transform.position;
+            transform.Translate(_movable.Speed * Time.deltaTime * direction.normalized);
         }
 
         public void DebaffSpeed(float speed)

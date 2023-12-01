@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assets.Playable_Entity_Module.Movement.Mover
+namespace Assets.PlayableEntityModule.Movement.Mover
 {
     public interface IMoverConfig
     {

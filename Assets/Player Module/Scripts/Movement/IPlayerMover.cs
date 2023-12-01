@@ -1,4 +1,4 @@
-﻿using Assets.Playable_Entity_Module.Mover;
+﻿using Assets.PlayableEntityModule.Mover;
 using System;
 using UnityEngine;
 

@@ -5,7 +5,7 @@ using Cinemachine;
 using Assets.Player_Module.Scripts;
 using Assets.Weapon_Module.Gun_Module.Gun;
 
-namespace Assets.Level_1.Installers
+namespace Assets.LevelModule.Level_1
 {
     public class PlayerModuleInstaller : MonoInstaller
     {

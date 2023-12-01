@@ -1,10 +1,9 @@
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Enemy_Module.Grounded.Robot_Bomb
+namespace Assets.EnemyModule.Grounded.RobotBomb
 {
-
-    public class RobotBombEnemyFactory
+    public class RobotBombEnemyFactory<T> where T : RobotBombEnemy
     {
         private const string ConfigsPath = "RobotBombEnemyConfigs/FreqiencyAroundContactEnemy";
 
@@ -18,9 +17,9 @@ namespace Assets.Enemy_Module.Grounded.Robot_Bomb
             _config = GetConfig();
         }
 
-        public RobotBombEnemy GetRobotBombEnemy(Transform enemyTranform)
+        public T GetRobotBombEnemy(Transform enemyTranform)
         {
-            RobotBombEnemy enemyObject = _container.InstantiatePrefabForComponent<RobotBombEnemy>(_config.Prefab, enemyTranform);
+            T enemyObject = _container.InstantiatePrefabForComponent<T>(_config.Prefab, enemyTranform);
             return enemyObject;
         }
 

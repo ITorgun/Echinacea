@@ -1,18 +1,16 @@
 ﻿using UnityEngine;
-using Assets.Playable_Entity_Module.Finder;
+using Assets.PlayableEntityModule.Finder;
 using Assets.PlayerModule;
 
-namespace Assets.Enemy_Module.PlayerFinder
+namespace Assets.EnemyModule.PlayerFinder
 {
     public class DirectionPlayerFinder : IFinder
     {
-        private readonly float _frequency;
-
         public Vector2 Direction { get; private set; }
         public float Range { get; private set; }
         public bool IsFinding { get; private set; }
 
-        public DirectionPlayerFinder(Vector2 direction, float distance, float frequency)
+        public DirectionPlayerFinder(Vector2 direction, float distance)
         {
             Range = distance;
             Direction = direction;

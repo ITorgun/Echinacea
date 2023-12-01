@@ -1,4 +1,4 @@
-using Assets.Playable_Entity_Module;
+using Assets.PlayableEntityModule;
 using Assets.Player_Module.Scripts.Health;
 using Assets.Player_Module.Scripts.Movement;
 using System;

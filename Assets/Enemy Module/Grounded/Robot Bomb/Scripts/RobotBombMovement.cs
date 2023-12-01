@@ -1,8 +1,8 @@
 using UnityEngine;
 using Zenject;
-using Assets.Playable_Entity_Module.Mover;
+using Assets.PlayableEntityModule.Mover;
 
-namespace Assets.Enemy_Module.Grounded.Robot_Bomb
+namespace Assets.EnemyModule.Grounded.RobotBomb
 {
     public class RobotBombMovement : MonoBehaviour, IMovement
     {

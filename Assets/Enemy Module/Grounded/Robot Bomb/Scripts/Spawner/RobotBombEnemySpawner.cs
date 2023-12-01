@@ -1,20 +1,20 @@
+using Assets.Enemy_Module.Grounded.Robot_Bomb.Configs;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Enemy_Module.Grounded.Robot_Bomb
+namespace Assets.EnemyModule.Grounded.RobotBomb
 {
     public class RobotBombEnemySpawner : MonoBehaviour
     {
-        private RobotBombEnemyFactory _factory;
-        private List<RobotBombEnemy> _enemies;
+        private RobotBombEnemyPool _factory;
 
         [Inject]
-        public void Constructor(RobotBombEnemyFactory factory)
+        public void Constructor(RobotBombEnemyPool factory)
         {
             _factory = factory;
-            _enemies = new List<RobotBombEnemy>();
+            _factory.transform.SetParent(transform);
         }
 
         private void Start()
@@ -24,11 +24,11 @@ namespace Assets.Enemy_Module.Grounded.Robot_Bomb
 
         private IEnumerator Spawning()
         {
+            Vector3 randomPosition;
             while (true)
             {
-                RobotBombEnemy robotBombEnemy = _factory.GetRobotBombEnemy(transform);
-                robotBombEnemy.transform.position = transform.position + new Vector3(0, Random.Range(1, 10));
-                _enemies.Add(robotBombEnemy);
+                randomPosition = new Vector3(Random.Range(1, 4), Random.Range(1, 10));
+                RobotBombEnemy robotBombEnemy = _factory.Get(randomPosition);
                 yield return new WaitForSeconds(2);
             }
         }

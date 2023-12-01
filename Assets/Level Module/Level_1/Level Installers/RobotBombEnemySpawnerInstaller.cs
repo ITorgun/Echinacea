@@ -1,16 +1,23 @@
-using Assets.Enemy_Module.Grounded.Robot_Bomb;
+using Assets.Enemy_Module.Grounded.Robot_Bomb.Configs;
+using Assets.EnemyModule.Grounded.RobotBomb;
 using UnityEngine;
 using Zenject;
 
-public class RobotBombEnemySpawnerInstaller : MonoInstaller
+namespace Assets.LevelModule.Level_1
 {
-    [SerializeField] private RobotBombEnemySpawner _spawner;
-
-    public override void InstallBindings()
+    public class RobotBombEnemySpawnerInstaller : MonoInstaller
     {
-        Container.BindInterfacesAndSelfTo<RobotBombEnemyFactory>().AsSingle().NonLazy();
+        [SerializeField] private RobotBombEnemyPool _enemyPool;
+        [SerializeField] private RobotBombEnemySpawner _spawner;
 
-        RobotBombEnemySpawner spawner = Container.InstantiatePrefabForComponent<RobotBombEnemySpawner>(_spawner);
-        Container.BindInterfacesAndSelfTo<RobotBombEnemySpawner>().FromInstance(spawner).AsSingle();
+        public override void InstallBindings()
+        {
+            Container.BindInterfacesAndSelfTo<RobotBombEnemyPool>().FromComponentInNewPrefab(_enemyPool).AsSingle();
+
+            Container.BindInterfacesAndSelfTo<RobotBombEnemyFactory<RobotBombEnemy>>().AsSingle().NonLazy();
+
+            RobotBombEnemySpawner spawner = Container.InstantiatePrefabForComponent<RobotBombEnemySpawner>(_spawner);
+            Container.BindInterfacesAndSelfTo<RobotBombEnemySpawner>().FromInstance(spawner).AsSingle();
+        }
     }
 }

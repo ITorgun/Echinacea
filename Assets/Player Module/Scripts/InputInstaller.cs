@@ -1,3 +1,4 @@
+using Assets.InputModule;
 using UnityEngine;
 using Zenject;
 

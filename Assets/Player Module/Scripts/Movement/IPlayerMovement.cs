@@ -1,4 +1,4 @@
-﻿using Assets.Playable_Entity_Module.Mover;
+﻿using Assets.PlayableEntityModule.Mover;
 
 namespace Assets.Player_Module.Scripts.Movement
 {

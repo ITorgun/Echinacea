@@ -1,6 +1,6 @@
-﻿namespace Assets.Playable_Entity_Module.Mover
+﻿namespace Assets.PlayableEntityModule
 {
-    public interface ISpeediable
+    public interface IMovable
     {
         public float Speed { get; }
         public float CurrentSpeed { get; }

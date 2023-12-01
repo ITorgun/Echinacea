@@ -1,4 +1,4 @@
-using Assets.WeaponModule.GunModule.Gun;
+using Assets.InputModule;
 using System;
 
 public class AmmoSwitcher : IDisposable

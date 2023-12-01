@@ -1,4 +1,4 @@
-﻿namespace Assets.Playable_Entity_Module
+﻿namespace Assets.PlayableEntityModule
 {
     public interface IDamageDealer
     {

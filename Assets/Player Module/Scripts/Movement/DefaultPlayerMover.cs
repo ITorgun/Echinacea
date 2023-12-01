@@ -1,6 +1,6 @@
-﻿using Assets.Playable_Entity_Module;
+﻿using Assets.EnvironmentModule.Obstacle;
+using Assets.InputModule;
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Assets.Player_Module.Scripts

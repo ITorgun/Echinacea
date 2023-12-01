@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
-using Assets.Playable_Entity_Module.Mover;
+using Assets.PlayableEntityModule.Mover;
+using Assets.Player_Module.Scripts;
+using System;
 
-namespace Assets.Enemy_Module.Grounded.Robot_Bomb
+namespace Assets.EnemyModule.Grounded.RobotBomb
 {
-    public class RobotBombEnemy : MonoBehaviour, IHealthTaker, IDamageable
+    public class RobotBombEnemy : MonoBehaviour, IHealthTaker, IDamageable, IDieEvent<RobotBombEnemy>
     {
         [SerializeField] private RobotBomb _bomb;
 
@@ -13,11 +15,26 @@ namespace Assets.Enemy_Module.Grounded.Robot_Bomb
         public float MaxHealth { get; private set; }
         public float MinHealth { get; private set; }
 
+        public event Action<RobotBombEnemy> Died;
 
         private void Awake()
         {
             RobotMovement = GetComponent<IMovement>();
+        }
+
+        private void OnEnable()
+        {
             _bomb.Bombed += OnBombed;
+        }
+
+        private void OnDisable()
+        {
+            _bomb.Bombed -= null;
+        }
+
+        public void Hide()
+        {
+            gameObject.SetActive(false);
         }
 
         public bool IsHealthLessMin()
@@ -28,6 +45,7 @@ namespace Assets.Enemy_Module.Grounded.Robot_Bomb
         public void Die()
         {
             gameObject.SetActive(false);
+            Died?.Invoke(this);
         }
 
         public void GetDamaged(float damage)

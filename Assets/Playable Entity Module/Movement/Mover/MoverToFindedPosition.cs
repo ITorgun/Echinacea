@@ -1,8 +1,8 @@
-﻿using Assets.Playable_Entity_Module.Finder;
-using Assets.Playable_Entity_Module.Movement.Mover;
+﻿using Assets.PlayableEntityModule.Finder;
+using Assets.PlayableEntityModule.Movement.Mover;
 using UnityEngine;
 
-namespace Assets.Playable_Entity_Module.Mover
+namespace Assets.PlayableEntityModule.Mover
 {
     public class MoverToFindedPosition : IMover
     {
@@ -19,8 +19,6 @@ namespace Assets.Playable_Entity_Module.Mover
             _finder = finder;
             Speed = config.MoverSpeed;
             CurrentSpeed = Speed;
-
-            Debug.Log(Speed);
         }
 
         public void Init(float speed)

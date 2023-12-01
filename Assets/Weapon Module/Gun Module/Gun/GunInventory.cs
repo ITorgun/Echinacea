@@ -1,4 +1,5 @@
-﻿using Assets.WeaponModule.GunModule.Gun;
+﻿using Assets.InputModule;
+using Assets.WeaponModule.GunModule.Gun;
 using System;
 using System.Collections.Generic;
 using UnityEngine;

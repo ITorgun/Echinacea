@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Assets.MoneyModule;
 using UnityEngine;
 
 public class Bitcoin : MonoBehaviour, IValueable

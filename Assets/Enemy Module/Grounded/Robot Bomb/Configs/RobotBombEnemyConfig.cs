@@ -1,7 +1,7 @@
 using UnityEngine;
-using Assets.Playable_Entity_Module.Movement.Mover;
+using Assets.PlayableEntityModule.Movement.Mover;
 
-namespace Assets.Enemy_Module.Grounded.Robot_Bomb
+namespace Assets.EnemyModule.Grounded.RobotBomb
 {
     [CreateAssetMenu(fileName = "Robot Bomb Enemy Config", menuName = "SO/RobotBombEnemyConfig")]
     public class RobotBombEnemyConfig : ScriptableObject, IMoverConfig

@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using Assets.PlayerModule;
-using Assets.Playable_Entity_Module.Finder;
+using Assets.PlayableEntityModule.Finder;
 
-namespace Assets.Enemy_Module.PlayerFinder
+namespace Assets.EnemyModule.PlayerFinder
 {
     public class AroundItselfPlayerFinder : IFinder
     {

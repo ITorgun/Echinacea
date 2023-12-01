@@ -1,6 +1,9 @@
 using System;
 
-public interface ISwitchAmmoEvent
+namespace Assets.InputModule
 {
-    abstract event Action AmmoSwitched;
+    public interface ISwitchAmmoEvent
+    {
+        abstract event Action AmmoSwitched;
+    }
 }

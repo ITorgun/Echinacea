@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Playable_Entity_Module.Finder
+namespace Assets.PlayableEntityModule.Finder
 {
     public interface IFinder
     {

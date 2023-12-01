@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Assets.Playable_Entity_Module.Mover
+namespace Assets.PlayableEntityModule.Mover
 {
-    public interface IMover : ISpeediable
+    public interface IMover : IMovable
     {
         void StartMove();
         void StopMove();

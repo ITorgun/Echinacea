@@ -1,4 +1,4 @@
-﻿namespace Assets.Playable_Entity_Module.Mover
+﻿namespace Assets.PlayableEntityModule.Mover
 {
     public interface IMovement
     {

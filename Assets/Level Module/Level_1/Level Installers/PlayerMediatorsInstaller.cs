@@ -1,81 +1,83 @@
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
-public class PlayerMediatorsInstaller : MonoInstaller
+namespace Assets.LevelModule.Level_1
 {
-    [SerializeField] private Canvas _canvas;
-    [SerializeField] private RectTransform _playerPanelTransform;
-
-    [SerializeField] private PlayerMediator _playerMediator;
-    [SerializeField] private SliderHealthViewer _playerHealthViewer;
-    
-    [SerializeField] private RectTransform _weaponRectTransform;
-    [SerializeField] private ShootableImageViewer _shootableImageViewer;
-    [SerializeField] private MagazineImageViewer _magazineImageViewer;
-
-    private RectTransform _playerPanel;
-
-    private PlayerAttackImageViewer _imageGunViewer;
-
-    public override void InstallBindings()
+    public class PlayerMediatorsInstaller : MonoInstaller
     {
-        InstantiatePlayerPanel();
+        [SerializeField] private Canvas _canvas;
+        [SerializeField] private RectTransform _playerPanelTransform;
 
-        InstallHealthViewer();
+        [SerializeField] private PlayerMediator _playerMediator;
+        [SerializeField] private SliderHealthViewer _playerHealthViewer;
 
-        //InstallAttackViewer();
-        InstallWeaponViewer();
+        [SerializeField] private RectTransform _weaponRectTransform;
+        [SerializeField] private ShootableImageViewer _shootableImageViewer;
+        [SerializeField] private MagazineImageViewer _magazineImageViewer;
 
-        InstallViewerMediator();
-        InstallInputMediator();
-        InstallPlayerMediator();
-    }
+        private RectTransform _playerPanel;
 
-    private void InstantiatePlayerPanel()
-    {
-        _playerPanel = Container
-            .InstantiatePrefabForComponent<RectTransform>(_playerPanelTransform, _canvas.transform);
-    }
+        private PlayerAttackImageViewer _imageGunViewer;
 
-    private void InstallHealthViewer()
-    {
-        SliderHealthViewer healthViewer = Container
-            .InstantiatePrefabForComponent<SliderHealthViewer>(_playerHealthViewer, _playerPanel);
+        public override void InstallBindings()
+        {
+            InstantiatePlayerPanel();
 
-        Container.BindInterfacesAndSelfTo<SliderHealthViewer>().FromInstance(healthViewer).AsSingle();
-    }
+            InstallHealthViewer();
 
-    private void InstallWeaponViewer()
-    {
-        RectTransform weaponViewerTransform = Container
-            .InstantiatePrefabForComponent<RectTransform>(_weaponRectTransform, _playerPanel);
+            //InstallAttackViewer();
+            InstallWeaponViewer();
 
-        ShootableImageViewer shootableViewer = Container
-            .InstantiatePrefabForComponent<ShootableImageViewer>(_shootableImageViewer, weaponViewerTransform);
-        Container.Bind<IImageViewer>().WithId("ShootableViewer").FromInstance(shootableViewer);
+            InstallViewerMediator();
+            InstallInputMediator();
+            InstallPlayerMediator();
+        }
 
-        MagazineImageViewer magazineViewer = Container
-            .InstantiatePrefabForComponent<MagazineImageViewer>(_magazineImageViewer, weaponViewerTransform);
-        Container.Bind<IImageViewer>().WithId("MagazineViewer").FromInstance(magazineViewer);
+        private void InstantiatePlayerPanel()
+        {
+            _playerPanel = Container
+                .InstantiatePrefabForComponent<RectTransform>(_playerPanelTransform, _canvas.transform);
+        }
 
-        WeaponImageViewer weaponViewer = Container.InstantiateComponent<WeaponImageViewer>(weaponViewerTransform.gameObject);
-        Container.BindInterfacesAndSelfTo<WeaponImageViewer>().FromInstance(weaponViewer).AsSingle();
-    }
+        private void InstallHealthViewer()
+        {
+            SliderHealthViewer healthViewer = Container
+                .InstantiatePrefabForComponent<SliderHealthViewer>(_playerHealthViewer, _playerPanel);
 
-    private void InstallViewerMediator()
-    {
-        Container.BindInterfacesAndSelfTo<PlayerViewerMediator>().AsSingle();
-    }
+            Container.BindInterfacesAndSelfTo<SliderHealthViewer>().FromInstance(healthViewer).AsSingle();
+        }
 
-    private void InstallInputMediator()
-    {
-        Container.BindInterfacesAndSelfTo<PlayerInputMediator>().AsSingle();
-    }
+        private void InstallWeaponViewer()
+        {
+            RectTransform weaponViewerTransform = Container
+                .InstantiatePrefabForComponent<RectTransform>(_weaponRectTransform, _playerPanel);
 
-    private void InstallPlayerMediator()
-    {
-        PlayerMediator mediator = Container.InstantiatePrefabForComponent<PlayerMediator>(_playerMediator);
-        Container.BindInterfacesAndSelfTo<PlayerMediator>().FromInstance(mediator).AsSingle().NonLazy();
+            ShootableImageViewer shootableViewer = Container
+                .InstantiatePrefabForComponent<ShootableImageViewer>(_shootableImageViewer, weaponViewerTransform);
+            Container.Bind<IImageViewer>().WithId("ShootableViewer").FromInstance(shootableViewer);
+
+            MagazineImageViewer magazineViewer = Container
+                .InstantiatePrefabForComponent<MagazineImageViewer>(_magazineImageViewer, weaponViewerTransform);
+            Container.Bind<IImageViewer>().WithId("MagazineViewer").FromInstance(magazineViewer);
+
+            WeaponImageViewer weaponViewer = Container.InstantiateComponent<WeaponImageViewer>(weaponViewerTransform.gameObject);
+            Container.BindInterfacesAndSelfTo<WeaponImageViewer>().FromInstance(weaponViewer).AsSingle();
+        }
+
+        private void InstallViewerMediator()
+        {
+            Container.BindInterfacesAndSelfTo<PlayerViewerMediator>().AsSingle();
+        }
+
+        private void InstallInputMediator()
+        {
+            Container.BindInterfacesAndSelfTo<PlayerInputMediator>().AsSingle();
+        }
+
+        private void InstallPlayerMediator()
+        {
+            PlayerMediator mediator = Container.InstantiatePrefabForComponent<PlayerMediator>(_playerMediator);
+            Container.BindInterfacesAndSelfTo<PlayerMediator>().FromInstance(mediator).AsSingle().NonLazy();
+        }
     }
 }

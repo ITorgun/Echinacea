@@ -1,3 +1,4 @@
+using Assets.InputModule;
 using Assets.WeaponModule.GunModule.Gun;
 using System;
 using Zenject;

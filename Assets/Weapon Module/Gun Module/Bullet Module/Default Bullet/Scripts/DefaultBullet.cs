@@ -1,3 +1,4 @@
+using Assets.EnvironmentModule.Obstacle;
 using System;
 using System.Collections;
 using Unity.VisualScripting;
