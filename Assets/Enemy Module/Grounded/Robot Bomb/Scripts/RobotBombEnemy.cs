@@ -2,10 +2,11 @@
 using Assets.PlayableEntityModule.Mover;
 using Assets.Player_Module.Scripts;
 using System;
+using Assets.Playable_Entity_Module.Health;
 
 namespace Assets.EnemyModule.Grounded.RobotBomb
 {
-    public class RobotBombEnemy : MonoBehaviour, IHealthTaker, IDamageable, IDieEvent<RobotBombEnemy>
+    public class RobotBombEnemy : MonoBehaviour, IHealthTaker, IDamageable, IDeathNotifiable<RobotBombEnemy>
     {
         [SerializeField] private RobotBomb _bomb;
 
@@ -14,6 +15,7 @@ namespace Assets.EnemyModule.Grounded.RobotBomb
         public float Health { get; private set; }
         public float MaxHealth { get; private set; }
         public float MinHealth { get; private set; }
+        public RobotBomb Bomb => _bomb;
 
         public event Action<RobotBombEnemy> Died;
 
@@ -24,12 +26,12 @@ namespace Assets.EnemyModule.Grounded.RobotBomb
 
         private void OnEnable()
         {
-            _bomb.Bombed += OnBombed;
+            Bomb.Bombed += OnBombed;
         }
 
         private void OnDisable()
         {
-            _bomb.Bombed -= null;
+            Bomb.Bombed -= null;
         }
 
         public void Hide()

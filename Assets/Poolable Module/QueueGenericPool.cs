@@ -2,7 +2,7 @@ using Assets.Enemy_Module.Grounded.Robot_Bomb.Configs;
 using System;
 using System.Collections.Generic;
 
-public class QueueGenericPool<T> : ITestPool<T>, IDisposable
+public class QueueGenericPool<T> : IPool<T>, IDisposable
 {
     private readonly int _maxSize;
     private Queue<T> _elements;

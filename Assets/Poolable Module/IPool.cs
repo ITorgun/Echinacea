@@ -2,7 +2,7 @@
 
 namespace Assets.Enemy_Module.Grounded.Robot_Bomb.Configs
 {
-    public interface ITestPool<T>
+    public interface IPool<T>
     {
         T Get();
         void Release(T element);
