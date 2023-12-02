@@ -60,7 +60,7 @@ public class QueueGenericPool<T> : IPool<T>, IDisposable
     {
         foreach (T item in _elements)
         {
-            OnDestorying.Invoke(item);
+            OnDestorying?.Invoke(item);
         }
 
         _elements.Clear();
