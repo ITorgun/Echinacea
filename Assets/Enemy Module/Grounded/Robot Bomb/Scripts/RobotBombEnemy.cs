@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using Assets.PlayableEntityModule.Mover;
-using Assets.Player_Module.Scripts;
 using System;
 using Assets.Playable_Entity_Module.Health;
 
@@ -63,13 +62,6 @@ namespace Assets.EnemyModule.Grounded.RobotBomb
         public void OnBombed(float damage)
         {
             GetDamaged(damage);
-        }
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-
-            Gizmos.DrawWireSphere(transform.position, 5);
         }
     }
 }

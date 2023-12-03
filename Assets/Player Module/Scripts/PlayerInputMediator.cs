@@ -1,40 +1,46 @@
+using Assets.InputModule;
 using Assets.Player_Module.Scripts;
-using Assets.PlayerModule;
-using Assets.WeaponModule.GunModule.Gun;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerInputMediator : IDisposable
 {
     private IPlayerMover _movement;
-    private ShotPosition _shotPosition;
-    private PlayerModel _animatorConroller;
+    private IRangeAttackEvents _rangeAttack;
+    private ShootPosition _shotPosition;
+    private PlayerModel _model;
 
-    public PlayerInputMediator(IPlayerMover movement, ShotPosition shotPosition, PlayerModel animatorConroller)
+    public PlayerInputMediator(IPlayerMover movement, IRangeAttackEvents rangeAttack, 
+        ShootPosition shotPosition, PlayerModel animatorConroller)
     {
         _movement = movement;
+        _rangeAttack = rangeAttack;
         _shotPosition = shotPosition;
-        _animatorConroller = animatorConroller;
+        _model = animatorConroller;
 
         _movement.InputDirectionUpdated += OnInputDirectionUpdated;
         _movement.MovementDirectionUpdated += OnMovementDirectionUpdated;
-    }
-
-    public void OnInputDirectionUpdated(Vector2 direction)
-    {
-        _shotPosition.UpdateState(direction);
-    }
-
-    public void OnMovementDirectionUpdated(Vector2 direction)
-    {
-        _animatorConroller.ChageAnimation(direction);
+        _rangeAttack.RangeAttackPressed += OnShooted;
     }
 
     public void Dispose()
     {
         _movement.InputDirectionUpdated -= OnInputDirectionUpdated;
     }
+
+    private void OnInputDirectionUpdated(Vector2 direction)
+    {
+        _shotPosition.UpdateState(direction);
+    }
+
+    private void OnMovementDirectionUpdated(Vector2 direction)
+    {
+        _model.PlayMovementAnimation(direction);
+    }
+
+    private void OnShooted()
+    {
+        _model.PlayShootAnimation(_shotPosition.CurrentVector);
+    }
+
 }

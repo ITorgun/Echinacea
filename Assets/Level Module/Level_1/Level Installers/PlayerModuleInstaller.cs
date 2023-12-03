@@ -13,18 +13,18 @@ namespace Assets.LevelModule.Level_1
         [SerializeField] private CinemachineVirtualCamera _cameraPrefab;
         [SerializeField] private PlayerModel _modelPrefab;
         [SerializeField] private PlayerInventory _playerInventoryPrefab;
-        [SerializeField] private GunInventory _gunInventoryPrefab;
+        [SerializeField] private PlayerGunInventory _gunInventoryPrefab;
         [SerializeField] private PlayerAttack _playerAttackPrefab;
-        [SerializeField] private ShotPosition _shotPositionPrefab;
+        [SerializeField] private ShootPosition _shotPositionPrefab;
 
-        private ShotPosition _shotPosition;
+        private ShootPosition _shotPosition;
         private StrongGun _strongGun;
 
         private GameObject _playerGameObject;
-        private GunInventory _gunInventory;
+        private PlayerGunInventory _gunInventory;
 
         [Inject]
-        public void Constructor(ShotPosition shotPosition, StrongGun strongGun)
+        public void Constructor(ShootPosition shotPosition, StrongGun strongGun)
         {
             _shotPosition = shotPosition;
             _strongGun = strongGun;
@@ -107,7 +107,7 @@ namespace Assets.LevelModule.Level_1
 
         private void InstallBulletInventory()
         {
-            Container.Bind<BulletInventory>().AsSingle().NonLazy();
+            Container.Bind<PlayerBulletInventory>().AsSingle().NonLazy();
         }
 
         private void InstallAmmoSwitcher()
@@ -117,13 +117,13 @@ namespace Assets.LevelModule.Level_1
 
         private void InstallGunInventory()
         {
-            _gunInventory = Container.InstantiatePrefabForComponent<GunInventory>(_gunInventoryPrefab, _playerGameObject.transform);
+            _gunInventory = Container.InstantiatePrefabForComponent<PlayerGunInventory>(_gunInventoryPrefab, _playerGameObject.transform);
             _gunInventory.transform.position = _playerGameObject.transform.position;
 
             _strongGun.transform.position = _gunInventory.transform.position;
             _strongGun.transform.SetParent(_gunInventory.transform);
 
-            Container.BindInterfacesAndSelfTo<GunInventory>().FromInstance(_gunInventory)
+            Container.BindInterfacesAndSelfTo<PlayerGunInventory>().FromInstance(_gunInventory)
                 .AsSingle().NonLazy();
         }
 

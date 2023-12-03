@@ -1,5 +1,5 @@
-using Assets.PlayableEntityModule;
 using Assets.Player_Module.Scripts.Health;
+using Assets.Player_Module.Scripts.Inventory;
 using Assets.Player_Module.Scripts.Movement;
 using System;
 using UnityEngine;
@@ -10,34 +10,22 @@ namespace Assets.PlayerModule
     public class Player : MonoBehaviour, IWallet,
         ICollectorValueable
     {
-        [SerializeField] private int _level;
-
         public IPlayerMovement Movement { get; private set; }
         public IPlayerHealthTaker Health { get; private set; }
+        public IPlayerInventory Inventory { get; private set; }
 
         public int Coins { get; private set; }
-        public int Wallet { get; private set; }
+        public int Wallet { get; set; }
 
         [Inject]
-        public void Constructor(IPlayerMovement playerMovement, IPlayerHealthTaker playerHealth)
+        public void Constructor(IPlayerMovement playerMovement, IPlayerHealthTaker playerHealth,
+            IPlayerInventory inventory)
         {
             Movement = playerMovement;
             Health = playerHealth;
-        }
+            Inventory = inventory;
 
-
-        public void IncreaseLevel()
-        {
-            _level++;
-            //LevelChanged.Invoke(_level);
-        }
-
-        public void ResetStats()
-        {
-            //HealthChanged.Invoke(Health);
-
-            _level = 1;
-            //LevelChanged.Invoke(_level);
+            Wallet = 100;
         }
 
         public void AddCoins(int value)

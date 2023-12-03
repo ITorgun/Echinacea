@@ -7,13 +7,13 @@ using Zenject;
 public class StrongBulletSubtypePool : AmmoSubtypePool, IStrongBulletPool
 {
     private IStrongBulletFactory _factory;
-    private ShotPosition _shotTranform;
+    private ShootPosition _shotTranform;
 
     private StrongBulletType _currentType;
 
     [Inject]
     public void Construct(IStrongBulletFactory factory,
-        ShotPosition shotTranform, StrongBulletType type)
+        ShootPosition shotTranform, StrongBulletType type)
     {
         _factory = factory;
         _shotTranform = shotTranform;

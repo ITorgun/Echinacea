@@ -3,14 +3,14 @@ using System;
 
 public class AmmoSwitcher : IDisposable
 {
-    private BulletInventory _ammoInventory;
+    private PlayerBulletInventory _ammoInventory;
     private IMagazine _magazine;
     private ISwitchAmmoEvent _switchAmmoEvent;
     private int _index = 0;
 
     public event Action<IImageViewable> AmmoSwithted;
 
-    public AmmoSwitcher(ISwitchAmmoEvent switchAmmoEvent, BulletInventory ammoInventory)
+    public AmmoSwitcher(ISwitchAmmoEvent switchAmmoEvent, PlayerBulletInventory ammoInventory)
     {
         _switchAmmoEvent = switchAmmoEvent;
         _ammoInventory = ammoInventory;

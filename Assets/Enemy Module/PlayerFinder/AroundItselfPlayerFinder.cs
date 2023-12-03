@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Assets.PlayerModule;
 using Assets.PlayableEntityModule.Finder;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 namespace Assets.EnemyModule.PlayerFinder
 {

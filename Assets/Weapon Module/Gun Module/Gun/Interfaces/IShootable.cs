@@ -1,10 +1,12 @@
+using System;
+
 namespace Assets.WeaponModule.GunModule.Gun
 {
     public interface IShootable : IImageViewable
     {
-        void Hide();
-        void Show();
-        void Shoot();
-        IMagazine Magazine { get; }
+        public void Hide();
+        public void Show();
+        public void Shoot();
+        public IMagazine Magazine { get; }
     }
 }

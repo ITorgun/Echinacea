@@ -11,12 +11,12 @@ namespace Assets.LevelModule.Level_1
         [SerializeField] private DefaultGun _defaultGunPrefab;
         [SerializeField] private DefaultMagazineConfig _config;
 
-        private GunInventory _gunInventory;
+        private PlayerGunInventory _gunInventory;
 
         private DefaultGun _gun;
 
         [Inject]
-        public void Constructor(GunInventory gunInventory)
+        public void Constructor(PlayerGunInventory gunInventory)
         {
             _gunInventory = gunInventory;
         }

@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Assets.Weapon_Module.Gun_Module.Gun
 {
-    public class GunInventory : MonoBehaviour
+    public class PlayerGunInventory : MonoBehaviour
     {
         private ISwitchGunEvent _switchGunEvent;
         private List<IShootable> _shootables;
