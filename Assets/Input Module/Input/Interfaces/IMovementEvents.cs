@@ -1,9 +1,10 @@
 using System;
-using UnityEngine;
-using UnityEngine.Animations;
 
-public interface IMovementEvents
+namespace Assets.InputModule
 {
-    public event Action<float> Horizontal;
-    public event Action<float> Vertical;
+    public interface IMovementEvents
+    {
+        public event Action<float> Horizontal;
+        public event Action<float> Vertical;
+    }
 }

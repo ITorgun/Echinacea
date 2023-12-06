@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface IValueable
+namespace Assets.MoneyModule
 {
-    int Value { get; }
+    public interface IValueable
+    {
+        int Value { get; }
 
-    void AddCoin(ICollectorValueable moneyPicker);
-    void Remove();
+        void AddCoin(ICollectorValueable moneyPicker);
+        void Remove();
+    }
 }

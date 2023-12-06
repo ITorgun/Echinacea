@@ -5,6 +5,6 @@ using UnityEngine.UI;
 
 public interface IImageViewer
 {
-    void SetImage(Image image);
+    void SetImage(IImageViewable image);
     void ResetImage();
 }

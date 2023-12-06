@@ -1,4 +1,4 @@
-using Assets.Playable_Entity_Module.IMover;
+using Assets.PlayableEntityModule.Mover;
 using Assets.Player_Module.Scripts;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ public class PlayerMovementDefabbZone : MonoBehaviour
     {
         if (collision.TryGetComponent(out IPlayerMovable movable))
         {
-            movable.PlayerMover.DebaffSpeed(9);
+            movable.Mover.DebaffSpeed(9);
         }
     }
 
@@ -18,7 +18,7 @@ public class PlayerMovementDefabbZone : MonoBehaviour
     {
         if (collision.TryGetComponent(out IPlayerMovable movable))
         {
-            movable.PlayerMover.ResetSpeed();
+            movable.Mover.ResetSpeed();
         }
     }
 }

@@ -1,21 +1,19 @@
-﻿using Assets.Playable_Entity_Module;
+﻿using Assets.EnvironmentModule.Obstacle;
+using Assets.InputModule;
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Assets.Player_Module.Scripts
 {
-    [Serializable]
     public class DefaultPlayerMover : IPlayerMover, IDisposable
     {
-        [SerializeField] private Animator _animator;
-
         private IMovementEvents _movementEvents;
         private Vector2 _inputDirection;
         private Vector3 _currentDirection;
         private bool _isMoving;
 
-        [field: SerializeField] public float Speed { get; private set; }
+        public float Speed { get; private set; }
+        public float CurrentSpeed { get; set; }
 
         public IMovementEvents MovementEvents => _movementEvents;
 
@@ -57,12 +55,12 @@ namespace Assets.Player_Module.Scripts
 
         public void DebaffSpeed(float speed)
         {
-            Speed -= speed;
+            CurrentSpeed -= speed;
         }
 
         public void ResetSpeed()
         {
-            Speed += 9;
+            CurrentSpeed = Speed;
         }
 
         private bool IsAxisZero(float axis)

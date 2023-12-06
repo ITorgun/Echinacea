@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerModel : MonoBehaviour
@@ -11,7 +9,21 @@ public class PlayerModel : MonoBehaviour
     private readonly string MovingUpAnimation = "MovingUp";
     private readonly string MovingHorisontalAnimation = "MovingHorisontal";
 
-    public void ChageAnimation(Vector2 direction)
+    private readonly string ShootingHorisontalAnimation = "ShootHorisontal";
+    private readonly string ShootingDownAnimation = "ShootDown";
+    private readonly string ShootingUpAnimation = "ShootUp";
+
+    public void PlayMovementAnimation(Vector2 direction)
+    {
+        PlayAnimation(direction, MovingHorisontalAnimation, MovingUpAnimation, MovingDownAnimation);
+    }
+
+    public void PlayShootAnimation(Vector2 direction)
+    {
+        PlayAnimation(direction, ShootingHorisontalAnimation, ShootingUpAnimation, ShootingDownAnimation);
+    }
+
+    private void PlayAnimation(Vector2 direction, string horisontalClip, string upClip, string downClip)
     {
         transform.rotation = Quaternion.Euler(new Vector3(0, 0));
 
@@ -23,25 +35,22 @@ public class PlayerModel : MonoBehaviour
 
         if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
         {
-            if (direction.x > 0)
-            {
-                _animator.Play(MovingHorisontalAnimation);
-            }
-            else
+            if (direction.x < 0)
             {
                 transform.rotation = Quaternion.Euler(new Vector3(0, 180));
-                _animator.Play(MovingHorisontalAnimation);
             }
+
+            _animator.Play(horisontalClip);
         }
         else
         {
             if (direction.y > 0)
             {
-                _animator.Play(MovingUpAnimation);
+                _animator.Play(upClip);
             }
             else
             {
-                _animator.Play(MovingDownAnimation);
+                _animator.Play(downClip);
             }
         }
     }

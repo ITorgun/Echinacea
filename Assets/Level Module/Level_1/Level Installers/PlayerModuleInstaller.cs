@@ -4,8 +4,9 @@ using Assets.PlayerModule;
 using Cinemachine;
 using Assets.Player_Module.Scripts;
 using Assets.Weapon_Module.Gun_Module.Gun;
+using System;
 
-namespace Assets.Level_1.Installers
+namespace Assets.LevelModule.Level_1
 {
     public class PlayerModuleInstaller : MonoInstaller
     {
@@ -13,18 +14,18 @@ namespace Assets.Level_1.Installers
         [SerializeField] private CinemachineVirtualCamera _cameraPrefab;
         [SerializeField] private PlayerModel _modelPrefab;
         [SerializeField] private PlayerInventory _playerInventoryPrefab;
-        [SerializeField] private GunInventory _gunInventoryPrefab;
+        [SerializeField] private PlayerGunInventory _gunInventoryPrefab;
         [SerializeField] private PlayerAttack _playerAttackPrefab;
-        [SerializeField] private ShotPosition _shotPositionPrefab;
+        [SerializeField] private PlayerShootPosition _shotPositionPrefab;
 
-        private ShotPosition _shotPosition;
+        private PlayerShootPosition _shotPosition;
         private StrongGun _strongGun;
 
         private GameObject _playerGameObject;
-        private GunInventory _gunInventory;
+        private PlayerGunInventory _gunInventory;
 
         [Inject]
-        public void Constructor(ShotPosition shotPosition, StrongGun strongGun)
+        public void Constructor(PlayerShootPosition shotPosition, StrongGun strongGun)
         {
             _shotPosition = shotPosition;
             _strongGun = strongGun;
@@ -37,6 +38,7 @@ namespace Assets.Level_1.Installers
 
             InstallModel();
 
+            InstallPlayerShooter();
             InstallPlayerAttack();
 
             InstallHealth();
@@ -45,10 +47,20 @@ namespace Assets.Level_1.Installers
             InstallMovement();
 
             InstallBulletInventory();
+            InstallAmmoSwitcher();
             InstallGunInventory();
             InstallPlayerInventory();
 
+            InstallWallet();
+
             InstallPlayer();
+        }
+
+        private void InstallWallet()
+        {
+            Container.BindInterfacesAndSelfTo<SimpleWallet>()
+                .FromInstance(new SimpleWallet(100))
+                .AsSingle();
         }
 
         private void InstantiatePlayerGameobject()
@@ -72,6 +84,11 @@ namespace Assets.Level_1.Installers
         {
             PlayerModel playerModel = Container.InstantiatePrefabForComponent<PlayerModel>(_modelPrefab, _playerGameObject.transform);
             Container.BindInterfacesAndSelfTo<PlayerModel>().FromInstance(playerModel).AsSingle().NonLazy();
+        }
+
+        private void InstallPlayerShooter()
+        {
+            Container.BindInterfacesAndSelfTo<DefaultRangeAttackDealer>().AsSingle().NonLazy();
         }
 
         private void InstallPlayerAttack()
@@ -100,18 +117,23 @@ namespace Assets.Level_1.Installers
 
         private void InstallBulletInventory()
         {
-            Container.Bind<BulletInventory>().AsSingle().NonLazy();
+            Container.Bind<PlayerBulletInventory>().AsSingle().NonLazy();
+        }
+
+        private void InstallAmmoSwitcher()
+        {
+            Container.BindInterfacesAndSelfTo<AmmoSwitcher>().AsSingle().NonLazy();
         }
 
         private void InstallGunInventory()
         {
-            _gunInventory = Container.InstantiatePrefabForComponent<GunInventory>(_gunInventoryPrefab, _playerGameObject.transform);
+            _gunInventory = Container.InstantiatePrefabForComponent<PlayerGunInventory>(_gunInventoryPrefab, _playerGameObject.transform);
             _gunInventory.transform.position = _playerGameObject.transform.position;
 
             _strongGun.transform.position = _gunInventory.transform.position;
             _strongGun.transform.SetParent(_gunInventory.transform);
 
-            Container.BindInterfacesAndSelfTo<GunInventory>().FromInstance(_gunInventory)
+            Container.BindInterfacesAndSelfTo<PlayerGunInventory>().FromInstance(_gunInventory)
                 .AsSingle().NonLazy();
         }
 

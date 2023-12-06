@@ -1,13 +1,16 @@
+using Assets.InputModule;
 using System;
 
 public class AmmoSwitcher : IDisposable
 {
-    private BulletInventory _ammoInventory;
+    private PlayerBulletInventory _ammoInventory;
     private IMagazine _magazine;
     private ISwitchAmmoEvent _switchAmmoEvent;
     private int _index = 0;
 
-    public AmmoSwitcher(ISwitchAmmoEvent switchAmmoEvent, BulletInventory ammoInventory)
+    public event Action<IImageViewable> AmmoSwithted;
+
+    public AmmoSwitcher(ISwitchAmmoEvent switchAmmoEvent, PlayerBulletInventory ammoInventory)
     {
         _switchAmmoEvent = switchAmmoEvent;
         _ammoInventory = ammoInventory;
@@ -29,5 +32,6 @@ public class AmmoSwitcher : IDisposable
     {
         _index = (_index + 1) % _ammoInventory.GetAvaibleBulletTypeCount(_magazine);
         _ammoInventory.InjectBulletType(_index, _magazine);
+        AmmoSwithted?.Invoke(_magazine);
     }
 }

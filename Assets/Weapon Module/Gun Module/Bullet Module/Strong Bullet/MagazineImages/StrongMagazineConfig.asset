@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e826ce8f72881324eb166df3c878d5a5, type: 3}
+  m_Name: StrongMagazineConfig
+  m_EditorClassIdentifier: 
+  _weakImage: {fileID: 2098182917261305382, guid: 4a7f861d27ea1304f8d6c2701bf0958e, type: 3}
+  _fastImage: {fileID: 2391033715685355204, guid: 450ba747292282c429539ad2bd44a3a1, type: 3}
+  _shortImage: {fileID: 1775816751096917222, guid: 41d9b68ef165f41429b0d3ca9a7a05e9, type: 3}

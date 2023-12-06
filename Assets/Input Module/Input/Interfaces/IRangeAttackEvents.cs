@@ -1,6 +1,9 @@
 using System;
 
-public interface IRangeAttackEvents
+namespace Assets.InputModule
 {
-    public event Action RangeAttackPressed;
+    public interface IRangeAttackEvents
+    {
+        public event Action RangeAttackPressed;
+    }
 }

@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf0d4f3377bce62488f44a6cc95a5603, type: 3}
+  m_Name: FreqiencyAroundContactEnemy
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 3696086646690878281, guid: 95366bb1419639a4db62961ac038a216, type: 3}

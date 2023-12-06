@@ -3,11 +3,11 @@ using Zenject;
 
 public class PlayerAttack : MonoBehaviour
 {
-    public ShotPosition ShotPosition { get; set; }
+    public PlayerShootPosition ShotPosition { get; set; }
     public IRangeAttackDealer RangeAttackDealer { get; set; }
 
     [Inject]
-    public void Construct(ShotPosition shotPosition, IRangeAttackDealer rangeAttackDealer)
+    public void Construct(PlayerShootPosition shotPosition, IRangeAttackDealer rangeAttackDealer)
     {
         ShotPosition = shotPosition;
         RangeAttackDealer = rangeAttackDealer;

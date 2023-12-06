@@ -1,3 +1,4 @@
+using Assets.EnvironmentModule.Obstacle;
 using System;
 using System.Collections;
 using Unity.VisualScripting;
@@ -5,7 +6,7 @@ using UnityEngine;
 
 namespace Assets.WeaponModule.GunModule.Gun
 {
-    public class DefaultBullet : MonoBehaviour, IBullet
+    public class DefaultBullet : MonoBehaviour, IAmmo
     {
         private Coroutine _flying;
 

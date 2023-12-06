@@ -5,5 +5,5 @@ public interface IWeaponImageViewer
     IImageViewer ShootableViewer { get; }
     IImageViewer MagazineViewer { get; }
 
-    void OnShootableSwitched(IShootable shootable);
+    void OnShootableSwitched(IImageViewable shootableViewable, IImageViewable magazineViewable);
 }

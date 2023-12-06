@@ -1,5 +1,6 @@
 using Assets.WeaponModule.GunModule.Gun;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 public class WeaponImageViewer : MonoBehaviour, IWeaponImageViewer
@@ -10,9 +11,14 @@ public class WeaponImageViewer : MonoBehaviour, IWeaponImageViewer
     [Inject(Id = "MagazineViewer")]
     public IImageViewer MagazineViewer { get; private set; }
 
-    public void OnShootableSwitched(IShootable shootable)
+    public void OnShootableSwitched(IImageViewable shootableViewable, IImageViewable magazineViewable)
     {
-        ShootableViewer.SetImage(shootable.Image);
-        MagazineViewer.SetImage(shootable.Magazine.Image);
+        ShootableViewer.SetImage(shootableViewable);
+        MagazineViewer.SetImage(magazineViewable);
+    }
+
+    public void OnAmmoTypeSwitched(IImageViewable magazineViewable)
+    {
+        MagazineViewer.SetImage(magazineViewable);
     }
 }

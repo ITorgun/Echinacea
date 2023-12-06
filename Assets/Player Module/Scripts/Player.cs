@@ -1,5 +1,5 @@
-using Assets.Playable_Entity_Module;
 using Assets.Player_Module.Scripts.Health;
+using Assets.Player_Module.Scripts.Inventory;
 using Assets.Player_Module.Scripts.Movement;
 using System;
 using UnityEngine;
@@ -7,37 +7,23 @@ using Zenject;
 
 namespace Assets.PlayerModule
 {
-    public class Player : MonoBehaviour, IWallet,
-        ICollectorValueable
+    public class Player : MonoBehaviour, ICollectorValueable
     {
-        [SerializeField] private int _level;
-
         public IPlayerMovement Movement { get; private set; }
         public IPlayerHealthTaker Health { get; private set; }
+        public IPlayerInventory Inventory { get; private set; }
+        public IWallet Wallet { get; private set; }
 
         public int Coins { get; private set; }
-        public int Wallet { get; private set; }
 
         [Inject]
-        public void Constructor(IPlayerMovement playerMovement, IPlayerHealthTaker playerHealth)
+        public void Constructor(IPlayerMovement movement, IPlayerHealthTaker health,
+            IPlayerInventory inventory, IWallet wallet)
         {
-            Movement = playerMovement;
-            Health = playerHealth;
-        }
-
-
-        public void IncreaseLevel()
-        {
-            _level++;
-            //LevelChanged.Invoke(_level);
-        }
-
-        public void ResetStats()
-        {
-            //HealthChanged.Invoke(Health);
-
-            _level = 1;
-            //LevelChanged.Invoke(_level);
+            Movement = movement;
+            Health = health;
+            Inventory = inventory;
+            Wallet = wallet;
         }
 
         public void AddCoins(int value)
@@ -48,12 +34,7 @@ namespace Assets.PlayerModule
             }
 
             Coins += value;
-        }
-
-        public void Add(int value)
-        {
-            Wallet += value;
-            Debug.Log("Value: " + Wallet);
+            Wallet.Add(Coins);
         }
     }
 }

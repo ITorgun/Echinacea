@@ -1,5 +1,9 @@
 using System;
-public interface ISwitchGunEvent
+
+namespace Assets.InputModule
 {
-    abstract event Action GunSwitched;
+    public interface ISwitchGunEvent
+    {
+        abstract event Action GunSwitched;
+    }
 }
