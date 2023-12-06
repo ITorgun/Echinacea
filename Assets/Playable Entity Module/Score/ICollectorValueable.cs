@@ -1,4 +1,4 @@
 public interface ICollectorValueable 
 {
-    void Add(int value);
+    void AddCoins(int value);
 }

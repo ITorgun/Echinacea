@@ -11,8 +11,12 @@ public class PlayerViewerMediator : IDisposable
     private PlayerInventory _inventory;
     private WeaponImageViewer _weaponImageViewer;
 
+    private IWallet _wallet;
+    private PlayerWalletViewer _walletViewer;
+
     public PlayerViewerMediator(IPlayerHealthTaker playerHealth, IHealthViewer floatViewer, 
-        PlayerInventory inventory, WeaponImageViewer weaponImageViewer)
+        PlayerInventory inventory, WeaponImageViewer weaponImageViewer, IWallet wallet, 
+        PlayerWalletViewer walletViewer)
     {
         _health = playerHealth;
         _healthViewer = floatViewer;
@@ -23,6 +27,10 @@ public class PlayerViewerMediator : IDisposable
         _inventory.GunInventory.ShootableSwitcted += OnShootableSwiched;
 
         _inventory.AmmoSwitcher.AmmoSwithted += OnAmmoTypeSwitched;
+
+        _wallet = wallet;
+        _walletViewer = walletViewer;
+        _wallet.Changed += OnWalletChaged;
     }
 
     public void Dispose()
@@ -33,6 +41,7 @@ public class PlayerViewerMediator : IDisposable
     public void InitViewers()
     {
         _healthViewer.SetInitialHealthValue(_health.Health);
+        _wallet.InitView();
     }
 
     private void OnPlayerHealthChanged(float healthValue)
@@ -48,5 +57,10 @@ public class PlayerViewerMediator : IDisposable
     private void OnAmmoTypeSwitched(IImageViewable imageViewable)
     {
         _weaponImageViewer.MagazineViewer.SetImage(imageViewable);
+    }
+
+    private void OnWalletChaged(int value)
+    {
+        _walletViewer.OnValueChanged(value);
     }
 }

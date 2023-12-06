@@ -4,6 +4,6 @@ namespace Assets.PlayableEntityModule.Mover
 {
     public interface IPlayerMovable
     {
-        IPlayerMover PlayerMover { get; }
+        IPlayerMover Mover { get; }
     }
 }

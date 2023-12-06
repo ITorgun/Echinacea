@@ -10,6 +10,7 @@ namespace Assets.InputModule
         public override event Action RangeAttackPressed;
         public override event Action GunSwitched;
         public override event Action AmmoSwitched;
+        public override event Action ShootPositionLocked;
 
         protected override void RaiseXMovementDirectionChanged(InputAction.CallbackContext movementContext)
         {
@@ -76,6 +77,14 @@ namespace Assets.InputModule
             if (ammoContext.performed)
             {
                 AmmoSwitched?.Invoke();
+            }
+        }
+
+        protected override void RaiseShootPositionLocked(InputAction.CallbackContext shootPositionContext)
+        {
+            if (shootPositionContext.performed)
+            {
+                ShootPositionLocked?.Invoke();
             }
         }
     }

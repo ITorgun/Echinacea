@@ -8,7 +8,7 @@ using UnityEngine;
 public class DefaultFirstLevelTrader : MonoBehaviour, IDefaultTrader
 {
     private IPlayerInventory _inventory;
-    private Player _player;
+    private IWallet _playerWallet;
 
     public event Action TradingStarted;
     public event Action TradingEnded;
@@ -18,15 +18,15 @@ public class DefaultFirstLevelTrader : MonoBehaviour, IDefaultTrader
         if (_inventory == null)
             throw new Exception("Player's inventory is null");
 
-        if (price > _player.Wallet)
+        if (price > _playerWallet.Value)
         {
             Debug.LogError("Не хватает денег");
             return false;
         }
 
-        _player.Wallet -= price;
+        _playerWallet.TryReduce(price);
 
-        Debug.Log("Сумма: " + _player.Wallet);
+        Debug.Log("Сумма: " + _playerWallet);
 
         _inventory.BulletInventory.TryAddBulletType(config);
         return true;
@@ -37,7 +37,7 @@ public class DefaultFirstLevelTrader : MonoBehaviour, IDefaultTrader
         if (collision.TryGetComponent(out Player player))
         {
             _inventory = player.Inventory;
-            _player = player;
+            _playerWallet = player.Wallet;
             TradingStarted?.Invoke();
         }
     }

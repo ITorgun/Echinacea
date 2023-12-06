@@ -864,6 +864,10 @@ PrefabInstance:
       propertyPath: _canvas
       value: 
       objectReference: {fileID: 931286855}
+    - target: {fileID: 1503305040024386402, guid: 4348cff2e2bdefe46989aca2ba3a566f, type: 3}
+      propertyPath: _walletViewer
+      value: 
+      objectReference: {fileID: 4740535769184269471, guid: 986a3e3f92820f448b0550d6f5292359, type: 3}
     - target: {fileID: 4322750200345922355, guid: 4348cff2e2bdefe46989aca2ba3a566f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

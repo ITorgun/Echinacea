@@ -7,25 +7,23 @@ using Zenject;
 
 namespace Assets.PlayerModule
 {
-    public class Player : MonoBehaviour, IWallet,
-        ICollectorValueable
+    public class Player : MonoBehaviour, ICollectorValueable
     {
         public IPlayerMovement Movement { get; private set; }
         public IPlayerHealthTaker Health { get; private set; }
         public IPlayerInventory Inventory { get; private set; }
+        public IWallet Wallet { get; private set; }
 
         public int Coins { get; private set; }
-        public int Wallet { get; set; }
 
         [Inject]
-        public void Constructor(IPlayerMovement playerMovement, IPlayerHealthTaker playerHealth,
-            IPlayerInventory inventory)
+        public void Constructor(IPlayerMovement movement, IPlayerHealthTaker health,
+            IPlayerInventory inventory, IWallet wallet)
         {
-            Movement = playerMovement;
-            Health = playerHealth;
+            Movement = movement;
+            Health = health;
             Inventory = inventory;
-
-            Wallet = 100;
+            Wallet = wallet;
         }
 
         public void AddCoins(int value)
@@ -36,12 +34,7 @@ namespace Assets.PlayerModule
             }
 
             Coins += value;
-        }
-
-        public void Add(int value)
-        {
-            Wallet += value;
-            Debug.Log("Value: " + Wallet);
+            Wallet.Add(Coins);
         }
     }
 }

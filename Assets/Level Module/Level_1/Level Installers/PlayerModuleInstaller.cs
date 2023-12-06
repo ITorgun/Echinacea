@@ -4,6 +4,7 @@ using Assets.PlayerModule;
 using Cinemachine;
 using Assets.Player_Module.Scripts;
 using Assets.Weapon_Module.Gun_Module.Gun;
+using System;
 
 namespace Assets.LevelModule.Level_1
 {
@@ -15,16 +16,16 @@ namespace Assets.LevelModule.Level_1
         [SerializeField] private PlayerInventory _playerInventoryPrefab;
         [SerializeField] private PlayerGunInventory _gunInventoryPrefab;
         [SerializeField] private PlayerAttack _playerAttackPrefab;
-        [SerializeField] private ShootPosition _shotPositionPrefab;
+        [SerializeField] private PlayerShootPosition _shotPositionPrefab;
 
-        private ShootPosition _shotPosition;
+        private PlayerShootPosition _shotPosition;
         private StrongGun _strongGun;
 
         private GameObject _playerGameObject;
         private PlayerGunInventory _gunInventory;
 
         [Inject]
-        public void Constructor(ShootPosition shotPosition, StrongGun strongGun)
+        public void Constructor(PlayerShootPosition shotPosition, StrongGun strongGun)
         {
             _shotPosition = shotPosition;
             _strongGun = strongGun;
@@ -50,7 +51,16 @@ namespace Assets.LevelModule.Level_1
             InstallGunInventory();
             InstallPlayerInventory();
 
+            InstallWallet();
+
             InstallPlayer();
+        }
+
+        private void InstallWallet()
+        {
+            Container.BindInterfacesAndSelfTo<SimpleWallet>()
+                .FromInstance(new SimpleWallet(100))
+                .AsSingle();
         }
 
         private void InstantiatePlayerGameobject()

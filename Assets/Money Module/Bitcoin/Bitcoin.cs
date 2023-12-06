@@ -7,7 +7,7 @@ public class Bitcoin : MonoBehaviour, IValueable
 
     public void AddCoin(ICollectorValueable moneyPicker)
     {
-        moneyPicker.Add(Value);
+        moneyPicker.AddCoins(Value);
     }
 
     public void Remove()
@@ -19,7 +19,7 @@ public class Bitcoin : MonoBehaviour, IValueable
     {
         if (collision.TryGetComponent(out ICollectorValueable collector))
         {
-            collector.Add(Value);
+            collector.AddCoins(Value);
             Remove();
         }
     }

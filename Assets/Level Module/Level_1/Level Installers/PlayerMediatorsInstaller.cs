@@ -14,6 +14,7 @@ namespace Assets.LevelModule.Level_1
         [SerializeField] private RectTransform _weaponRectTransform;
         [SerializeField] private ShootableImageViewer _shootableImageViewer;
         [SerializeField] private MagazineImageViewer _magazineImageViewer;
+        [SerializeField] private PlayerWalletViewer _walletViewer;
 
         private RectTransform _playerPanel;
 
@@ -27,6 +28,7 @@ namespace Assets.LevelModule.Level_1
 
             //InstallAttackViewer();
             InstallWeaponViewer();
+            InstallWalletViewer();
 
             InstallViewerMediator();
             InstallInputMediator();
@@ -62,6 +64,12 @@ namespace Assets.LevelModule.Level_1
 
             WeaponImageViewer weaponViewer = Container.InstantiateComponent<WeaponImageViewer>(weaponViewerTransform.gameObject);
             Container.BindInterfacesAndSelfTo<WeaponImageViewer>().FromInstance(weaponViewer).AsSingle();
+        }
+
+        private void InstallWalletViewer()
+        {
+            PlayerWalletViewer walletViewer = Container.InstantiatePrefabForComponent<PlayerWalletViewer>(_walletViewer, _playerPanel);
+            Container.BindInterfacesAndSelfTo<PlayerWalletViewer>().FromInstance(walletViewer).AsSingle();
         }
 
         private void InstallViewerMediator()

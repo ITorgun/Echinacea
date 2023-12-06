@@ -7,8 +7,6 @@ namespace Assets.Player_Module.Scripts
 {
     public class DefaultPlayerMover : IPlayerMover, IDisposable
     {
-        [SerializeField] private Animator _animator;
-
         private IMovementEvents _movementEvents;
         private Vector2 _inputDirection;
         private Vector3 _currentDirection;

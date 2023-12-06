@@ -5,7 +5,7 @@ using Zenject;
 public class InputInstaller : MonoInstaller
 {
     [SerializeField] private Dekstop _dekstopPrefab;
-    [SerializeField] private ShootPosition _shotPositionPrefab;
+    [SerializeField] private PlayerShootPosition _shotPositionPrefab;
 
     public override void InstallBindings()
     {
@@ -22,7 +22,7 @@ public class InputInstaller : MonoInstaller
 
     private void InstallShotPosition()
     {
-        ShootPosition shotPosition = Container.InstantiatePrefabForComponent<ShootPosition>(_shotPositionPrefab);
-        Container.BindInterfacesAndSelfTo<ShootPosition>().FromInstance(shotPosition).AsSingle().NonLazy();
+        PlayerShootPosition shotPosition = Container.InstantiatePrefabForComponent<PlayerShootPosition>(_shotPositionPrefab);
+        Container.BindInterfacesAndSelfTo<PlayerShootPosition>().FromInstance(shotPosition).AsSingle().NonLazy();
     }
 }

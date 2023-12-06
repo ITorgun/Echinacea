@@ -8,13 +8,13 @@ using Zenject;
 public class DefaultBulletSubtypePool : AmmoSubtypePool, IDefaultBulletPool
 {
     private IDefaultBulletFactory _factory;
-    private ShootPosition _shotTranform;
+    private PlayerShootPosition _shotTranform;
 
     private DefaultBulletType _currentType;
 
     [Inject]
     public void Construct (IDefaultBulletFactory factory,
-        ShootPosition shotTranform, DefaultBulletType type)
+        PlayerShootPosition shotTranform, DefaultBulletType type)
     {
         _factory = factory;
         _shotTranform = shotTranform;

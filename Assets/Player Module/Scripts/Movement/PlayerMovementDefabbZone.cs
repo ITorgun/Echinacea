@@ -10,7 +10,7 @@ public class PlayerMovementDefabbZone : MonoBehaviour
     {
         if (collision.TryGetComponent(out IPlayerMovable movable))
         {
-            movable.PlayerMover.DebaffSpeed(9);
+            movable.Mover.DebaffSpeed(9);
         }
     }
 
@@ -18,7 +18,7 @@ public class PlayerMovementDefabbZone : MonoBehaviour
     {
         if (collision.TryGetComponent(out IPlayerMovable movable))
         {
-            movable.PlayerMover.ResetSpeed();
+            movable.Mover.ResetSpeed();
         }
     }
 }

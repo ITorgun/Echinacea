@@ -1,6 +1,7 @@
 using UnityEngine;
+using Zenject;
 
-public class ShootPosition : MonoBehaviour, IShootPosition
+public class PlayerShootPosition : MonoBehaviour, IShootPosition
 {
     [SerializeField] private Transform _leftPositon;
     [SerializeField] private Transform _rightPositon;
@@ -9,11 +10,25 @@ public class ShootPosition : MonoBehaviour, IShootPosition
 
     public Transform CurrentPosition { get; private set; }
     public Vector2 CurrentVector { get; private set; }
+    public bool IsLocked { get; private set; }
+
+    private ILockShootPositionEvent _lockPositionEvent;
 
     private void Awake()
     {
         CurrentPosition = _leftPositon;
         CurrentVector = Vector2.left;
+    }
+
+    [Inject]
+    public void Construct(ILockShootPositionEvent lockPositionEvent)
+    {
+        _lockPositionEvent = lockPositionEvent;
+    }
+
+    private void OnEnable()
+    {
+        _lockPositionEvent.ShootPositionLocked += OnPositionLocked;
     }
 
     public void UpdateState(Vector2 movementDirection)
@@ -42,9 +57,17 @@ public class ShootPosition : MonoBehaviour, IShootPosition
         }
     }
 
+    private void OnPositionLocked()
+    {
+        IsLocked = !IsLocked;
+    }
+
     private void ChangeCurrentState(Transform position, Vector2 direction)
     {
-        CurrentPosition = position;
-        CurrentVector = direction;
+        if (IsLocked == false)
+        {
+            CurrentPosition = position;
+            CurrentVector = direction;
+        }
     }
 }

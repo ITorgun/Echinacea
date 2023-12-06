@@ -6,7 +6,7 @@ using Zenject;
 namespace Assets.InputModule
 {
     public abstract class PlayerInput : MonoBehaviour, IMovementEvents, IRangeAttackEvents, ISwitchGunEvent,
-    ISwitchAmmoEvent
+    ISwitchAmmoEvent, ILockShootPositionEvent
     {
         protected InputActions Actions;
 
@@ -15,6 +15,7 @@ namespace Assets.InputModule
         public abstract event Action AmmoSwitched;
         public abstract event Action<float> Horizontal;
         public abstract event Action<float> Vertical;
+        public abstract event Action ShootPositionLocked;
 
         protected bool IsMovedOnY = false;
         protected bool IsMovedOnX = false;
@@ -42,6 +43,9 @@ namespace Assets.InputModule
 
             Actions.KeyboardMouse.SwitchAmmoType.performed += swithAmmoContext =>
             RaiseAmmoSwitched(swithAmmoContext);
+
+            Actions.KeyboardMouse.LockShootPosition.performed += shootPositionContext =>
+            RaiseShootPositionLocked(shootPositionContext);
         }
 
         protected virtual void OnEnable()
@@ -59,5 +63,6 @@ namespace Assets.InputModule
         protected abstract void RaiseYMovementDirectionChanged(InputAction.CallbackContext movementcontext);
         protected abstract void RaiseGunSwitched(InputAction.CallbackContext gunContext);
         protected abstract void RaiseAmmoSwitched(InputAction.CallbackContext ammoContext);
+        protected abstract void RaiseShootPositionLocked(InputAction.CallbackContext shootPositionContext);
     }
 }

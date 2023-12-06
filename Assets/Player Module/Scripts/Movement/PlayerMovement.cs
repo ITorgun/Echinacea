@@ -1,27 +1,50 @@
-using Assets.PlayableEntityModule;
-using Assets.PlayableEntityModule.Mover;
 using Assets.Player_Module.Scripts;
 using Assets.Player_Module.Scripts.Movement;
 using UnityEngine;
 using Zenject;
 
+[RequireComponent(typeof(Animator))]
 public class PlayerMovement : MonoBehaviour, IPlayerMovement
 {
-    public IPlayerMover PlayerMover { get; private set; }
+    private PlayerModel _model;
+    private PlayerShootPosition _shootPosition;
+
+    public IPlayerMover Mover { get; private set; }
 
     [Inject]
-    public void Constructor(IPlayerMover mover)
+    public void Constructor(IPlayerMover mover, PlayerModel model, PlayerShootPosition shootPosition)
     {
-        PlayerMover = mover;
+        Mover = mover;
+        _model = model;
+        _shootPosition = shootPosition;
+
+        Mover.InputDirectionUpdated += OnInputDirectionUpdated;
+        Mover.MovementDirectionUpdated += OnMovementDirectionUpdated;
+    }
+
+    private void OnDisable()
+    {
+        Mover.InputDirectionUpdated -= OnInputDirectionUpdated;
+        Mover.MovementDirectionUpdated -= OnMovementDirectionUpdated;
     }
 
     private void Start()
     {
-        PlayerMover.StartMove();
+        Mover.StartMove();
     }
 
     private void Update()
     {
-        PlayerMover.Moving(transform);
+        Mover.Moving(transform);
+    }
+
+    private void OnInputDirectionUpdated(Vector2 direction)
+    {
+        _shootPosition.UpdateState(direction);
+    }
+
+    private void OnMovementDirectionUpdated(Vector2 direction)
+    {
+        _model.PlayMovementAnimation(direction);
     }
 }

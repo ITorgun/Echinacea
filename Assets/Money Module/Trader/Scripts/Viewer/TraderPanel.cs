@@ -5,6 +5,7 @@ public class TraderPanel : MonoBehaviour, IViewable
 {
     [SerializeField] private AvaibleOptionsViewer _avaibleOptionsViewer;
     [SerializeField] private TraderGoodsViewer _goodsViewer;
+    //[SerializeField] private 
 
     public AvaibleOptionsViewer AvaibleOptionsViewer => _avaibleOptionsViewer;
     public TraderGoodsViewer GoodsViewer => _goodsViewer;
